@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Action for graphics -->
+	<record model="ir.actions.act_window" id="action_analytic_account_graphics">
+        <field name="name">Account Graphics</field>
+        <field name="res_model">account.analytic.account</field>
+        <field name="view_mode">graph,search</field>
+        <field name="view_id" ref="view_analytic_account_graph"/>
+    </record>
+
+    <!-- Action for just see account -->
+    <record model="ir.actions.act_window" id="action_analytic_account">
+        <field name="name">Analytic account</field>
+        <field name="res_model">account.analytic.account</field>
+        <field name="view_mode">tree,form,graph,search</field>
+    </record>
+    
+    <!-- Actions for department -->
+    <record model="ir.actions.act_window" id="action_analytic_account_group_department">
+        <field name="name">Analytic account group department</field>
+        <field name="res_model">analytic_accounts.group.department</field>
+        <field name="view_mode">tree,form,search</field>
+    </record>
+
+    <!-- Actions for sub department -->
+    <record model="ir.actions.act_window" id="action_analytic_account_group_sub_department">
+        <field name="name">Analytic account group sub department</field>
+        <field name="res_model">analytic_accounts.group.sub_department</field>
+        <field name="view_mode">tree,form,search</field>
+    </record>
+
+    <!-- Actions for type -->
+    <record model="ir.actions.act_window" id="action_analytic_account_group_type">
+        <field name="name">Analytic account group type</field>
+        <field name="res_model">analytic_accounts.group.type</field>
+        <field name="view_mode">tree,form,search</field>
+    </record>
+    
+    <!-- Actions for group -->
+    <record model="ir.actions.act_window" id="action_analytic_account_group">
+        <field name="name">Analytic account group</field>
+        <field name="res_model">analytic_accounts.group</field>
+        <field name="view_mode">tree,form,search</field>
+    </record>
+
+    <!-- Actions for account -->
+    <record model="ir.actions.act_window" id="action_analytic_account_group_account">
+        <field name="name">Analytic account group account</field>
+        <field name="res_model">analytic_accounts.group.account</field>
+        <field name="view_mode">tree,form,search</field>
+    </record>
+
+    <!-- Actions for sub account -->
+    <record model="ir.actions.act_window" id="action_analytic_account_group_sub_account">
+        <field name="name">Analytic account group sub account</field>
+        <field name="res_model">analytic_accounts.group.sub_account</field>
+        <field name="view_mode">tree,form,search</field>
+    </record>
+
+    <!-- Actions for item -->
+    <record model="ir.actions.act_window" id="action_analytic_account_group_item">
+        <field name="name">Analytic account group item</field>
+        <field name="res_model">analytic_accounts.group.item</field>
+        <field name="view_mode">tree,form,search</field>
+    </record>
+
+    <!-- List of view of action -->
+
+    <!-- Tree -->
+    <record model="ir.actions.act_window.view" id="action_analytic_account_tree">
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="analytic.view_account_analytic_account_list"/>
+        <field name="act_window_id" ref="action_analytic_account"/>
+    </record>
+
+    <!-- Form -->
+    <record model="ir.actions.act_window.view" id="action_analytic_account_form">
+        <field name="sequence" eval="21"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_analytic_account_form"/>
+        <field name="act_window_id" ref="action_analytic_account"/>
+    </record>
+    
+    <!-- Graph -->
+    <record model="ir.actions.act_window.view" id="action_analytic_account_graph">
+        <field name="sequence" eval="21"/>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_analytic_account_graph"/>
+        <field name="act_window_id" ref="action_analytic_account"/>
+    </record>
+
+    <menuitem id="menu_analytic_account_parent"
+              name="Analytic Account"
+              parent="account_accountant.menu_accounting"/>
+
+    <menuitem id="menu_analytic_account"
+              parent="menu_analytic_account_parent"
+              action="action_analytic_account"
+              name="Analytic Account"/>
+
+    <menuitem id="menu_analytic_account_graphics"
+            parent="menu_analytic_account_parent"
+            action="action_analytic_account_graphics"
+            name="Analytic Graphics"/>
+    
+    <!-- Group types -->
+    <menuitem id="menu_analytic_account_groups"
+              parent="menu_analytic_account_parent"
+              name="Analytic Groups"/>
+
+    <menuitem id="menu_analytic_account_group_department"
+              parent="menu_analytic_account_groups"
+              action="action_analytic_account_group_department"
+              name="Department"/>
+
+    <menuitem id="menu_analytic_account_group_sub_department"
+              parent="menu_analytic_account_groups"
+              action="action_analytic_account_group_sub_department"
+              name="Sub Department"/>
+
+    <menuitem id="menu_analytic_account_group_type"
+              parent="menu_analytic_account_groups"
+              action="action_analytic_account_group_type"
+              name="Type"/>
+
+    <menuitem id="menu_analytic_account_group"
+              parent="menu_analytic_account_groups"
+              action="action_analytic_account_group"
+              name="Groups"/>
+
+    <menuitem id="menu_analytic_account_group_account"
+              parent="menu_analytic_account_groups"
+              action="action_analytic_account_group_account"
+              name="Accounts"/>
+
+    <menuitem id="menu_analytic_account_group_sub_account"
+              parent="menu_analytic_account_groups"
+              action="action_analytic_account_group_sub_account"
+              name="Sub Accounts"/>
+
+    <menuitem id="menu_analytic_account_group_item"
+              parent="menu_analytic_account_groups"
+              action="action_analytic_account_group_item"
+              name="Items"/>
+
+    <!-- <menuitem id="menu_analytic_account_report_form"
+              parent="menu_analytic_account_parent"
+              action="action_analytic_account_report_form"
+              name="Analytic Reports"/> -->
+</odoo>

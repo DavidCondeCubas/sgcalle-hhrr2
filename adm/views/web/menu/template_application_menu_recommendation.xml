@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm.template_application_menu_recommendation">
+        <t t-call="website.layout">
+            <t t-set="title">Application</t>
+            <link rel="stylesheet" href="/adm/static/css/form_application.css" />
+            <div class="oe_struture" />
+            <div class="oe_struture">
+                <div class="container-fluid d-flex p-4">
+                    <t t-call="adm.template_application_menu" />
+                    <main class="col">
+                        <form action="app_edit.cfm?memberid=3606&amp;studentid=504&amp;FormSchoolID=272"
+                            method="post" name="frm" class="app_form" enctype="multipart/form-data">
+                            <input type="hidden" name="next_previous" value="next" />
+                            <input type="hidden" name="goto" value="" />
+
+                            <div class="redtext warn" style="padding-bottom:10px;">
+                                There are 3 missing requirements on this form.
+                            </div>
+                            <p>Please
+                                provide a name and email address for the requested recommendation. Our Online
+                                Application system will automatically notify the person listed of your request
+                                to be a
+                                referral. Once the recommendationform
+                                is complete and submitted back to the school you
+                                will receive a notification
+                                email.
+                            </p>
+
+                            <p>Thank you.</p>
+
+                            <input type="hidden" name="ReferralID_list" value="28" />
+
+
+                            <main class="formlist">
+
+                                <section class="section_header">Preschool Teacher Recommendation</section>
+                                <section>
+                                    <div class="desc">Referral Name</div>
+                                    <div>
+
+                                        <input type="text" name="ReferralName28" value="" size="40"
+                                            maxlength="100" />
+
+                                    </div>
+                                </section>
+                                <section>
+                                    <div class="desc warn">
+                                        Referral Email
+                                        <span class="redtext"> *</span>
+                                    </div>
+                                    <div>
+
+                                        <input type="text" name="ReferralEmail28" value="" size="50"
+                                            maxlength="256" />
+
+                                    </div>
+                                </section>
+
+                            </main>
+
+                            <main class="formlist">
+                                <section class="form_divider_top" style="padding-bottom:15px; margin-top:15px;"></section>
+
+                                <section class="more_space">
+
+                                    <div class="desc">
+
+                                        <span class="p_no_margin">
+                                            <p>
+                                                <u>PARENT RELEASE</u>
+                                                <br />
+                                                Dear Parent or Guardian:
+                                                <br />
+                                                Applicants to The International School of Panama must obtain
+                                                Recommendations completed by the student’s most
+                                                recent school. The
+                                                recommendations must be completed
+                                                using the appropriate ISP
+                                                Recommendation Form and
+                                                submitted to the ISP by the teacher/school.
+                                            </p>
+
+                                            <main>
+                                                <section>The forms are confidential references between the school
+                                                    and ISP.
+                                                </section>
+                                                <section>The forms will be submitted electronically to the
+                                                    Admissions Office
+                                                    at ISP.
+                                                </section>
+                                            </main>
+
+                                            <p>Please read and sign the statement below.</p>
+
+                                            <p>
+                                                <em>I acknowledge that I waive my rights to read the
+                                                    confidential teacher
+                                                    recommendations and school reports
+                                                    for the student listed above.
+                                                </em>
+                                            </p>
+                                        </span>
+
+                                    </div>
+
+                                    <div>
+
+                                        <fieldset class="addl-questions colnum-3">
+
+                                        </fieldset>
+                                        <div style="clear:both;"></div>
+                                    </div>
+
+                                </section>
+
+                                <section class="more_space">
+
+                                    <div class="desc warn">
+
+                                        <div>
+                                            <span class="redtext">*</span>
+                                            <input type="checkbox" name="question_538_signature" value="1" />
+                                            Check here for Parent/Guardian Signature
+                                            <input type="hidden" name="question_538_previous_full" value="" />
+
+                                            <br />
+                                            Name:
+                                            <input type="text" name="question_538" value="" size="20" />
+                                            <input type="hidden" name="question_538_previous" value="" />
+                                            <input type="hidden" name="question_538_previous_checkbox" value="0" />
+                                            <br />
+                                            Date:
+                                            2/11/2020
+                                        </div>
+
+                                        <div class="signature-before">
+                                            <div class="signature-label warn">Sign here using your mouse, touchpad, or
+                                                touchscreen.
+                                            </div>
+                                            <div class="signature-outer">
+
+                                                <div class="signature-again">
+                                                    <div class="signature-box">
+                                                        <div
+                                                            style="padding:0 !important; margin:0 !important;width: 100% !important; height: 0 !important; -ms-touch-action: none; touch-action: none;margin-top:-1em !important; margin-bottom:1em !important;"></div>
+                                                        <canvas class="jSignature" width="320" height="80"
+                                                            style="margin: 0px; padding: 0px; border: none; height: 80px; width: 320px; touch-action: none; background-color: rgb(255, 255, 255);"></canvas>
+                                                        <div
+                                                            style="padding:0 !important; margin:0 !important;width: 100% !important; height: 0 !important; -ms-touch-action: none; touch-action: none;margin-top:-1.5em !important; margin-bottom:1.5em !important; position: relative;"></div>
+                                                    </div>
+                                                    <input type="hidden" name="SignatureImg_538"
+                                                        class="signature-hid" />
+                                                    <div class="signature-tools">
+                                                        <input type="button" value="Clear" class="jsig-startover" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="signature-end"></div>
+                                        </div>
+
+                                    </div>
+
+                                </section>
+
+                            </main>
+
+                        </form>
+                    </main>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

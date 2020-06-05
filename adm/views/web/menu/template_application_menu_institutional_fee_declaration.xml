@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm.template_application_menu_institutional_fee_declaration">
+        <t t-call="website.layout">
+            <t t-set="title">Application</t>
+            <link rel="stylesheet" href="/adm/static/css/form_application.css" />
+            <div class="oe_struture" />
+            <div class="oe_struture">
+                <div class="container-fluid d-flex p-4">
+                    <t t-call="adm.template_application_menu" />
+                    <main class="col">
+                        <form action="app_edit.cfm?memberid=3606&amp;studentid=504&amp;FormSchoolID=265"
+                            method="post" name="frm" class="app_form" enctype="multipart/form-data">
+                            <input type="hidden" name="next_previous" value="next" />
+                            <input type="hidden" name="goto" value="" />
+
+                            <div class="redtext warn" style="padding-bottom:10px;">
+                                There are 4 missing requirements on this form.
+                            </div>
+                            <p>As a means to accommodate and better serve the needs of more transient families,
+                                an annual
+                                per-student Institutional Fee to subsidize the operating costs
+                                associated to running an
+                                international school is charged.
+                            </p>
+
+                            <p>
+                                <strong>Institution fee: USD3,500.00 per student.</strong>
+                                This fee is applicable to families with students whose educational benefits are
+                                paid
+                                directly/indirectly, reimbursed fully or partially, or included in their
+                                remuneration
+                                package by their employers, embassies, banks, corporations or other
+                                organizations. This
+                                fee is due upon acceptance or at the time of re-inscription.
+                                Students in this category,
+                                as established in the admissions policy, have
+                                priority for admissions.
+                            </p>
+
+                            <p>
+                                For all students applying to ISP, parents will be required to complete, as part
+                                of the
+                                application process, the Institutional Fee Declaration, in which they
+                                will indicate if
+                                their employer is responsible fully or partially for school
+                                fees.
+                                <br />
+                                For returning students, the Institutional Fee Declaration will be required to be
+                                completed every year as part of
+                                the reinscription process. Re-inscription will not be
+                                processed unless all
+                                required information and documents are submitted:
+                            </p>
+                            <main class="formlist">
+
+                                <section class="more_space">
+
+                                    <div class="desc warn">
+
+                                        <span class="p_no_margin">
+                                            <p>Fees for my child are fully/partially paid or reimbursed by my
+                                                employer.
+                                            </p>
+                                        </span>
+
+                                    </div>
+
+                                    <div>
+                                        <span class="redtext" style="padding-right:5px;">*</span>
+                                        <input type="radio" name="question_513" value="1" />
+                                        Yes
+
+                                        <input type="radio" name="question_513" value="0" />
+                                        No
+                                    </div>
+
+                                </section>
+
+                                <section class="more_space">
+
+                                    <div class="desc">
+
+                                        <span class="p_no_margin">
+                                            <p>If yes, please complete the following -</p>
+                                        </span>
+
+                                    </div>
+
+                                    <div>
+
+                                        <fieldset class="addl-questions colnum-3">
+
+                                        </fieldset>
+                                        <div style="clear:both;"></div>
+                                    </div>
+
+                                </section>
+
+                                <section class="more_space">
+
+                                    <div class="desc">
+
+                                        <span class="p_no_margin">
+                                            <p>Company Name, Department or Organization:</p>
+                                        </span>
+
+                                    </div>
+
+                                    <div>
+
+                                        <input type="text" name="question_515" size="50" value="" />
+
+                                    </div>
+
+                                </section>
+
+                                <section class="more_space">
+
+                                    <div class="desc">
+
+                                        <span class="p_no_margin">
+                                            <p>Please send invoices to:</p>
+                                        </span>
+
+                                    </div>
+
+                                    <div>
+
+                                        <input type="text" name="question_516" size="50" value="" />
+
+                                    </div>
+
+                                </section>
+
+                                <section class="more_space">
+
+                                    <div class="desc">
+
+                                        <span class="p_no_margin">
+                                            <p>Company Contact Name:</p>
+                                        </span>
+
+                                    </div>
+
+                                    <div>
+
+                                        <input type="text" name="question_517" size="50" value="" />
+
+                                    </div>
+
+                                </section>
+
+                                <section class="more_space">
+
+                                    <div class="desc">
+
+                                        <span class="p_no_margin">
+                                            <p>Email:</p>
+                                        </span>
+
+                                    </div>
+
+                                    <div>
+
+                                        <input type="text" name="question_518" size="50" value="" />
+
+                                    </div>
+
+                                </section>
+
+                                <section class="more_space">
+
+                                    <div class="desc">
+
+                                        <span class="p_no_margin">
+                                            <p>I,
+                                                the undersigned, certify that I understand that an annual
+                                                per-student
+                                                Institutional fee applies to families with students
+                                                whose educational
+                                                benefits are paid (directly/indirectly) or
+                                                reimbursed (fully or
+                                                partially) by their employers, embassies,
+                                                banks, corporations or other
+                                                organizations as part of their
+                                                remuneration package.
+                                                This fee is due upon
+                                                acceptance or at the time of
+                                                re-inscription.
+                                                I certify that the
+                                                information provided in this form is
+                                                accurate.*
+                                            </p>
+
+                                            <p>*Misrepresentation may have implication on the child’s enrollment
+                                                in the
+                                                school.
+                                            </p>
+                                        </span>
+
+                                    </div>
+
+                                    <div>
+
+                                        <fieldset class="addl-questions colnum-3">
+
+                                        </fieldset>
+                                        <div style="clear:both;"></div>
+                                    </div>
+
+                                </section>
+
+                            </main>
+
+
+                            <p class="warn">
+                                <input type="checkbox" name="signature_area1" value="1" />
+                                Check here for Parent/Guardian Signature
+                                <br />
+                                <span class="warn2">Name:</span>
+                                <input type="text" name="parent_ack_area1_name" value="" size="20" maxlength="100" />
+                                <br />
+                                Date:
+                                2/11/2020
+                            </p>
+
+
+                            <div class="signature-label warn">Sign here using your mouse, touchpad, or touchscreen.</div>
+                            <div class="signature-outer">
+
+                                <div class="signature-again">
+                                    <div class="signature-box">
+                                        <div
+                                            style="padding:0 !important; margin:0 !important;width: 100% !important; height: 0 !important; -ms-touch-action: none; touch-action: none;margin-top:-1em !important; margin-bottom:1em !important;"></div>
+                                        <canvas class="jSignature" width="320" height="80"
+                                            style="margin: 0px; padding: 0px; border: none; height: 80px; width: 320px; touch-action: none; background-color: rgb(255, 255, 255);"></canvas>
+                                        <div
+                                            style="padding:0 !important; margin:0 !important;width: 100% !important; height: 0 !important; -ms-touch-action: none; touch-action: none;margin-top:-1.5em !important; margin-bottom:1.5em !important; position: relative;"></div>
+                                    </div>
+                                    <input type="hidden" name="ParentAckArea1Img" class="signature-hid" />
+                                    <div class="signature-tools">
+                                        <input type="button" value="Clear" class="jsig-startover" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="signature-end"></div>
+                        </form>
+                    </main>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

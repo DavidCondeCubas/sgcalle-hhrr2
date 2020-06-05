@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template id="template" xml:space="preserve">
+    <t t-name="BtnRegisterPayment">
+        <div class="control-button">Register payment</div>
+    </t>
+    <t t-name="BtnInvoices">
+        <div class="control-button">Invoices</div>
+    </t>
+
+    <t t-name="InvoicesLineWidget">
+        <div class="pos_invoice_screen screen">
+            <div class="screen-content">
+                <section class="top-content">
+                    <span class="button back">
+                        <i class="fa fa-angle-double-left"></i>
+                        Cancel
+                    </span>
+                    <span class="searchbox">
+                        <input placeholder="Search Invoice" />
+                        <span class="search-clear"></span>
+                    </span>
+                    <span class="searchbox"></span>
+
+                    <span class="button next oe_hidden highlight">
+                        Register payment
+                        <i class="fa fa-angle-double-right"></i>
+                    </span>
+                </section>
+                <section class="full-content">
+                    <div class="window">
+                        <section class="subwindow collapsed">
+                            <div class="subwindow-container collapsed">
+                                <div class="subwindow-container-fix invoice-details-contents"></div>
+                            </div>
+                        </section>
+                        <section class="subwindow">
+                            <div class="subwindow-container">
+                                <div class="subwindow-container-fix touch-scrollable scrollable-y">
+                                    <table class="invoice-list">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Due date</th>
+                                                <th>Customer</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="invoice-list-contents"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="PosInvoiceLine">
+        <tr class="invoice-line" t-att-data-id="invoice.id">
+            <td>
+                <t t-esc="invoice.name" />
+            </td>
+            <td>
+                <t t-esc="invoice.invoice_date_due" />
+            </td>
+            <td>
+                <t t-esc="invoice.partner_id" />
+            </td>
+        </tr>
+    </t>
+
+    <t t-name="InvoiceDetails">
+        <section class="invoice-details">
+            <div class="invoice-name">
+                <t t-esc="move.name" />
+            </div>
+            <div>
+                <t t-esx="move" />
+            </div>
+            <div class="invoice-details-box clearfix">
+                <div class="invoice-details-left">
+                    <div class="invoice-detail">
+                        <span class="label">Invoice date</span>
+                        <t t-if="move.invoice_date">
+                            <span class="detail invoice-date">
+                                <t t-esc="move.invoice_date" />
+                            </span>
+                        </t>
+                        <t t-if="!move.invoice_date">
+                            <span class="detail invoice-invoice_date empty">N/A</span>
+                        </t>
+                    </div>
+                </div>
+                <div class="invoice-details-right">
+                    <div class="invoice-detail">
+                        <span class="label">Amount total</span>
+                        <t t-if="move.amount_total">
+                            <span class="detail invoice-id">
+                                <t t-esc="move.amount_total" />
+                            </span>
+                        </t>
+                        <t t-if="!move.amount_total">
+                            <span class="detail invoice-total empty">N/A</span>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </t>
+    <!-- con widget option podemos acceder las opciones del widget -->
+    <t t-name="InvoicePaymentPopupWidget">
+        <div role="dialog" class="modal-dialog">
+            <div class="popup">
+                <header class="title">Register Payment</header>
+                <article class="container-fluid">
+                    <div class="row">
+                        <label for="journal_id">Journal:</label>
+                        <t t-if="widget.options.journal_ids">
+                            <select id="journal_id" name="journal_id" class="invoice-select">
+                                <t t-foreach="widget.options.journal_ids" t-as="journal_id">
+                                    <option t-att-value="journal_id.id">
+                                        <t t-esc="journal_id.display_name" />
+                                    </option>
+                                </t>
+                            </select>
+                        </t>
+                    </div>
+                    <div class="row">
+                        <label for="journal_id">Payment method:</label>
+                        <t t-if="widget.options.payment_method_ids">
+                            <select id="payment_method_id" name="payment_method_id" class="invoice-select">
+                                <t t-foreach="widget.options.payment_method_ids" t-as="payment_method_id">
+                                    <option t-att-value="payment_method_id.id">
+                                        <t t-esc="payment_method_id.name" />
+                                    </option>
+                                </t>
+                            </select>
+                        </t>
+                    </div>
+                    <div class="row">
+                        <label for="amount">Amount:</label>
+                        <input id="amount" type="number" name="amount" />
+                    </div>
+                </article>
+                <footer class="footer">
+                    <div class="button confirm">
+                        Confirm
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </t>
+
+</template>

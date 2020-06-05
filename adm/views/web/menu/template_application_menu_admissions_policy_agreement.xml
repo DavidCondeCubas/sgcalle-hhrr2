@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm.template_application_menu_admissions_policy_agreement">
+        <t t-call="website.layout">
+            <t t-set="title">Application</t>
+            <link rel="stylesheet" href="/adm/static/css/form_application.css" />
+            <div class="oe_struture" />
+            <div class="oe_struture">
+                <div class="container-fluid d-flex p-4">
+                    <t t-call="adm.template_application_menu" />
+                    <main class="col">
+                        <form action="app_edit.cfm?memberid=3606&amp;studentid=504&amp;FormSchoolID=267"
+                            method="post" name="frm" class="app_form" enctype="multipart/form-data">
+                            <input type="hidden" name="next_previous" value="next" />
+                            <input type="hidden" name="goto" value="" />
+
+                            <div class="redtext warn" style="padding-bottom:10px;">
+                                There are 3 missing requirements on this form.
+                            </div>
+                            <p>
+                                The signature of the parent, or legal guardian, below reflects an acceptance of
+                                the school’s
+                                <a
+                                    href="https://is-pan.client.renweb.com/oa/client_files/is-pan/uploads/AdmissionsPolicy.pdf"
+                                    target="_blank">Admissions Policy</a>
+                                . School attendance is subject to the timely payment of all applicable fees and
+                                to the provision of accurate and complete student records. The signature also
+                                grants permission for ISP to contact teaches and specialists who have been
+                                involved in your child’s educational progress to date.
+                            </p>
+
+                            <p class="warn">
+                                <input type="checkbox" name="SignedDate1" value="1" />
+                                Check here for Parent/Guardian Signature
+                                <br />
+                                <span class="warn2">Name:</span>
+                                <input type="text" name="SignedName1" value="" size="20" maxlength="100" />
+                                <br />
+                                Date:
+                                2/11/2020
+                            </p>
+
+
+                            <div class="signature-label warn">Sign here using your mouse, touchpad, or touchscreen.</div>
+                            <div class="signature-outer">
+
+                                <div class="signature-again">
+                                    <div class="signature-box">
+                                        <div
+                                            style="padding:0 !important; margin:0 !important;width: 100% !important; height: 0 !important; -ms-touch-action: none; touch-action: none;margin-top:-1em !important; margin-bottom:1em !important;"></div>
+                                        <canvas class="jSignature" width="320" height="80"
+                                            style="margin: 0px; padding: 0px; border: none; height: 80px; width: 320px; touch-action: none; background-color: rgb(255, 255, 255);"></canvas>
+                                        <div
+                                            style="padding:0 !important; margin:0 !important;width: 100% !important; height: 0 !important; -ms-touch-action: none; touch-action: none;margin-top:-1.5em !important; margin-bottom:1.5em !important; position: relative;"></div>
+                                    </div>
+                                    <input type="hidden" name="SignedName1Img" class="signature-hid" />
+                                    <div class="signature-tools">
+                                        <input type="button" value="Clear" class="jsig-startover" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="signature-end"></div>
+
+                        </form>
+                    </main>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

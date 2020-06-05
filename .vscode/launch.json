@@ -1,0 +1,36 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more infogigit  rmation, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Odoo V13",
+            "type": "python",
+            "request": "launch",
+            "program": "C:\\odoo\\Odoo_13e\\server\\odoo-bin",
+            "console": "integratedTerminal",
+            "args": [
+/*                 "--update=payment_paguelofacil" */
+/*                 "--update=honduras_invoices", */
+/*                 "--update=haque_invoices", */
+                "--update=qatar_invoices",
+/*                 "--update=pos_payment_register",  */
+/*                 "--update=multiple_discounts" */
+/*                 "--update=hr_extends" */
+/*                 "--update=school_base", */
+/*                 "--update=school_finance", */
+/*                 "--update=point_of_sale", */
+/*                 "--init=base", */
+            ],
+        },
+        {
+            "name": "Tools Debug",
+            "type": "python",
+            "request": "launch",
+            "program": "C:\\odoo\\Odoo_13e\\server\\addons\\honduras_invoices\\tools\\tools.py",
+            "console": "integratedTerminal",
+            "args": [],
+        }
+    ]
+}

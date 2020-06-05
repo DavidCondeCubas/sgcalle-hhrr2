@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm.template_application_menu_references">
+        <t t-call="website.layout">
+            <t t-set="title">Application</t>
+            <link rel="stylesheet" href="/adm/static/css/form_application.css" />
+            <div class="oe_struture" />
+            <div class="oe_struture">
+                <div class="container-fluid d-flex p-4">
+                    <t t-call="adm.template_application_menu" />
+                    <main class="col">
+                        <form t-att-action="'/admission/applications/{}/write'.format(application_id)"
+                            method="post" enctype="multipart/form-data">
+                            <div class="container">
+                                <section class="form-group row">
+                                    <label class="col-4 control-label">ISP Community Reference #1</label>
+                                    <div class="col">
+                                        <input class="form-control" type="text" name="isp_community_reference_1"
+                                            t-att-value="application.isp_community_reference_1" />
+                                    </div>
+                                </section>
+
+                                <section class="form-group row">
+                                    <label class="col-4 control-label">ISP Community Reference #2</label>
+
+                                    <div class="col">
+                                        <input class="form-control" type="text" name="isp_community_reference_2" 
+                                            t-att-value="application.isp_community_reference_2" />
+                                    </div>
+                                </section>
+
+                                <section class="form-group row">
+                                    <label class="col-4 control-label">Personal Reference #1 Name:
+                                        <span class="text-danger" style="padding-right:5px;">*</span>
+                                    </label>
+
+                                    <div class="col">
+                                        <input class="form-control" type="text" name="personal_reference_contact_information_1" 
+                                            t-att-value="application.personal_reference_contact_information_1" />
+                                    </div>
+                                </section>
+
+                                <section class="form-group row">
+                                    <label class="col-4 control-label">Personal Reference #1 Contact Information:
+                                        <span class="text-danger" style="padding-right:5px;">*</span>
+                                    </label>
+
+                                    <div class="col">
+                                        <input class="form-control" type="text" name="personal_reference_name_1" 
+                                            t-att-value="application.personal_reference_name_1" />
+                                    </div>
+                                </section>
+
+                                <section class="form-group row">
+                                    <label class="col-4 control-label">Personal Reference #2 Name:
+                                        <span class="text-danger" style="padding-right:5px;">*</span>
+                                    </label>
+
+                                    <div class="col">
+                                        <input class="form-control" type="text" name="personal_reference_contact_information_2" 
+                                            t-att-value="application.personal_reference_contact_information_2" />
+                                    </div>
+                                </section>
+
+                                <section class="form-group row">
+                                    <label class="col-4 control-label">Personal Reference #2 Contact Information:
+                                        <span class="text-danger" style="padding-right:5px;">*</span>
+                                    </label>
+
+                                    <div class="col">
+                                        <input class="form-control" type="text" name="personal_reference_name_2" 
+                                            t-att-value="application.personal_reference_name_2" />
+                                    </div>
+                                </section>
+                                <button class="btn btn-primary d-block ml-auto mr-auto mt-3 mb-3">Save changes</button>
+                            </div>
+                        </form>
+                    </main>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

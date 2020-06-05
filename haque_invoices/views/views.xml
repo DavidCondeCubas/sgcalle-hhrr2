@@ -1,0 +1,63 @@
+<odoo>
+
+    <record id="account_move_late_fee_form_view" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <group id="header_left_group" position="inside">
+                <field name="late_fee_amount"/>
+                <field name="invoice_date_invalid"/>
+            </group>
+        </field>
+    </record>
+
+    <record id="view_order_form_dates" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="payment_term_id" position="replace">
+                <label for="payment_term_id"/>
+                <div class="d-flex">
+                    <field name="payment_term_id" placeholder="Terms"/>
+                    <span class="o_form_label mx-3 oe_edit_only"> or </span>
+                    <field name="invoice_date_due" force_save="1" placeholder="Date" attrs="{'invisible': [('payment_term_id', '!=', False)]}"/>
+                </div>
+                <field name="invoice_date_invalid"/>
+                <field name="late_fee_amount"/>
+            </field>
+        </field>
+    </record>
+
+<!--     <record model="ir.ui.view" id="journal_honduras_form_view">
+        <field name="name">journal.honduras</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="is_honduras_invoice"/>
+            </field>
+            <notebook position="inside">
+                <page string="Honduras" attrs="{'invisible': [('is_honduras_invoice', '=', False)]}">
+                    <group>
+                        <field name="prefix" />
+                        <field name="authorized_range_from" />
+                        <field name="authorized_range_to" />
+                        <field name="cai" />
+                        <field name="issue_limit_date" />
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record> -->
+
+<!--     <record model="ir.ui.view" id="res_partner_registro_exonerado_form_view">
+        <field name="name">res.partner.registro_exonerado</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="no_constant_registro_exonerado" />
+            </xpath>
+        </field>
+    </record> -->
+</odoo>

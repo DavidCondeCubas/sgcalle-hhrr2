@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="template_application_menu_student_info">
+        <t t-call="website.layout">
+            <t t-set="title">Application</t>
+            <link rel="stylesheet" href="/adm/static/css/form_application.css" />
+            <div class="oe_struture" />
+            <div class="oe_struture">
+                <div class="container-fluid d-flex p-4">
+                    <t t-call="adm.template_application_menu" />
+                    <main class="col">
+                        <form t-att-action="'/admission/applications/{}/write'.format(application_id)" method="post" enctype="multipart/form-data" id="info-form">
+
+                            <input type="hidden" name="is_additional_student_info" />
+
+                            <div class="container">
+                                <!-- <section class="form-group row">
+                                    <div class="desc">
+                                        <span class="p_no_margin">
+                                            <attribute name="id">fooTest</attribute>
+                                            <p>Resident status in Panama:</p>
+                                        </span>
+                                    </div>
+                                    <select class="form-control" name="resident_status">
+                                        <option selected="selected">Select one</option>
+                                        <option t-if="application.resident_status == 'permanent'"
+                                            value="permanent" selected="selected">Permanent</option>
+                                        <option t-else="" value="permanent">Permanent</option>
+
+                                        <option t-if="application.resident_status == 'transient'"
+                                            value="transient" selected="selected">Transient</option>
+                                        <option t-else="" value="transient">Transient</option>
+                                    </select>
+                                </section>
+
+                                <section class="form-group row">
+
+                                    <div class="desc">
+
+                                        <span class="p_no_margin">
+                                            <p style="font-weight:normal;">If transient, length of stay in Panama:</p>
+                                        </span>
+
+                                    </div>
+
+                                    <div>
+
+                                        <input type="text" name="resident_length_of_stay"
+                                            t-att-value="application.resident_length_of_stay" class="form-control"/>
+
+                                    </div>
+
+                                </section> -->
+
+                                <section class="form-group row">
+
+                                    <label class="col-4 control-label">
+                                        First Language:
+                                        <span class="text-danger" style="padding-right:5px;">*</span>
+                                    </label>
+
+                                    <div class="col">
+                                        <select name="first_language" class="form-control">
+                                            <option value="-1" t-att-selected="not application.first_language">Select a language
+                                            </option>
+                                            <t t-foreach="languages" t-as="language">
+                                                <option t-att-value="language.id" t-att-selected="application.first_language.id == language.id">
+                                                    <t t-esc="language.name" />
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </section>
+
+                                <section class="form-group row">
+                                    <label class="col-4 control-label">
+                                            Which of these can the student do with reasonable fluency in this
+                                                language (check all that apply):
+                                        </label>
+                                    <div class="col">
+                                        <div class="text-danger" style="float:left;margin-right:2px;">*</div>
+                                        <span>
+                                            <input type="checkbox" class="form-input form-checkbox" name="first_language_skill_write" t-att-checked="application.first_language_skill_write" />
+                                            <label for="first_language_skill_write">Write</label>
+                                        </span>
+
+                                        <span>
+                                            <input type="checkbox" class="form-input form-checkbox" name="first_language_skill_read" t-att-checked="application.first_language_skill_read" />
+                                            <label for="first_language_skill_read">Read</label>
+                                        </span>
+
+                                        <span>
+                                            <input type="checkbox" class="form-input form-checkbox" name="first_language_skill_speak" t-att-checked="application.first_language_skill_speak" />
+                                            <label for="first_language_skill_speak">Speak</label>
+                                        </span>
+
+                                        <span>
+                                            <input type="checkbox" class="form-custom" name="first_language_skill_listen" t-att-checked="application.first_language_skill_listen" />
+                                            <label for="first_language_skill_listen">Listen</label>
+                                        </span>
+                                    </div>
+
+                                </section>
+
+                                <section class="form-group row">
+                                    <label class="col-4 control-label">Second Language:</label>
+                                    <div class="col">
+                                        <select name="second_language" class="form-control">
+                                            <option value="-1" t-att-selected="not application.second_language">Select a language
+                                            </option>
+                                            <t t-foreach="languages" t-as="language">
+                                                <option t-att-value="language.id" t-att-selected="application.second_language == language">
+                                                    <t t-esc="language.name" />
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </section>
+
+                                <section class="form-group row">
+                                    <label class="col-4 control-label">
+                                        Which of these can the student do with reasonable fluency in this
+                                        language (check all that apply):
+                                    </label>
+                                    <div class="col">
+                                        <span>
+                                            <input type="checkbox" class="form-input form-checkbox" name="second_language_skill_write" t-att-checked="application.second_language_skill_write" />
+                                            <label for="question_500">Write</label>
+                                        </span>
+
+                                        <span>
+                                            <input type="checkbox" class="form-input form-checkbox" name="second_language_skill_read" t-att-checked="application.second_language_skill_read" />
+                                            <label for="question_500">Read</label>
+                                        </span>
+
+                                        <span>
+                                            <input type="checkbox" class="form-input form-checkbox" name="second_language_skill_speak" t-att-checked="application.second_language_skill_speak" />
+                                            <label for="question_500">Speak</label>
+                                        </span>
+
+                                        <span>
+                                            <input type="checkbox" class="form-input form-checkbox" name="second_language_skill_listen" t-att-checked="application.second_language_skill_listen" />
+                                            <label for="question_500">Listen</label>
+                                        </span>
+                                    </div>
+
+                                </section>
+
+                                <section class="form-group row">
+                                    <label class="col-4 control-label">Third Language:</label>
+                                    <div class="col">
+                                        <select name="third_language" class="form-control">
+                                            <option value="-1" t-att-selected="not application.third_language">Select a language
+                                            </option>
+                                            <t t-foreach="languages" t-as="language">
+                                                <option t-att-value="language.id" t-att-selected="application.third_language == language">
+                                                    <t t-esc="language.name" />
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </section>
+
+                                <section class="form-group row">
+
+                                    <label class="col-4 control-label">Which of these can the student do with reasonable fluency in this
+                                            language (check all that apply):
+                                    </label>
+
+                                    <div class="col">
+                                        <span>
+                                            <input type="checkbox" class="form-input form-checkbox" name="third_language_skill_write" t-att-checked="application.third_language_skill_write" />
+                                            <label for="question_502">Write</label>
+                                        </span>
+
+                                        <span>
+                                            <input type="checkbox" class="form-input form-checkbox" name="third_language_skill_read" t-att-checked="application.third_language_skill_read" />
+                                            <label for="question_502">Read</label>
+                                        </span>
+
+                                        <span>
+                                            <input type="checkbox" class="form-input form-checkbox" name="third_language_skill_speak" t-att-checked="application.third_language_skill_speak" />
+                                            <label for="question_502">Speak</label>
+                                        </span>
+                                        <span>
+                                            <input type="checkbox" class="form-input form-checkbox" name="third_language_skill_listen" t-att-checked="application.third_language_skill_listen" />
+                                            <label for="question_502">Listen</label>
+                                        </span>
+                                    </div>
+
+                                </section>
+
+                                <section class="form-group row">
+                                    <label class="col-4 control-label">
+                                        Number of previous years of instruction in English:
+                                        <span class="text-danger" style="padding-right:5px;">*</span>
+                                    </label>
+                                    <div class="col">
+                                        <input type="number" name="number_years_in_english" class="form-control" t-att-value="application.number_years_in_english" />
+                                    </div>
+                                </section>
+
+                                <section class="form-group row">
+                                    <label class="col-4 control-label">
+                                        <p>Other:</p>
+                                    </label>
+                                    <div class="col">
+                                        <input type="text" name="additional_info_other" class="form-control" t-att-value="application.additional_info_other" />
+                                    </div>
+                                </section>
+
+                                <section class="form-group row">
+
+                                    <label class="col-4 control-label">
+                                        <p>Has the student ever participated in a special education or
+                                            learning
+                                            support program (i.e. gifted &amp; talented, learning
+                                            difference/
+                                            disability, speech/language therapy, occupational
+                                            therapy) in the last
+                                            five years?</p>
+                                    </label>
+
+                                    <div class="col">
+                                        <span class="text-danger" style="padding-right:5px;">*</span>
+                                        <input t-att-checked="application.special_education" type="radio" name="special_education" value="True" />
+                                        Yes
+                                        <input t-att-checked="not application.special_education" type="radio" checked="checked" name="special_education" value="" />
+                                        No
+                                    </div>
+
+                                </section>
+
+                                <section class="form-group row">
+
+                                    <label class="col-4 control-label">
+                                        <p>If yes, please describe:</p>
+                                    </label>
+                                    <div class="col">
+                                        <textarea name="special_education_desc" class="form-control" rows="5"><t t-esc="application.special_education_desc" /></textarea>
+                                    </div>
+
+                                </section>
+
+                                <section class="form-group row">
+
+                                    <label class="col-4 control-label">
+                                        <p>Has the student ever had any psycho-educational (cognitive
+                                                ability and
+                                                achievement) testing (ie WISC) in the last five
+                                                years?
+                                            </p>
+                                    </label>
+
+                                    <div class="col">
+                                        <span class="text-danger" style="padding-right:5px;">*</span>
+                                        <input t-att-checked="application.psycho_educational_testing" type="radio" name="psycho_educational_testing" value="True" />
+                                        Yes
+                                        <input t-att-checked="not application.psycho_educational_testing" type="radio" name="psycho_educational_testing" value="" />
+                                        No
+                                    </div>
+
+                                </section>
+
+                                <section class="form-group row">
+
+                                    <label class="col-4 control-label">
+                                        <p style="font-weight:normal;">
+                                            <em>If yes, please submit copies.</em>
+                                        </p>
+                                    </label>
+
+                                    <div class="col">
+                                        <fieldset class="addl-questions colnum-3"></fieldset>
+                                        <div style="clear:both;"></div>
+                                    </div>
+
+                                </section>
+
+                                <section class="form-group row">
+
+                                    <label class="col-4 control-label">
+                                        <p>Does the applicant require any emotional support as part of his
+                                                or her
+                                                learning program (i.e. recent family changes or personal
+                                                difficulties,
+                                                present counseling support)?
+                                            </p>
+                                    </label>
+
+                                    <div class="col">
+                                        <span class="text-danger" style="padding-right:5px;">*</span>
+                                        <input t-att-checked="application.emotional_support" type="radio" name="emotional_support" value="True" />
+                                        Yes
+                                        <input t-att-checked="not application.emotional_support" type="radio" name="emotional_support" value="" />
+                                        No
+                                    </div>
+
+                                </section>
+
+                                <section class="form-group row">
+
+                                    <label class="col-4 control-label">If yes, please describe:</label>
+
+                                    <div class="col">
+                                        <textarea name="emotional_support_desc" rows="5" class="form-control"><t t-esc="application.emotional_support_desc" /></textarea>
+                                    </div>
+
+                                </section>
+
+                                <!-- <section class="form-group row">
+
+                                    <label class="col-4 control-label">
+                                            <p>Has the student had an IEP (Individual Education Plan/Program)
+                                                within the
+                                                last five years?
+                                            </p>
+                                    </label>
+
+                                    <div class="col">
+                                        <span class="text-danger" style="padding-right:5px;">*</span>
+                                        <input t-att-checked="application.iep_education" type="radio" name="iep_education" value="True" />
+                                        Yes
+                                        <input t-att-checked="not application.iep_education" type="radio" name="iep_education" value="" />
+                                        No
+                                    </div>
+                                </section>
+
+                                <section class="form-group row">
+                                    <div class="desc">
+                                        <span class="p_no_margin">
+                                            <p style="font-weight:normal;">
+                                                <em>If yes, please submit a copy.</em>
+                                            </p>
+                                        </span>
+                                    </div>
+                                </section> -->
+                                <button class="btn btn-success d-block ml-auto mr-auto mt-3 mb-3">Save changes</button>
+                            </div>
+                        </form>
+                    </main>
+                </div>
+            </div>
+            <script type="text/javascript" src="/adm/static/js/student_info.js"></script>
+        </t>
+    </template>
+</odoo>

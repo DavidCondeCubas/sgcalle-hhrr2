@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm.template_application_menu_previous_school">
+        <t t-call="website.layout">
+            <t t-set="title">Application</t>
+            <link rel="stylesheet" href="/adm/static/css/form_application.css" />
+            <div class="oe_struture" />
+            <div class="oe_struture">
+                <div class="container-fluid d-flex p-4">
+                    <article class="row card card-body d-none" id="form-template">
+                        <input class="form-control" type="hidden" name="previous_school_id" value="-1" />
+                        <div class="row">
+                            <section class="col-12 col-md">
+                                <label>School Name</label>
+                                <span class="text-danger"> *</span>
+                                <div>
+                                    <input class="form-control" type="text" name="previous_school_name" />
+                                </div>
+                            </section>
+
+                            <section class="col-12 col-md">
+                                <label>Street Address</label>
+                                <input class="form-control" type="text" name="previous_school_street" />
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col-6">
+                                <label>Country</label>
+                                <select class="country form-control">
+                                    <option selected="selected" disabled="disabled">Select a country
+                                    </option>
+                                    <t t-foreach="countries" t-as="country">
+                                        <option t-att-value="country.id" t-field="country.name" />
+                                    </t>
+                                </select>
+                            </section>
+                            <section class="col-6">
+                                <label>State</label>
+                                <select class="state form-control">
+                                    <option selected="selected" disabled="disabled">Select a
+                                        state
+                                    </option>
+                                    <t t-foreach="states" t-as="state">
+                                        <option t-att-value="state.id" t-field="state.name"
+                                            t-att-data-country="state.country_id.id" />
+                                    </t>
+                                </select>
+                            </section>
+                            <section class="col-6">
+                                <label>City</label>
+                                <input class="form-control" type="text" name="previous_school_city" />
+                            </section>
+                            <section class="col-6">
+                                <label>Zip</label>
+                                <input class="form-control" type="text" name="previous_school_zip" />
+                            </section>
+                        </div>
+                        <div class="row">
+
+                            <section class="col-12 col-md">
+                                <label>Phone</label>
+                                <input class="form-control" type="text" name="previous_school_phone" />
+                            </section>
+
+                            <section class="col-12 col-md">
+                                <label>
+                                    From Date
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input class="form-control" type="date" name="previous_school_fromdate" />
+                            </section>
+
+                        </div>
+                        <div class="row">
+                            <section class="col-12 col-md">
+                                <label>
+                                    To Date
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input class="form-control" type="date" name="previous_school_todate" />
+                            </section>
+
+                            <section class="col-12 col-md">
+                                <label>
+                                    Grade Completed
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input class="form-control" type="text" name="previous_school_gradecompleted" />
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col-12 d-flex justify-content-center p-3">
+                                <button type="button" class="btn btn-danger remove-school">Remove</button>
+                            </section>
+                        </div>
+                    </article>
+
+                    <t t-call="adm.template_application_menu" />
+                    <main class="col">
+                        <form t-att-action="'/admission/applications/{}/write'.format(application_id)"
+                            method="post" enctype="multipart/form-data">
+
+                            <input class="form-control" type="hidden" name="has_previous_schools" />
+
+                            <section class="container-fluid">
+                                <div id="school_forms">
+                                    <t t-foreach="application.previous_school_ids" t-as="previous_school">
+                                        <article class="row card card-body"
+                                            t-att-id="'previous_school_{}'.format(previous_school_index+1)">
+                                            <input class="form-control" type="hidden" name="previous_school_id"
+                                                t-att-value="previous_school.id" />
+
+                                            <div class="row">
+                                                <section class="col-12 col-md">
+                                                    <label>School Name</label>
+                                                    <span class="text-danger"> *</span>
+                                                    <div>
+                                                        <input class="form-control" type="text"
+                                                            name="previous_school_name"
+                                                            t-att-value="previous_school.name" />
+                                                    </div>
+                                                </section>
+
+                                                <section class="col-12 col-md">
+                                                    <label>Street Address</label>
+                                                    <input class="form-control" type="text"
+                                                        name="previous_school_street"
+                                                        t-att-value="previous_school.street" />
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col-6">
+                                                    <label>Country</label>
+
+                                                    <select class="country form-control" name="previous_school_country">
+                                                        <option selected="selected" disabled="disabled">Select a country
+                                                        </option>
+                                                        <t t-foreach="countries" t-as="country">
+                                                            <option t-if="previous_school.country_id == country"
+                                                                selected="selected" t-att-value="country.id"
+                                                                t-field="country.name" />
+                                                            <option t-else="" t-att-value="country.id"
+                                                                t-field="country.name" />
+                                                        </t>
+                                                    </select>
+                                                </section>
+                                                <section class="col-6">
+                                                    <label>State</label>
+                                                    <select class="state form-control" name="previous_school_state">
+                                                        <option selected="selected" disabled="disabled">Select a
+                                                            state
+                                                        </option>
+                                                        <t t-foreach="states" t-as="state">
+                                                            <option t-if="previous_school.state_id.id == state.id"
+                                                                selected="selected" t-att-value="state.id"
+                                                                t-field="state.name"
+                                                                t-att-data-country="state.country_id.id"  />
+                                                            <option t-else="" t-att-value="state.id"
+                                                                t-field="state.name" 
+                                                                t-att-data-country="state.country_id.id" />
+                                                        </t>
+                                                    </select>
+                                                </section>
+
+
+                                                <section class="col-6">
+                                                    <label>City</label>
+                                                    <input class="form-control" type="text"
+                                                        name="previous_school_city" t-att-value="previous_school.city" />
+                                                </section>
+                                                <section class="col-6">
+                                                    <label>Zip</label>
+                                                    <input class="form-control" type="text"
+                                                        name="previous_school_zip" t-att-value="previous_school.zip" />
+                                                </section>
+
+                                            </div>
+                                            <div class="row">
+
+                                                <section class="col-12 col-md">
+                                                    <label>Phone</label>
+                                                    <input class="form-control" type="text"
+                                                        name="previous_school_phone" t-att-value="previous_school.phone" />
+                                                </section>
+
+                                                <section class="col-12 col-md">
+                                                    <label>
+                                                        From Date
+                                                        <span class="text-danger"> *</span>
+                                                    </label>
+                                                    <input class="form-control" type="date"
+                                                        name="previous_school_fromdate"
+                                                        t-att-value="previous_school.from_date" />
+                                                </section>
+
+                                            </div>
+                                            <div class="row">
+                                                <section class="col-12 col-md">
+                                                    <label>
+                                                        To Date
+                                                        <span class="text-danger"> *</span>
+                                                    </label>
+                                                    <input class="form-control" type="date"
+                                                        name="previous_school_todate"
+                                                        t-att-value="previous_school.to_date" />
+                                                </section>
+
+                                                <section class="col-12 col-md">
+                                                    <label>
+                                                        Grade Completed
+                                                        <span class="text-danger"> *</span>
+                                                    </label>
+                                                    <input class="form-control" type="text"
+                                                        name="previous_school_gradecompleted"
+                                                        t-att-value="previous_school.grade_completed" />
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col-12 d-flex justify-content-center p-3">
+                                                    <button type="button"
+                                                        class="btn btn-danger remove-school"
+                                                        t-att-data-id="previous_school_index+1">Remove</button>
+                                                </section>
+                                            </div>
+                                        </article>
+                                    </t>
+                                    <button type="button" class="add-school btn btn-success d-block m-auto">Add school</button>
+                                </div>
+                                <div class="row justify-content-center p-4">
+                                    <button class="btn btn-primary">Submit changes</button>
+                                </div>
+                            </section>
+                        </form>
+                    </main>
+                </div>
+            </div>
+        </t>
+        <script defer="defer" type="text/javascript" src="/adm/static/js/previous_school.js"></script>
+    </template>
+</odoo>

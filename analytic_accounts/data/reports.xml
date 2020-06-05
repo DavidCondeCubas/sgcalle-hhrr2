@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Action for reports -->    
+    <report
+        id="action_analytic_account_reports"
+        model="account.analytic.account"
+        string="Accounts"
+        report_type="qweb-html"
+        name="analytic_accounts.report_sample"
+        menu="False"
+    />
+</odoo>

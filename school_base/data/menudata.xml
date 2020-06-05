@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="action_school_configuration_years">
+        <field name="name">School years</field>
+        <field name="res_model">school_base.school_year</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_school_configuration_grades">
+        <field name="name">School grades</field>
+        <field name="res_model">school_base.grade_level</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_school_configuration_codes">
+        <field name="name">School grades</field>
+        <field name="res_model">school_base.school_code</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="school_configuration_menu" name="School Configurations"/>
+
+    <menuitem id="school_configuration_menu_year" action="action_school_configuration_years"
+              name="School years" parent="school_configuration_menu"/>
+
+    <menuitem id="school_configuration_menu_grades" action="action_school_configuration_grades"
+              name="School grades" parent="school_configuration_menu"/>
+
+    <menuitem id="school_configuration_menu_codes" action="action_school_configuration_codes"
+              name="School code" parent="school_configuration_menu"/>
+</odoo>

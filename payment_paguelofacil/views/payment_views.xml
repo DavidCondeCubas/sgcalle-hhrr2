@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="acquirer_form_paguelofacil" model="ir.ui.view">
+        <field name="name">payment.acquirer.form.inherit</field>
+        <field name="model">payment.acquirer</field>
+        <field name="inherit_id" ref="payment.acquirer_form"/>
+        <field name="arch" type="xml">
+            <field name="payment_flow" position="attributes">
+            </field>
+            <field name="payment_flow" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('token_implemented', '=', False), ('provider', '=', 'paguelofacil')]}</attribute>
+            </field>
+            <xpath expr='//group[@name="acquirer"]' position='inside'>
+                <group attrs="{'invisible': [('provider', '!=', 'paguelofacil')]}">
+                    <field name="paguelofacil_cclw" attrs="{'required':[ ('provider', '=', 'paguelofacil'), ('state', '!=', 'disabled')]}" password="True"/>
+                    <field name="paguelofacil_api_key" attrs="{'required':[ ('provider', '=', 'paguelofacil'), ('state', '!=', 'disabled')]}" password="True"/>
+                </group>
+            </xpath>
+            <xpath expr='//group[@name="acquirer_config"]' position='after'>
+                <group attrs="{'invisible': [('provider', '!=', 'paguelofacil')]}">
+                    <field name="paguelofacil_save_card"/>
+                    <field name="paguelofacil_image_url"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

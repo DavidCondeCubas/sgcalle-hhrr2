@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm_uni.template_admission_application_form">
+        <style>
+            .pointer{
+            cursor: pointer;
+            }
+        </style>
+        <div class="oe_structure" />
+        <div class="oe_struture">
+            <main class="container p-4">
+                <div class="d-none" id="selLanguage">
+                    <option disabled="disabled" value="-1" selected="true">- Select a language -</option>
+                    <t t-foreach="language_ids" t-as="language">
+                        <option t-att-value="language.id">
+                            <t t-esc="language.name" />
+                        </option>
+                    </t>
+                </div>
+                <div class="d-none" id="selLanguageLevel">
+                    <option disabled="disabled" value="-1" selected="true">- Select a level -</option>
+                    <t t-foreach="language_level_ids" t-as="language_level">
+                        <option t-att-value="language_level.id">
+                            <t t-esc="language_level.name" />
+                        </option>
+                    </t>
+                </div>
+                <form action="/admission-university/application" method="post"
+                    class="s_website_form form-horizontal container-fluid mt32" enctype="multipart/form-data">
+
+                    <input type="hidden" name="studentsCount" id="studentsCount" value="1" />
+
+                    <!-- Student -->
+                    <section class="card mt-2">
+                        <section class="card-header">
+                            <h1 class="text-info">Student</h1>
+                        </section>
+                        <section class="card-body">
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <label for="selGender">Gender</label>
+                                    <select type="text" class="form-control" id="selGender"
+                                        name="selGender" placeholder="Gender">
+                                        <option value="m">Male</option>
+                                        <option value="f">Female</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="txtFatherName">Father Name</label>
+                                    <input type="text" class="form-control" id="txtFatherName"
+                                        name="txtFatherName" placeholder="Father Name" />
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="txtMotherName">Mother Name</label>
+                                    <input type="text" class="form-control" id="txtMotherName"
+                                        name="txtMotherName" placeholder="Mother Name" />
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+
+                    <section class="card mt-2">
+                        <section class="card-header">
+                            <h1 class="text-info">Contact</h1>
+                        </section>
+                        <section class="card-body">
+                            <div class="form-group" id="contacts">
+                                <div class="row" id="contact_row">
+                                    <div class="col-5">
+                                        <input class="form-control" name="txtContactName"
+                                            placeholder="Skype, Whatsapp..." />
+                                    </div>
+                                    <div class="col-5">
+                                        <input class="form-control" name="txtContactId"
+                                            placeholder="phone, email, username..." />
+                                    </div>
+                                    <div class="col-2">
+                                        <button type="button" class="w-100 btn btn-primary add_contact">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="card mt-2">
+                        <section class="card-header">
+                            <h1 class="text-info">Language Skills</h1>
+                        </section>
+                        <section class="card-body">
+                            <div class="form-group" id="languages">
+                                <div class="row" id="language_row">
+                                    <div class="col-5">
+                                        <select class="form-control" name="selLanguage">
+                                            <option disabled="disabled" value="-1" selected="true">- Select a language -</option>
+                                            <t t-foreach="language_ids" t-as="language">
+                                                <option t-att-value="language.id">
+                                                    <t t-esc="language.name" />
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="col-5">
+                                        <select class="form-control" name="selLanguageLevel">
+                                            <option disabled="disabled" value="-1" selected="true">- Select a level -</option>
+                                            <t t-foreach="language_level_ids" t-as="language_level">
+                                                <option t-att-value="language_level.id">
+                                                    <t t-esc="language_level.name" />
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="col-2">
+                                        <button type="button" class="w-100 btn btn-primary add_language">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+
+                    <!-- School Information -->
+                    <section class="card mt-2">
+                        <section class="card-header">
+                            <h1 class="text-info">School Information</h1>
+                        </section>
+                        <section class="card-body">
+                            <div class="row">
+
+                                <div class="form-group col-12">
+                                    <label for="txtPreviousSchool">Previous School</label>
+                                    <input type="text" class="form-control" id="txtPreviousSchool"
+                                        name="txtPreviousSchool" placeholder="Previous School" />
+                                </div>
+
+                                <hr class="w-100" />
+
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="txtGPA">GPA</label>
+                                    <input type="text" class="form-control" id="txtGPA" name="txtGPA"
+                                        placeholder="GPA" required="required" />
+                                </div>
+
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="txtCumulativeGrade">Cumulative Grade</label>
+                                    <input type="text" class="form-control" id="txtCumulativeGrade"
+                                        name="txtCumulativeGrade" placeholder="Cumulative Grade" required="required" />
+                                </div>
+
+                                <small class="col-12 text-danger mb-3">for Moroccan students only</small>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="txtRegionalExam">Regional Exam</label>
+                                    <input type="text" class="form-control" id="txtRegionalExam"
+                                        name="txtRegionalExam" placeholder="Regional Exam" />
+                                </div>
+
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="txtBACGrade">BAC Grade</label>
+                                    <input type="text" class="form-control" id="txtBACGrade" name="txtBACGrade"
+                                        placeholder="BAC Grade" />
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+
+                    <section class="card mt-2">
+                        <section class="card-header">
+                            <h1 class="text-info">Documentation</h1>
+                        </section>
+                        <section class="card-body">
+                            <div class="row w-100 m-0">
+                                <div class="form-group col-12 col-md-6">
+                                    <div class="custom-file">
+                                        <input type="file" name="fileLetterOfMotivation"
+                                            class="pointer file custom-file-input" data-show-upload="true"
+                                            data-show-caption="true" lass="file" data-show-preview="true"
+                                            id="fileLetterOfMotivation" />
+                                        <label class="custom-file-label" for="fileLetterOfMotivation">Letter of motivation</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <div class="custom-file">
+                                        <input type="file" name="fileCV" class="pointer file custom-file-input"
+                                            data-show-upload="true" data-show-caption="true" lass="file"
+                                            data-show-preview="true" id="fileCV" />
+                                        <label class="custom-file-label" for="fileCV">C.V</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <div class="custom-file">
+                                        <input type="file" name="fileGradeTranscript"
+                                            class="pointer file custom-file-input" data-show-upload="true"
+                                            data-show-caption="true" lass="file" data-show-preview="true"
+                                            id="fileGradeTranscript" />
+                                        <label class="custom-file-label" for="fileGradeTranscript">Grade transcript</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <div class="custom-file">
+                                        <input type="file" name="fileLettersOfRecommendation"
+                                            class="pointer file custom-file-input" data-show-upload="true"
+                                            data-show-caption="true" lass="file" data-show-preview="true"
+                                            id="fileLettersOfRecommendation" />
+                                        <label class="custom-file-label" for="fileLettersOfRecommendation">Letters of recommendation</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="card mt-2">
+                        <section class="card-body">
+                            <div class="row w-100 m-0">
+                                <div class="form-group col-12">
+                                    <label for="selPreferredContactTime">
+                                        Preferred Contact Time
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select type="text" class="form-control" id="selPreferredContactTime"
+                                        name="selPreferredContactTime" required="required">
+                                        <option disabled="disabled" value="-1" selected="true">- Select an option -</option>
+                                        <t t-foreach="contact_time_ids" t-as="contact_time">
+                                            <option t-att-value="contact_time.id">
+                                                <t t-esc="contact_time.name" />
+                                                - (
+                                                <t t-esc="contact_time.from_time" />
+                                                -
+                                                <t t-esc="contact_time.to_time" />
+                                                )
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="form-group col-12">
+                                    <label for="selPreferredDegreeProgram">
+                                        Preferred Degree Program
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select type="text" class="form-control" id="selPreferredDegreeProgram"
+                                        name="selPreferredDegreeProgram" required="required">
+                                        <option disabled="disabled" value="-1" selected="true">- Select an option -</option>
+                                        <t t-foreach="degree_program_ids" t-as="degree_program">
+                                            <option t-att-value="degree_program.id">
+                                                <t t-esc="degree_program.name" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+
+                    <div class="row justify-content-center m-3">
+                        <button type="submit" class="btn btn-primary">Submit Application</button>
+                    </div>
+                </form>
+            </main>
+        </div>
+        <script type="text/javascript" src="/adm_uni/static/js/admission_university.js"></script>
+    </template>
+</odoo>

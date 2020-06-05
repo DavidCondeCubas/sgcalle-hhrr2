@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="adm.template_application_menu_medical_info">
+        <t t-call="website.layout">
+            <t t-set="title">Application</t>
+            <link rel="stylesheet" href="/adm/static/css/form_application.css" />
+            <div class="oe_struture" />
+            <div class="oe_struture">
+                <div class="container-fluid d-flex p-4">
+                    <article class="border rounded p-2 m-1 d-none" id="form-template-condition">
+                        <input required="required" class="form-control" type="hidden" name="medical_condition_id" value="-1" />
+                        <div class="row">
+                            <section class="col-5">
+                                <label>
+                                    Name
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input required="required" class="form-control" type="text" name="medical_condition_name" />
+                            </section>
+                            <section class="col-6">
+                                <label>
+                                    comment
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input required="required" class="form-control" type="text" name="medical_condition_comment" />
+                            </section>
+                            <section class="col-1 d-flex justify-content-center p-3">
+                                <button type="button" class="btn btn-danger remove-medical_condition">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </section>
+                        </div>
+                    </article>
+
+                    <article class="border rounded p-2 m-1 d-none" id="form-template-allergy">
+                        <input required="required" class="form-control" type="hidden" name="medical_allergy_id" value="-1" />
+                        <div class="row">
+                            <section class="col-5">
+                                <label>
+                                    Name
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input required="required" class="form-control" type="text" name="medical_allergy_name" />
+                            </section>
+                            <section class="col-6">
+                                <label>
+                                    comment
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input required="required" class="form-control" type="text" name="medical_allergy_comment" />
+                            </section>
+                            <section class="col-1 d-flex justify-content-center p-3">
+                                <button type="button" class="btn btn-danger remove-medical_allergy">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </section>
+                        </div>
+                    </article>
+
+                    <article class="border rounded p-2 m-1 d-none" id="form-template-medication">
+                        <input required="required" class="form-control" type="hidden" name="medical_medication_id" value="-1" />
+                        <div class="row">
+                            <section class="col-5">
+                                <label>
+                                    Name
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input required="required" class="form-control" type="text" name="medical_medication_name" />
+                            </section>
+                            <section class="col-6">
+                                <label>
+                                    comment
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input required="required" class="form-control" type="text" name="medical_medication_comment" />
+                            </section>
+                            <section class="col-1 d-flex justify-content-center p-3">
+                                <button type="button" class="btn btn-danger remove-medical_medication">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </section>
+                        </div>
+                    </article>
+
+
+                    <t t-call="adm.template_application_menu" />
+                    <main class="col">
+                        <form t-att-action="'/admission/applications/{}/write'.format(application_id)" method="post" enctype="multipart/form-data">
+
+                            <input required="required" class="form-control" type="hidden" name="has_medical_info" />
+                            <section class="container-fluid">
+                                    <div class="row mb-4 justify-content-center align-items-center">
+                                        <section class="col">
+                                            <label>
+                                                Name
+                                                <span class="text-danger"> *</span>
+                                            </label>
+                                            <input required="required" class="form-control" type="text" name="doctor_name" t-att-value="application.doctor_name" />
+                                        </section>
+                                        <section class="col">
+                                            <label>
+                                                Doctor phone
+                                                <span class="text-danger"> *</span>
+                                            </label>
+                                            <input required="required" class="form-control" type="text" name="doctor_phone" t-att-value="application.doctor_phone" />
+                                        </section>
+                                        <section class="col">
+                                            <label>
+                                                Permision to treat?
+                                                <span class="text-danger"> *</span>
+                                            </label>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="permission_to_treat" id="pst_yes" value="true" t-att-checked="application.permission_to_treat"/>
+                                                <label class="form-check-label" for="pst_yes">Yes</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" id="pst_no" name="permission_to_treat" value="" t-att-checked="not application.permission_to_treat" />
+                                                <label class="form-check-label" for="pst_no">No</label>
+                                            </div>
+                                        </section>
+                                    </div>
+
+                                    <div class="card mt-4">
+                                        <section class="card-header">
+                                            <h1>Medical Conditions</h1>
+                                        </section>
+                                        <section id="form-condition" class="container-fluid card-body">
+                                            <t t-foreach="application.medical_conditions_ids" t-as="condition">
+                                                <article class="border rounded p-2 m-1" t-att-id="'medical_condition_{}'.format(condition_index+1)">
+                                                    <input required="required" class="form-control" type="hidden" name="medical_condition_id" t-att-value="condition.id" />
+                                                    <div class="row">
+                                                        <section class="col-5">
+                                                            <label>
+                                                                Name
+                                                                <span class="text-danger"> *</span>
+                                                            </label>
+                                                            <input required="required" class="form-control" type="text" name="medical_condition_name" t-att-value="condition.name" />
+                                                        </section>
+                                                        <section class="col-6">
+                                                            <label>
+                                                                comment
+                                                                <span class="text-danger"> *</span>
+                                                            </label>
+                                                            <input required="required" class="form-control" type="text" name="medical_condition_comment" t-att-value="condition.comment" />
+                                                        </section>
+                                                        <section class="col-1 d-flex justify-content-center p-3">
+                                                            <button type="button" class="btn btn-danger remove-medical_condition" t-att-data-id="condition_index+1">
+                                                                <i class="fa fa-times"></i>
+                                                            </button>
+                                                        </section>
+                                                    </div>
+                                                </article>
+                                            </t>
+                                            <button type="button" class="add-medical_condition btn btn-success d-block ml-auto mr-auto mt-3 mb-3" id="btn-condition">Add Condition</button>
+                                        </section>
+                                    </div>
+
+                                    <div class="card mt-4">
+                                        <section class="card-header">
+                                            <h1>Medical allergies</h1>
+                                        </section>
+                                        <section id="form-allergy" class="container-fluid card-body">
+                                            <t t-foreach="application.medical_allergies_ids" t-as="allergy">
+                                                <article class="border rounded p-2 m-1" t-att-id="'medical_allergy_{}'.format(allergy_index+1)">
+                                                    <input required="required" class="form-control" type="hidden" name="medical_allergy_id" t-att-value="allergy.id" />
+                                                    <div class="row">
+                                                        <section class="col-5">
+                                                            <label>
+                                                                Name
+                                                                <span class="text-danger"> *</span>
+                                                            </label>
+                                                            <input required="required" class="form-control" type="text" name="medical_allergy_name" t-att-value="allergy.name" />
+                                                        </section>
+                                                        <section class="col-6">
+                                                            <label>
+                                                                comment
+                                                                <span class="text-danger"> *</span>
+                                                            </label>
+                                                            <input required="required" class="form-control" type="text" name="medical_allergy_comment" t-att-value="allergy.comment" />
+                                                        </section>
+                                                        <section class="col-1 d-flex justify-content-center p-3">
+                                                            <button type="button" class="btn btn-danger remove-medical_allergy" t-att-data-id="allergy_index+1">
+                                                                <i class="fa fa-times"></i>
+                                                            </button>
+                                                        </section>
+                                                    </div>
+                                                </article>
+                                            </t>
+                                            <button type="button" class="add-medical_allergy btn btn-success d-block ml-auto mr-auto mt-3 mb-3">Add Allergy</button>
+                                        </section>
+                                    </div>
+
+                                    <div class="card mt-4">
+                                        <section class="card-header">
+                                            <h1>Medication</h1>
+                                        </section>
+                                        <section id="form-medication" class="container-fluid">
+                                            <t t-foreach="application.medical_medications_ids" t-as="medication">
+                                                <article class="border rounded p-2 m-1" t-att-id="'medical_medication_{}'.format(medication_index+1)">
+                                                    <input required="required" class="form-control" type="hidden" name="medical_medication_id" t-att-value="medication.id" />
+                                                    <div class="row">
+                                                        <section class="col-5">
+                                                            <label>
+                                                                Name
+                                                                <span class="text-danger"> *</span>
+                                                            </label>
+                                                            <input required="required" class="form-control" type="text" name="medical_medication_name" t-att-value="medication.name" />
+                                                        </section>
+                                                        <section class="col-6">
+                                                            <label>
+                                                                comment
+                                                                <span class="text-danger"> *</span>
+                                                            </label>
+                                                            <input required="required" class="form-control" type="text" name="medical_medication_comment" t-att-value="medication.comment" />
+                                                        </section>
+                                                        <section class="col-1 d-flex justify-content-center p-3">
+                                                            <button type="button" class="btn btn-danger remove-medical_medication" t-att-data-id="medication_index+1">
+                                                                <i class="fa fa-times"></i>
+                                                            </button>
+                                                        </section>
+                                                    </div>
+                                                </article>
+                                            </t>
+                                            <button type="button" class="add-medical_medication btn btn-success d-block ml-auto mr-auto mt-3 mb-3">Add Medication</button>
+                                        </section>
+                                    </div>
+                                <div class="row mt-4 p-2 align-items-center justify-content-center">
+                                    <button class="btn btn-primary">Submit changes</button>
+                                </div>
+                            </section>
+                        </form>
+                    </main>
+                    <script type="text/javascript" src="/adm/static/js/medical_info.js"></script>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

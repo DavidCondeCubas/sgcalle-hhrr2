@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="haque_paper_format" model="report.paperformat">
+            <field name="name">Haque Paper Format</field>
+            <field name="format">Letter</field>
+            <field name="default" eval="True"/>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">125</field>
+        </record>
+        
+        <record id="account.action_report_payment_receipt" model="ir.actions.report">
+            <field name="paperformat_id" ref="haque_invoices.haque_paper_format"/>
+        </record>
+        <record id="account.account_invoices" model="ir.actions.report">
+            <field name="paperformat_id" ref="haque_invoices.haque_paper_format"/>
+        </record>
+
+        <record id="invoice_payments_report" model="ir.actions.report">
+            <field name="model">account.move</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+    
+            <field name="name">Invoice Payments</field>
+            <field name="paperformat_id" ref="base.paperformat_us" />
+            <field name="report_name">haque_invoices.invoice_payments_template</field>
+        </record>
+    </data>
+</odoo>

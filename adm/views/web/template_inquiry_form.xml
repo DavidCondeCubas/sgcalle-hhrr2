@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm.template_admission_inquiry">
+        <t t-call="website.layout">
+            <t t-set="title">Admissions</t>
+            <style>
+                .pointer{
+                cursor: pointer;
+                }
+            </style>
+            <div class="oe_structure" />
+            <div class="oe_struture">
+
+                <main class="container p-4">
+                    <form action="/admission/inquiry" method="post"
+                        class="s_website_form form-horizontal container-fluid mt32" enctype="multipart/form-data">
+
+                        <input type="hidden" name="studentsCount" id="studentsCount" value="1" />
+
+                        <!-- Student -->
+                        <section class="card">
+                            <section class="card-header">
+                                <h1 class="text-info">Parent / Guardian Information</h1>
+                            </section>
+                            <section class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-12 col-md">
+                                        <label for="txtLastName">
+                                            Last Name
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" id="txtLastName"
+                                            name="txtLastName" placeholder="Last Name" required="required" />
+                                    </div>
+                                    <div class="form-group col-12 col-md">
+                                        <label for="txtMiddleName">Middle Name</label>
+                                        <input type="text" class="form-control" id="txtMiddleName"
+                                            name="txtMiddleName" placeholder="Middle Name" />
+                                    </div>
+                                    <div class="form-group col-12 col-md">
+                                        <label for="txtFirstName">
+                                            First Name
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" id="txtFirstName"
+                                            name="txtFirstName" placeholder="First Name" required="required" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="txtSalutation">
+                                            Salutation
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <select class="custom-select" id="txtSalutation" name="txtSalutation"
+                                            placeholder="Salutation" required="required">
+                                            <option disabled="disabled" value="">- Select a salutation -</option>
+                                            <option value="Col.">Col.</option>
+                                            <option value="Dr.">Dr.</option>
+                                            <option value="Fr.">Fr.</option>
+                                            <option value="Miss">Miss</option>
+                                            <option value="Mr.">Mr.</option>
+                                            <option value="Mrs.">Mrs.</option>
+                                            <option value="Ms.">Ms.</option>
+                                            <option value="Sr.">Sr.</option>
+                                            <option value="Srt.ª">Srt.ª</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="txtEmail">
+                                            Email
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="email" class="form-control" id="txtEmail" name="txtEmail"
+                                            placeholder="example@email.com" required="required" />
+                                    </div>
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="txtCellPhone">Cell Phone</label>
+                                        <input type="tel" class="form-control" id="txtCellPhone"
+                                            name="txtCellPhone" placeholder="+01 234 56 78 90" pattern="\+?[0-9 -]+" />
+                                    </div>
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="txtHomePhone">Home Phone</label>
+                                        <input type="tel" class="form-control" id="txtHomePhone"
+                                            name="txtHomePhone" placeholder="+01 234 56 78 90" pattern="\+?[0-9 -]+" />
+                                    </div>
+                                </div>
+                            </section>
+                        </section>
+
+                        <section class="card mt-2">
+                            <section class="card-header">
+                                <h1 class="text-info">Address Information</h1>
+                            </section>
+                            <section class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="selCountry">
+                                            Country
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <select type="text" class="custom-select" id="selCountry"
+                                            name="selCountry" placeholder="Country" required="required">
+                                            <option value="-1" selected="true" disabled="disabled">-Select a country-
+                                            </option>
+                                            <t t-foreach="countries" t-as="country">
+                                                <option t-att-value="country.id">
+                                                    <t t-esc="country.name" />
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="selState">
+                                            State
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <select class="form-control" id="selState" name="selState">
+                                            <option selected="selected" disabled="disabled">Select a
+                                                state
+                                            </option>
+                                            <t t-foreach="states" t-as="state">
+                                                <option t-att-value="state.id" t-field="state.name"
+                                                    t-att-data-country="state.country_id.id" />
+                                            </t>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-12 col-md">
+                                        <label for="txtCity">
+                                            City
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" id="txtCity" name="txtCity"
+                                            placeholder="City" required="required" />
+                                    </div>
+                                    <div class="form-group col-12 col-md">
+                                        <label for="txtZip">
+                                            Zip
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" id="txtZip" name="txtZip"
+                                            maxlength="10" placeholder="Zip" required="required" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-12 col-md">
+                                        <label for="txtStreetAddress">
+                                            Street Address
+                                            <span class="text-danger">
+                                                *
+                                            </span>
+                                        </label>
+                                        <input type="text" class="form-control" id="txtStreetAddress"
+                                            name="txtStreetAddress" placeholder="Street Address" required="required" />
+                                    </div>
+                                    <div class="form-group col-12 col-md">
+                                        <label for="txtStreetAddress2">
+                                            Street Address 2
+                                        </label>
+                                        <input type="text" class="form-control" id="txtStreetAddress2"
+                                            name="txtStreetAddress2" placeholder="Street Address 2" />
+                                    </div>
+                                </div>
+                            </section>
+                        </section>
+
+                        <section class="card mt-2">
+                            <section class="card-header">
+                                <h1 class="text-info">Students</h1>
+                            </section>
+                            <section class="card-body">
+                                <ul class="nav nav-tabs" id="studentsNavbar" role="tablist">
+                                    <li class="nav-item" id="student1-tab-li">
+                                        <a class="nav-link active" id="student1-tab" data-toggle="tab"
+                                            href="#student1" role="tab" aria-controls="student1" aria-selected="true">Student 1
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" id="add-tab-li">
+                                        <a class="nav-link" id="add-tab" role="tab"
+                                            style="background: #dee2e6; cursor: pointer">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content pt-3" id="studentsTabContent">
+                                    <div class="tab-pane fade show active" id="student1" role="tabpanel"
+                                        aria-labelledby="student1-tab">
+
+                                        <div class="row">
+                                            <div class="form-group col-12 col-md">
+                                                <label for="txtStudent1LastName">
+                                                    Last Name
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" class="form-control" id="txtStudent1LastName"
+                                                    name="txtStudentLastName" placeholder="Last Name"
+                                                    required="required" />
+                                            </div>
+                                            <div class="form-group col-12 col-md">
+                                                <label for="txtStudent1MiddleName">Middle Name</label>
+                                                <input type="text" class="form-control" id="txtStudent1MiddleName"
+                                                    name="txtStudentMiddleName" placeholder="Middle Name" />
+                                            </div>
+                                            <div class="form-group col-12 col-md">
+                                                <label for="txtStudent1FirstName">
+                                                    First Name
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" class="form-control" id="txtStudent1FirstName"
+                                                    name="txtStudentFirstName" placeholder="First Name"
+                                                    required="required" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="txtStudent1Birthday">
+                                                    Birthday
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="date" class="form-control" id="txtStudent1Birthday"
+                                                    name="txtStudentBirthday" required="required" />
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="txtStudent1Birthday">Gender</label>
+                                                <select class="custom-select" name="selStudentGender">
+                                                    <option value="gender_male">Male</option>
+                                                    <option value="gender_female">Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-12 col-md-6">
+                                                <label for="selStudent1GradeLevel">
+                                                    Grade Level of Interest
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <select class="custom-select" id="selStudent1GradeLevel"
+                                                    name="selStudentGradeLevel" required="required">
+                                                    <option value="-1" selected="true" disabled="disabled">-Select a
+                                                        grade
+                                                        level-
+                                                    </option>
+                                                    <t t-foreach="grade_levels" t-as="grade_level">
+                                                        <option t-att-value="grade_level.id">
+                                                            <t t-esc="grade_level.name" />
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-12 col-md-6">
+                                                <label for="selStudent1SchoolYear">
+                                                    School Year
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <select class="custom-select" id="selStudent1SchoolYear"
+                                                    name="selStudentSchoolYear" required="required">
+                                                    <option value="-1" selected="true" disabled="disabled">-Select a
+                                                        school
+                                                        year-
+                                                    </option>
+                                                    <t t-foreach="school_years" t-as="school_year">
+                                                        <option t-att-value="school_year.id">
+                                                            <t t-esc="school_year.name" />
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-12 col-md-6">
+                                                <label for="txtStudent1CurrentSchool">Current School</label>
+                                                <input type="text" class="form-control"
+                                                    id="txtStudent1CurrentSchool" name="txtStudentCurrentSchool"
+                                                    placeholder="Current School" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </section>
+                        <div class="row justify-content-center m-3">
+                            <button type="submit" class="btn btn-primary">Submit inquiry</button>
+                        </div>
+                    </form>
+                </main>
+            </div>
+            <script type="text/javascript" src="/adm/static/js/inquiry.js"></script>
+        </t>
+    </template>
+
+    <template id="adm.template_inquiry_sent">
+        <t t-call="website.layout">
+            <t t-set="title">Inquiry Sent</t>
+            <div class="oe_structure" />
+            <div class="oe_struture">
+                <main class="container p-4 text-center">
+                    <section class="card card-body">
+                        <p>
+                            <h2>
+                                <em>
+                                    Thank you for sending your information to this school. A member of
+                                    our
+                                    admissions team
+                                    will be in
+                                    touch with you shortly.
+                                </em>
+                            </h2>
+                        </p>
+                    </section>
+                </main>
+            </div>
+        </t>
+    </template>
+</odoo>

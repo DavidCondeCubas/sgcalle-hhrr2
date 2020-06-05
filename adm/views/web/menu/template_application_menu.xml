@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm.template_application_menu">
+        <nav class="col-2">
+            <div class="list-group">
+                <a t-att-href="'/admission/applications/{}/instructions-resources'.format(application_id)"
+                    class="list-group-item list-group-item-action">Instructions and Resources</a>
+
+                <a t-att-href="'/admission/applications/{}/info'.format(application_id)"
+                    class="list-group-item list-group-item-action">Application information</a>
+
+                <a t-att-href="'/admission/applications/{}/previous-school'.format(application_id)"
+                    class="list-group-item list-group-item-action">Previous School</a>
+
+                <a t-att-href="'/admission/applications/{}/additional-student-info'.format(application_id)"
+                    class="list-group-item list-group-item-action">Additional Student Information</a>
+
+                <a t-att-href="'/admission/applications/{}/house-address'.format(application_id)"
+                    class="list-group-item list-group-item-action">House address</a>
+
+                <a t-att-href="'/admission/applications/{}/family-info'.format(application_id)"
+                    class="list-group-item list-group-item-action">Family Information</a>
+
+                <a t-att-href="'/admission/applications/{}/medical-info'.format(application_id)"
+                    class="list-group-item list-group-item-action">Medical information</a>
+
+<!--                 <a t-att-href="'/admission/applications/{}/alumni-currently-enrolled-student'.format(application_id)" -->
+<!--                     class="list-group-item list-group-item-action">Alumni or Currently Enrolled Students</a> -->
+
+                <!-- link: '/admission/applications/{}/institutional-fee-declaration-form'.format(application_id) -->
+                <!-- <a t-att-href="'#'" class="list-group-item list-group-item-action disabled">Institutional Fee Declaration 
+                    Form</a> -->
+
+                <!-- Link: '/admission/applications/{}/policy-agreement'.format(application_id) -->
+                <!-- <a t-att-href="'#'" class="list-group-item list-group-item-action disabled">Admissions Policy Agreement</a> -->
+
+                <a t-att-href="'/admission/applications/{}/references'.format(application_id)"
+                    class="list-group-item list-group-item-action">References</a>
+
+                <!-- link: '/admission/applications/{}/recommendation'.format(application_id) -->
+                <!-- <a t-att-href="'#'" class="list-group-item list-group-item-action disabled">Recommendation Form</a> -->
+
+                <a t-att-href="'/admission/applications/{}/document-upload'.format(application_id)"
+                    class="list-group-item list-group-item-action">Document Upload</a>
+
+                <!-- Link: '/admission/applications/{}/electronic-signature'.format(application_id) -->
+                <!-- <a t-att-href="'#'" class="list-group-item list-group-item-action disabled">Electronic Signature Page</a> -->
+
+                <a t-att-href="'/admission/applications/{}/review'.format(application_id)"
+                    class="list-group-item list-group-item-action">Application Review</a>
+
+            </div>
+        </nav>
+    </template>
+</odoo>

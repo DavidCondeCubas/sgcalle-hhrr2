@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm_uni.template_admission_inquiry">
+        <t t-call="website.layout">
+            <t t-set="title">Admissions</t>
+            <style>
+                .pointer{
+                cursor: pointer;
+                }
+            </style>
+            <div class="oe_structure" />
+            <div class="oe_struture">
+                <main class="container p-4">
+                    <form action="/admission-university/inquiry" method="post"
+                        class="s_website_form form-horizontal container-fluid mt32" enctype="multipart/form-data">
+
+                        <input type="hidden" name="studentsCount" id="studentsCount" value="1" />
+
+                        <!-- Student -->
+                        <section class="card mt-2">
+                            <section class="card-header">
+                                <h1 class="text-info">Student</h1>
+                            </section>
+                            <section class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-12 col-md">
+                                        <label for="txtLastName">
+                                            Last Name
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" id="txtLastName"
+                                            name="txtLastName" placeholder="Last Name" required="required" />
+                                    </div>
+                                    <div class="form-group col-12 col-md">
+                                        <label for="txtMiddleName">Middle Name</label>
+                                        <input type="text" class="form-control" id="txtMiddleName"
+                                            name="txtMiddleName" placeholder="Middle Name" />
+                                    </div>
+                                    <div class="form-group col-12 col-md">
+                                        <label for="txtFirstName">
+                                            First Name
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" id="txtFirstName"
+                                            name="txtFirstName" placeholder="First Name" required="required" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="txtBirthdate">Birthdate</label>
+                                        <input type="date" class="form-control" id="txtBirthdate"
+                                            name="txtBirthdate" />
+                                    </div>
+                                </div>
+                            </section>
+                        </section>
+
+                        <section class="card mt-2">
+                            <section class="card-header">
+                                <h1 class="text-info">Contact</h1>
+                            </section>
+                            <section class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="txtPhone">
+                                            Home Phone
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="tel" class="form-control" id="txtPhone" name="txtPhone"
+                                            placeholder="+01 234 56 78 90" pattern="\+?[0-9 -]+" required="required" />
+                                    </div>
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="txtEmail">Email</label>
+                                        <input type="email" class="form-control" id="txtEmail" name="txtEmail"
+                                            placeholder="example@email.com" />
+                                    </div>
+                                </div>
+                            </section>
+                        </section>
+
+
+
+
+                        <!-- School Information -->
+                        <section class="card mt-2">
+                            <section class="card-header">
+                                <h1 class="text-info">School Information</h1>
+                            </section>
+                            <section class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="txtCurrentSchool">Current School</label>
+                                        <input type="text" class="form-control" id="txtCurrentSchool"
+                                            name="txtCurrentSchool" placeholder="Current School" required="required" />
+                                    </div>
+
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="txtCurrentSchoolAddress">Current School Address</label>
+                                        <input type="text" class="form-control" id="txtCurrentSchoolAddress"
+                                            name="txtCurrentSchoolAddress" placeholder="Current School Address" required="required" />
+                                    </div>
+                                </div>
+                            </section>
+                        </section>
+                        
+                        <section class="card mt-2">
+                            <section class="card-header">
+                                <h1 class="text-info">Address Information</h1>
+                            </section>
+                            <section class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="selCountry">
+                                            Country
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <select type="text" class="custom-select" id="selCountry"
+                                            name="selCountry" placeholder="Country" required="required">
+                                            <option value="-1" selected="true" disabled="disabled">-Select a country-</option>
+                                            <t t-foreach="countries" t-as="country">
+                                                <option t-att-value="country.id">
+                                                    <t t-esc="country.name" />
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-12 col-md-6">
+                                        <label for="selState">
+                                            State
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <select type="text" class="custom-select" id="selState" name="selState"
+                                            placeholder="State" required="required">
+                                            <option disabled="disabled" selected="true" value='-1'>-Select a state-</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-12 col-md">
+                                        <label for="txtCity">
+                                            City
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" id="txtCity" name="txtCity"
+                                            placeholder="City" required="required" />
+                                    </div>
+                                    <div class="form-group col-12 col-md">
+                                        <label for="txtStreetAddress">
+                                            Street Address
+                                            <span class="text-danger">
+                                                *
+                                            </span>
+                                        </label>
+                                        <input type="text" class="form-control" id="txtStreetAddress"
+                                            name="txtStreetAddress" placeholder="Street Address" required="required" />
+                                    </div>
+                                    <div class="form-group col-12 col-md">
+                                        <label for="txtZip">
+                                            Zip
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" id="txtZip" name="txtZip"
+                                            maxlength="10" placeholder="Zip" required="required" />
+                                    </div>
+                                </div>
+                            </section>
+                        </section>
+                        <div class="row justify-content-center m-3">
+                            <button type="submit" class="btn btn-primary">Submit inquiry</button>
+                        </div>
+                    </form>
+                </main>
+            </div>
+            <script type="text/javascript" src="/adm_uni/static/js/admission_university.js"></script>
+        </t>
+    </template>
+</odoo>

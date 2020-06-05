@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<record model="ir.ui.view" id="view_analytic_account_form">
+		<field name="name">Analytic Account</field>
+		<field name="model">account.analytic.account</field>
+		<field name="priority" eval="21" />
+		<field name="arch" type="xml">
+			<form>
+				<sheet string="Analytic Account">
+					<div class="oe_button_box" name="button_box">
+						<button class="oe_stat_button" type="action" name="108" icon="fa-usd" string="Cost/Revenue" widget="statinfo" />
+						<button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+							<field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}" />
+						</button>
+					</div>
+					<div class="oe_title">
+						<label for="name" class="oe_edit_only" />
+						<h1>
+							<field name="name" class="oe_inline" placeholder="e.g. Project XYZ" />
+						</h1>
+					</div>
+					<hr />
+					<div name="project" />
+					<group name="main">
+						<group>
+							<field name="code" readonly="1" />
+							<field name="partner_id" />
+						</group>
+						<group>
+							<field name="group_id" />
+							<field name="company_id" options="{'no_create': True}" groups="base.group_multi_company" />
+							<field name="currency_id" options="{'no_create': True}" groups="base.group_multi_currency" />
+						</group>
+					</group>
+					<notebook groups="account.group_account_user">
+						<page string="Budget Items">
+							<field name="crossovered_budget_line" widget="one2many" colspan="4" nolabel="1" mode="tree">
+								<tree string="Budget Items" editable="top">
+									<field name="crossovered_budget_id" />
+									<field name="general_budget_id" />
+									<field name="date_from" />
+									<field name="date_to" />
+									<field name="paid_date" />
+									<field name="planned_amount" widget="monetary" />
+									<field name="practical_amount" sum="Practical Amount" widget="monetary" />
+									<field name="theoritical_amount" sum="Theoritical Amount" widget="monetary" />
+									<field name="percentage" />
+								</tree>
+								<form string="Budget Items">
+									<group>
+										<field name="crossovered_budget_id" />
+										<field name="general_budget_id" />
+										<field name="date_from" />
+										<field name="date_to" />
+										<field name="paid_date" />
+										<field name="planned_amount" widget="monetary" />
+									</group>
+								</form>
+							</field>
+						</page>
+						<page string="Company Information">
+							<group colspan="2">
+								<!-- Country -->
+								<group>
+									<field name="country_id" required="1" attr="{'readonly': [('id', '!=', False)]}" />
+								</group>
+								<group colspan="1">
+									<field name="country_rel_code" readonly="0" nolabel="1" />
+								</group>
+
+								<!-- State -->
+								<group>
+									<field name="state_id" required="1" attr="{'readonly': [('id', '!=', False)]}" />
+								</group>
+								<group colspan="1">
+									<field name="state_rel_code" readonly="0" nolabel="1" />
+								</group>
+
+								<!-- Company -->
+								<group>
+									<field name="company_id" required="1" attr="{'readonly': [('id', '!=', False)]}" />
+								</group>
+								<group colspan="1">
+									<field name="company_rel_code" readonly="0" nolabel="1" />
+								</group>
+							</group>
+						</page>
+
+						<page string="Analytic Stats">
+							<field name="id" invisible="1" />
+							<group string="Departments">
+								<group colspan="2">
+									<group colspan="1">
+										<field name="department"/> <!-- context="{'default_code': self.test_foo()}"/> -->
+										<field name="department_rel_name" readonly="0" invisible="1"/>
+									</group>
+									<group colspan="1">
+										<field name="department_rel_code" readonly="0" nolabel="1" />
+									</group>
+								</group>
+								<group colspan="2">
+									<group colspan="1">
+										<field name="sub_department" attrs="{'readonly':[('department', '=', False)]}" />
+										<field name="sub_department_rel_name" readonly="0" invisible="1"/>
+									</group>
+									<group colspan="1">
+										<field name="sub_department_rel_code" readonly="0" nolabel="1" />
+									</group>
+								</group>
+							</group>
+							<hr />
+							<group string="Groups">
+								<group colspan="2" col="2">
+									<group colspan="1">
+										<field name="type" required="1" />
+									</group>
+									<group colspan="1">
+										<field name="type_rel_code" readonly="0" nolabel="1" />
+									</group>
+								</group>
+								<group colspan="2" col="2">
+									<group colspan="1">
+										<field name="group" required="1" domain="[('type_id', '=', type)]" context="{'type_id': type}" />
+									</group>
+									<group colspan="1">
+										<field name="group_rel_code" readonly="0" nolabel="1" />
+									</group>
+								</group>
+								<group colspan="2" col="2">
+									<group colspan="1">
+										<field name="account" required="1" domain="[('group_id', '=', group)]" context="{'group_id': group}" />
+									</group>
+									<group colspan="1">
+										<field name="account_rel_code" readonly="0" nolabel="1" />
+									</group>
+								</group>
+								<group colspan="2" col="2">
+									<group colspan="1">
+										<field name="sub_account" domain="[('account_id', '=', account)]" context="{'account_id': account}" />
+									</group>
+									<group colspan="1">
+										<field name="sub_account_rel_code" readonly="0" nolabel="1" />
+									</group>
+								</group>
+								<group colspan="2" col="2">
+									<group colspan="1">
+										<field name="item" domain="[('sub_account_id', '=', sub_account)]" context="{'sub_account_id': sub_account}" />
+									</group>
+									<group colspan="1">
+										<field name="item_rel_code" readonly="0" nolabel="1" />
+									</group>
+								</group>
+							</group>
+						</page>
+					</notebook>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers" />
+					<field name="message_ids" widget="mail_thread" />
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="view_analytic_account_graph">
+		<field name="name">Analytic Account Graph</field>
+		<field name="model">account.analytic.account</field>
+		<field name="arch" type="xml">
+			<graph>
+				<field name="name" />
+				<field name="balance" type="measure" />
+			</graph>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="view_analytoc_account_search">
+		<field name="name">Analytic Account Search</field>
+		<field name="model">account.analytic.account</field>
+		<field name="priority" eval="1" />
+		<field name="arch" type="xml">
+			<search>
+				<field name="name" />
+				<field name="balance" />
+
+				<field name="country_id" />
+				<field name="state_id" />
+				<field name="company_id" />
+				<field name="department" />
+				<field name="sub_department" />
+
+				<field name="type" />
+				<field name="group" />
+				<field name="account" />
+				<field name="sub_account" />
+
+
+			</search>
+		</field>
+	</record>
+
+	<!-- <record model="ir.ui.view" id="view_analytic_account_report_form">
+		<field name="name">Analytic Account Report Form</field>
+		<field name="priority" eval="40" />
+		<field name="arch" type="xml">
+			<form>
+
+			</form>
+		</field>
+	</record> -->
+
+	<record id="view_company_form_with_code" model="ir.ui.view">
+		<field name="name">id.category.list2</field>
+		<field name="model">res.company</field>
+		<field name="inherit_id" ref="base.view_company_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//div[@class='o_address_format']" position="after">
+				<field name="analytic_code" />
+			</xpath>
+		</field>
+	</record>
+</odoo>

@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="pakistan_wht.list">
+      <field name="name">pakistan_wht list</field>
+      <field name="model">pakistan_wht.pakistan_wht</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="pakistan_wht.action_window">
+      <field name="name">pakistan_wht window</field>
+      <field name="res_model">pakistan_wht.pakistan_wht</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="pakistan_wht.action_server">
+      <field name="name">pakistan_wht server</field>
+      <field name="model_id" ref="model_pakistan_wht_pakistan_wht"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="pakistan_wht" id="pakistan_wht.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="pakistan_wht.menu_1" parent="pakistan_wht.menu_root"/>
+    <menuitem name="Menu 2" id="pakistan_wht.menu_2" parent="pakistan_wht.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="pakistan_wht.menu_1_list" parent="pakistan_wht.menu_1"
+              action="pakistan_wht.action_window"/>
+    <menuitem name="Server to list" id="pakistan_wht" parent="pakistan_wht.menu_2"
+              action="pakistan_wht.action_server"/>
+-->
+  </data>
+</odoo>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="adm.template_application_menu_family_info">
+        <t t-call="website.layout">
+            <t t-set="title">Application</t>
+            <link rel="stylesheet" href="/adm/static/css/form_application.css" />
+            <div class="oe_struture" />
+            <div class="oe_struture">
+                <t t-set="house_ids" t-value="application.sudo().partner_id.parent_id.house_address_ids" />
+
+                <div class="container-fluid d-flex p-4">
+                    <article class="row card card-body d-none" id="form-template">
+                        <div class="row">
+                            <section class="col-12 col-md">
+                                <label>
+                                    New contact
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <select required="required" class="form-control" name="contact_type_select">
+                                    <option value="new">New contact</option>
+                                    <option value="existing">Existing contact</option>
+                                </select>
+                            </section>
+                            <section class="col-12 col-md">
+                                <label>
+                                    Contact name
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <select required="required" class="form-control" name="contact_existing_id" disabled="disabled">
+                                    <option value="" />
+                                    <t t-foreach="partners" t-as="partner">
+                                        <option t-att-value="partner.id">
+                                            <t t-esc="partner.name" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </section>
+                        </div>
+
+                        <div class="row new-contact-form">
+                            <input required="required" class="form-control" type="hidden" name="new_contact_id" value="-1" />
+                            <section class="col-12">
+                                <label>
+                                    Name
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input required="required" type="text" name="new_partner_name" class="form-control" />
+                            </section>
+                            <section class="col-12 col-md-4">
+                                <label>
+                                    Phone
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input required="required" type="text" name="new_partner_mobile" class="form-control" />
+                            </section>
+
+                            <section class="col-12 col-md-4">
+                                <label>
+                                    Homephone
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input required="required" type="text" name="new_partner_phone" class="form-control" />
+                            </section>
+
+                            <section class="col-12 col-md-4">
+                                <label>
+                                    Email
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input required="required" type="text" name="new_partner_email" class="form-control" />
+                            </section>
+
+                            <section class="col-12 col-md">
+                                <label>
+                                    Relationship
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <select required="required" class="form-control" type="text" name="new_relationship_type">
+                                    <option value="sibling">Sibling</option>
+                                    <option value="father">Father</option>
+                                    <option value="mother">Mother</option>
+                                    <option value="uncle">Uncle</option>
+                                    <option value="grandmother">Grandmother</option>
+                                    <option value="grandfather">Grandfather</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </section>
+
+                            <section class="col-12 col-md">
+                                <label>
+                                    House
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <select required="required" class="form-control" type="text" name="new_relationship_house">
+                                    <t t-foreach="house_ids" t-as="house_address">
+                                        <option t-att-value="house_address.id">
+                                            <t t-esc="house_address.name" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </section>
+
+                            <section class="col-12 p-4">
+                                <label>Is an emergency contact?</label>
+                                <input class="true-emergency-contact" type="checkbox" value="True" name="new_relationship_is_emergency_contact" />
+                                <input class="false-emergency-contact" type="hidden" value="" name="new_relationship_is_emergency_contact" checked="checked" />
+                            </section>
+
+                        </div>
+                        <div class="row">
+                            <section class="col-12 d-flex justify-content-center p-3">
+                                <button type="button" class="btn btn-danger remove-contact">Remove</button>
+                            </section>
+                        </div>
+
+                    </article>
+
+                    <t t-call="adm.template_application_menu" />
+                    <main class="col">
+                        <form t-att-action="'/admission/applications/{}/write'.format(application_id)" method="post" enctype="multipart/form-data" id="family_form">
+
+                            <input required="required" class="form-control" type="hidden" name="has_contact" />
+
+                            <section class="container-fluid">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h1>Family members</h1>
+                                    </div>
+                                    <div id="contact_forms" class="card-body">
+                                        <t t-foreach="application.sudo().relationship_ids" t-as="relationship">
+                                            <article class="row card card-body" t-att-id="'relationship_{}'.format(relationship_index+1)">
+                                                <t t-set="partner" t-value="relationship.partner_2" />
+                                                <input required="required" class="form-control" type="hidden" name="contact_id" t-att-value="relationship.partner_2.id" />
+                                                <div class="row">
+
+                                                    <section class="col-12">
+                                                        <label>
+                                                            Name
+                                                            <span class="text-danger"> *</span>
+                                                        </label>
+                                                        <input required="required" type="text" disabled="disabled" t-att-value="partner.name" class="form-control" />
+                                                    </section>
+                                                    <section class="col-12 col-md-4">
+                                                        <label>
+                                                            Phone
+                                                            <span class="text-danger"> *</span>
+                                                        </label>
+                                                        <input required="required" type="text" t-att-value="partner.mobile" class="form-control" name="relation_partner_mobile" />
+                                                    </section>
+
+                                                    <section class="col-12 col-md-4">
+                                                        <label>
+                                                            Homephone
+                                                            <span class="text-danger"> *</span>
+                                                        </label>
+                                                        <input required="required" type="text" t-att-value="partner.phone" class="form-control" name="relation_partner_phone" />
+                                                    </section>
+
+                                                    <section class="col-12 col-md-4">
+                                                        <label>
+                                                            Email
+                                                            <span class="text-danger"> *</span>
+                                                        </label>
+                                                        <input required="required" type="text" t-att-value="partner.email" class="form-control" name="relation_partner_email" />
+                                                    </section>
+
+                                                    <section class="col-12 col-md">
+                                                        <label>
+                                                            Type
+                                                            <span class="text-danger"> *</span>
+                                                        </label>
+                                                        <select required="required" class="form-control" type="text" name="relationship_type">
+                                                            <option value="sibling" t-att-selected="relationship.relationship_type == 'sibling'">Sibling</option>
+                                                            <option value="father" t-att-selected="relationship.relationship_type == 'father'">Father</option>
+                                                            <option value="mother" t-att-selected="relationship.relationship_type == 'mother'">Mother</option>
+                                                            <option value="uncle" t-att-selected="relationship.relationship_type == 'uncle'">Uncle</option>
+                                                            <option value="grandmother" t-att-selected="relationship.relationship_type == 'grandmother'">Grandmother</option>
+                                                            <option value="grandfather" t-att-selected="relationship.relationship_type == 'grandfather'">Grandfather</option>
+                                                            <option value="other" t-att-selected="relationship.relationship_type == 'other'">Other</option>
+                                                        </select>
+                                                    </section>
+
+                                                    <section class="col-12 col-md">
+                                                        <label>
+                                                            House
+                                                            <span class="text-danger"> *</span>
+                                                        </label>
+                                                        <select required="required" class="form-control" type="text" name="relationship_house">
+                                                            <option value="" />
+                                                            <t t-foreach="house_ids" t-as="house_address">
+                                                                <option t-att-value="house_address.id" t-att-selected="house_address.id == partner.house_address_id.id">
+                                                                    <t t-esc="house_address.name" />
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </section>
+
+                                                    <section class="col-12 p-4">
+                                                        <label>Is an emergency contact?</label>
+                                                        <input class="true-emergency-contact" type="checkbox" value="True" name="relationship_is_emergency_contact" t-att-checked="relationship.is_emergency_contact" />
+                                                        <input class="false-emergency-contact" type="hidden" value="" name="relationship_is_emergency_contact" checked="checked" />
+                                                    </section>
+                                                </div>
+
+                                                <div class="row">
+                                                    <section class="col-12 d-flex justify-content-center p-3">
+                                                        <button type="button" class="btn btn-danger remove-contact" t-att-data-id="relationship_index+1">Remove</button>
+                                                    </section>
+                                                </div>
+                                            </article>
+                                        </t>
+                                        <button type="button" class="add-contact btn btn-success d-block m-auto">Add family member</button>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary d-block ml-auto mr-auto mt-3 mb-3">Submit changes</button>
+                            </section>
+                        </form>
+                    </main>
+                    <script type="text/javascript" src="/adm/static/js/contact.js"></script>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

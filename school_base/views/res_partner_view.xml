@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_res_partner_school_fields_form_view">
+        <field name="name">view_res_partner_school_fields_form_view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']/parent::h1" position="after">
+                <group attrs="{'invisible': [('is_company', '=', True)]}">
+                    <field name="first_name"/>
+                    <field name="middle_name"/>
+                    <field name="last_name"/>
+                </group>
+            </xpath>
+            <div name="button_box" position="before">
+                <field name="person_type" readonly="1" style="
+                       position: absolute;
+                       top: 0;
+                       font-size: xx-large;
+                       color: #875a7b;
+                       font-weight: bold; "/>
+            </div>
+            <notebook position="inside">
+                <page string="School data">
+                    <group>
+                        <group attrs="{'invisible': [('is_company', '=', False)]}">
+                            <field name="is_family"/>
+                        </group>
+                        <group attrs="{'invisible': [('is_company', '=', True)]}">
+                            <field name="person_type"/>
+                            <field name="grade_level_id"/>
+                            <field name="homeroom"/>
+                            <field name="student_status"/>
+                        </group>
+                        <group>
+                            <field name="comment_facts"/>
+                            <field name="facts_id"/>
+                            <field name="facts_id_int"/>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+            <xpath expr="//field[@name='child_ids']/parent::page" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': [('is_family', '=', True)]}
+                </attribute>
+            </xpath>
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': [('is_family', '=', True)]}
+                </attribute>
+            </xpath>
+            <xpath expr="//field[@name='child_ids']/parent::page" position="before">
+                <page string="Members" attrs="{'invisible': ['|', ('is_family', '=', False), ('is_company', '=', False)]}">
+                    <field name="member_ids" mode="kanban" 
+                           domain="[('is_company', '=', False)]" 
+                           context="{'default_street': street, 'default_street2': street2, 'default_city': city, 
+                                     'default_is_company': True,
+                                     'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 
+                                     'default_lang': lang, 'default_user_id': user_id}">
+                        <kanban>
+                            <field name="id"/>
+                            <field name="color"/>
+                            <field name="name"/>
+                            <field name="title"/>
+                            <field name="type"/>
+                            <field name="person_type"/>
+                            <field name="email"/>
+                            <field name="parent_id"/>
+                            <field name="is_company"/>
+                            <field name="function"/>
+                            <field name="phone"/>
+                            <field name="street"/>
+                            <field name="street2"/>
+                            <field name="zip"/>
+                            <field name="city"/>
+                            <field name="country_id"/>
+                            <field name="mobile"/>
+                            <field name="state_id"/>
+                            <field name="image_1920"/>
+                            <field name="lang"/>
+                            <!-- fields in form x2many view to diminish requests -->
+                            <field name="comment"/>
+                            <field name="display_name"/>
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <t t-set="color" t-value="kanban_color(record.color.raw_value)"/>
+                                    <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
+                                        <div class="o_kanban_image">
+                                            <t t-if="record.image_1920.raw_value">
+                                                <img t-att-src="kanban_image('res.partner', 'image_1920', record.id.raw_value)"/>
+                                            </t>
+                                            <t t-else="">
+                                                <img alt="Delivery" t-if="record.type.raw_value === 'delivery'" t-att-src="_s + &quot;/base/static/img/truck.png&quot;"/>
+                                                <img alt="Invoice" t-if="record.type.raw_value === 'invoice'" t-att-src="_s + &quot;/base/static/img/money.png&quot;"/>
+                                                <t t-if="record.type.raw_value !== 'invoice' || record.type.raw_value !== 'delivery'">
+                                                    <img alt="Logo" t-if="record.is_company.raw_value === true" t-att-src="_s + &quot;/base/static/img/company_image.png&quot;"/>
+                                                    <img alt="Avatar" t-if="record.is_company.raw_value === false" t-att-src="_s + &quot;/base/static/img/avatar_grey.png&quot;"/>
+                                                </t>
+                                            </t>
+                                        </div>
+                                        <div class="oe_kanban_details">
+                                            <strong><field name="person_type"/></strong><br></br>
+                                            <field name="name"/>
+                                            <div t-if="record.function.raw_value"><field name="function"/></div>
+                                            <div t-if="record.email.raw_value"><field name="email" widget="email"/></div>
+                                            <div t-if="record.type.raw_value != 'contact'">
+                                                <div>
+                                                    <field name="zip"/>
+                                                    <field name="city"/>
+                                                </div>
+                                                <field t-if="record.state_id.raw_value" name="state_id"/>
+                                                <field name="country_id"/>
+                                            </div>
+                                            <div t-if="record.phone.raw_value">Phone: <field name="phone"/></div>
+                                            <div t-if="record.mobile.raw_value">Mobile: <field name="mobile"/></div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                    </field>
+                </page>
+                <page string="Families" attrs="{'invisible': [('is_company', '=', True)]}">
+                    <field name="family_ids" mode="kanban" 
+                           domain="[('is_company', '=', True), ('is_family', '=', True)]" 
+                           context="{'member_id': active_id, 'default_street': street, 
+                                     'default_is_company': True, 'default_is_family': True,
+                                     'default_street2': street2, 'default_city': city, 
+                                     'default_state_id': state_id, 'default_zip': zip, 
+                                     'default_country_id': country_id, 'default_lang': lang, 
+                                     'default_user_id': user_id}">
+                        <kanban>
+                            <field name="id"/>
+                            <field name="color"/>
+                            <field name="name"/>
+                            <field name="title"/>
+                            <field name="type"/>
+                            <field name="person_type"/>
+                            <field name="email"/>
+                            <field name="parent_id"/>
+                            <field name="is_company"/>
+                            <field name="function"/>
+                            <field name="phone"/>
+                            <field name="street"/>
+                            <field name="street2"/>
+                            <field name="zip"/>
+                            <field name="city"/>
+                            <field name="country_id"/>
+                            <field name="mobile"/>
+                            <field name="state_id"/>
+                            <field name="image_1920"/>
+                            <field name="lang"/>
+                            <!-- fields in form x2many view to diminish requests -->
+                            <field name="comment"/>
+                            <field name="display_name"/>
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <t t-set="color" t-value="kanban_color(record.color.raw_value)"/>
+                                    <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
+                                        <div class="o_kanban_image">
+                                            <t t-if="record.image_1920.raw_value">
+                                                <img t-att-src="kanban_image('res.partner', 'image_1920', record.id.raw_value)"/>
+                                            </t>
+                                            <t t-else="">
+                                                <img alt="Delivery" t-if="record.type.raw_value === 'delivery'" t-att-src="_s + &quot;/base/static/img/truck.png&quot;"/>
+                                                <img alt="Invoice" t-if="record.type.raw_value === 'invoice'" t-att-src="_s + &quot;/base/static/img/money.png&quot;"/>
+                                                <t t-if="record.type.raw_value !== 'invoice' || record.type.raw_value !== 'delivery'">
+                                                    <img alt="Logo" t-if="record.is_company.raw_value === true" t-att-src="_s + &quot;/base/static/img/company_image.png&quot;"/>
+                                                    <img alt="Avatar" t-if="record.is_company.raw_value === false" t-att-src="_s + &quot;/base/static/img/avatar_grey.png&quot;"/>
+                                                </t>
+                                            </t>
+                                        </div>
+                                        <div class="oe_kanban_details">
+                                            <strong><field name="person_type"/></strong><br></br>
+                                            <field name="name"/>
+                                            <div t-if="record.function.raw_value"><field name="function"/></div>
+                                            <div t-if="record.email.raw_value"><field name="email" widget="email"/></div>
+                                            <div t-if="record.type.raw_value != 'contact'">
+                                                <div>
+                                                    <field name="zip"/>
+                                                    <field name="city"/>
+                                                </div>
+                                                <field t-if="record.state_id.raw_value" name="state_id"/>
+                                                <field name="country_id"/>
+                                            </div>
+                                            <div t-if="record.phone.raw_value">Phone: <field name="phone"/></div>
+                                            <div t-if="record.mobile.raw_value">Mobile: <field name="mobile"/></div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="base_view_res_partner_filter" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <search position="inside">
+                <field name="family_ids"/>
+                <filter string="Family" name="family" domain="['&amp;', ('is_company', '=', True), ('is_family', '=', True)]"/>
+                <filter string="Member" name="member" domain="['&amp;', ('is_company', '=', False), '&amp;', ('is_family', '=', False), ('family_ids', '!=', False)]"/>
+                <filter string="Parent" name="parent" domain="['&amp;', ('is_company', '=', False), ('person_type', '=', 'parent')]"/>
+                <filter string="Student" name="student" domain="['&amp;', ('is_company', '=', False), ('person_type', '=', 'student')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="school_base_view_res_partner_filter" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <search position="inside">
+                <field name="family_ids"/>
+                <filter string="Family" name="family" domain="['&amp;', ('is_company', '=', True), ('is_family', '=', True)]"/>
+                <filter string="Member" name="member" domain="['&amp;', ('is_company', '=', False), '&amp;', ('is_family', '=', False), ('family_ids', '!=', False)]"/>
+                <filter string="Parent" name="parent" domain="['&amp;', ('is_company', '=', False), ('person_type', '=', 'parent')]"/>
+                <filter string="Student" name="student" domain="['&amp;', ('is_company', '=', False), ('person_type', '=', 'student')]"/>
+            </search>
+        </field>
+    </record>
+    
+
+    <act_window
+            id="action_family"
+            name="Family"
+            view_mode="kanban,tree,form,activity"
+            context="{'search_default_family': 1, 'default_family': True}"
+            res_model="res.partner"/>
+    <act_window
+            id="action_member"
+            name="Members"
+            view_mode="kanban,tree,form,activity"
+            context="{'search_default_member': 1}"
+            res_model="res.partner"/>
+    <act_window
+            id="action_parent"
+            name="Parent"
+            view_mode="kanban,tree,form,activity"
+            context="{'search_default_parent': 1}"
+            res_model="res.partner"/>
+    <act_window
+            id="action_student"
+            name="Student"
+            view_mode="kanban,tree,form,activity"
+            context="{'search_default_student': 1}"
+            res_model="res.partner"/>
+
+    <menuitem id="menu_contacts_school"
+        parent="contacts.menu_contacts"
+        name="School"/>
+
+    <menuitem id="menu_contact_family"
+        parent="menu_contacts_school"
+        action="action_family"/>
+
+    <menuitem id="menu_contact_member"
+        parent="menu_contacts_school"
+        action="action_member"/>
+
+    <menuitem id="menu_contact_parent"
+        parent="menu_contacts_school"
+        action="action_parent"/>
+
+    <menuitem id="menu_contact_student"
+        parent="menu_contacts_school"
+        action="action_student"/>
+</odoo>

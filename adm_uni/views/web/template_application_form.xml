@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm_uni.template_admission_application">
+        <t t-call="website.layout">
+            <t t-set="title">Application</t>
+            <link rel="stylesheet" href="/adm_uni/static/css/form_application.css"/>
+            <div class="oe_struture" />
+            <div class="oe_struture">
+                <t t-if="not contact_id.is_in_application" t-call="adm_uni.template_admission_application_form" />
+                <t t-else="">
+                    <main class="container">
+                        <section class="row">
+                            <b>Current Status:</b>
+                            <ul class="progressbar col">
+                                <t t-set="current" t-value="False" />
+                                <t t-foreach="application_status_ids" t-as="application_status_id">
+                                    <t t-if="contact_id.uni_application_id.status_id.id == application_status_id.id">
+                                        <t t-set="current" t-value="True" />
+                                        <li class="current">
+                                            <t t-esc="application_status_id.name" />
+                                        </li>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-if="current">
+                                            <li>
+                                                <t t-esc="application_status_id.name" />
+                                            </li>
+                                        </t>
+                                        <t t-else="">
+                                            <li class="active">
+                                                <t t-esc="application_status_id.name" />
+                                            </li>
+                                        </t>
+                                    </t>
+                                </t>
+                            </ul>
+                        </section>
+                        <section class="card mb-2">
+                            <section class="card-header">
+                                <i class="h1">Send a message</i>
+                            </section>
+                            <section class="card-body>">
+                                <div class="container">
+                                    <form action="/admission-university/message" method="post"
+                                        enctype="multipart/form-data">
+                                        <section class="row p-4">
+                                            <div class="form-group col-12">
+                                                <label for="file_upload">
+                                                    <b>Attach a file:</b>
+                                                </label>
+                                                <input id="file_upload" type="file" name="file_upload" />
+                                            </div>
+                                            <div class="form-group col-12">
+                                                <label for="message_body">
+                                                    <b>Message content:</b>
+                                                </label>
+                                                <textarea class="form-control" rows="4" cols="50"
+                                                    name="message_body" id="message_body" required="required"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-success">Send</button>
+                                        </section>
+                                    </form>
+                                </div>
+                            </section>
+                        </section>
+                        <b>Messages:</b>
+                        <t t-foreach="contact_id.uni_application_id.message_ids" t-as="message_id">
+                            <section class="card mb-2">
+                                <section class="card-header">
+                                    <b>By:</b>
+                                    <t t-esc="message_id.email_from" />
+                                </section>
+                                <section class="card-body">
+                                    <t t-raw="message_id.body" />
+                                </section>
+                            </section>
+                        </t>
+                    </main>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

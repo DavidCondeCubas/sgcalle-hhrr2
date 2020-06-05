@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="hr_extends.employee.type" id="employee_type_administration">
+        <field name="name">Administration</field>
+    </record>
+    <record model="hr_extends.employee.type" id="employee_type_academic">
+        <field name="name">Academic</field>
+    </record>
+</odoo>

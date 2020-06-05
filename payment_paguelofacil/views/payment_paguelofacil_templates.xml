@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="paguelofacil_form">
+            <input type="hidden" name="data_set" t-attf-data-action-url="{{tx_url}}?CCLW={{acquirer._get_cclw()}}&amp;CMTN={{amount}}&amp;CDSC={{Description}}" data-remove-me="" />
+            <input type="hidden" name="session_id" t-att-value="session_id" />
+            <input type="hidden" name="paguelofacil_key" t-att-value="acquirer.paguelofacil_api_key" />
+            <script type="text/javascript">
+                odoo.define(function (require) {
+                    var ajax = require('web.ajax');
+                    ajax.loadJS("/payment_paguelofacil/static/src/js/paguelofacil.js");
+                });
+            </script>
+        </template>
+
+        <template id="paguelofacil_s2s_form">
+            <input type="hidden" name="acquirer_id" t-att-value="id" />
+            <input type="hidden" name="amount" t-att-value="amount or invoice.amount_total" />
+            <input type="hidden" name="paguelofacil_api_key" t-att-value="acq.sudo().paguelofacil_api_key" />
+            <input type="hidden" name="currency_id" t-att-value="currency_id" />
+            <input t-if="return_url" type="hidden" name="return_url" t-att-value="return_url" />
+            <input t-if="partner_id" type="hidden" name="partner_id" t-att-value="partner_id" />
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+            <div id="payment-form">
+                <div class="container-fluid">
+                    <section class="row">
+                        <div class="col-12 col-md-6 p-0">
+                            <input type="text" class="form-control" name="pf_card_number" maxlength="19" size="19" placeholder="Credit Card" />
+                        </div>
+                        <div class="col-12 col-md-6 d-flex justify-content-around p-0 pl-1">
+                            <input type="text" class="form-control" name="pf_card_month" maxlength="2" size="2" placeholder="mm" />
+                            <input type="text" class="form-control" name="pf_card_year" maxlength="2" size="2" placeholder="yy" />
+                            <input type="text" class="form-control" name="pf_card_cvv" maxlength="3" size="3" placeholder="cvv" />
+                        </div>
+                    </section>
+                    <section class="row mt-2">
+                        <input type="text" class="col-12 col-md-6 form-control" name="pf_card_name" maxlength="25" size="25" placeholder="Name" />
+                        <input type="text" class="col-12 col-md-6 form-control" name="pf_card_lastname" maxlength="25" size="25" placeholder="Last name" />
+                    </section>
+                    <section class="row mt-2">
+                        <input type="text" class="col-12 col-md-6 form-control" name="pf_card_email" maxlength="100" size="100" placeholder="Email" />
+                        <input type="text" class="col-12 col-md-6 form-control" name="pf_card_address" maxlength="100" size="100" placeholder="Address" />
+                    </section>
+                    <section class="row mt-2">
+                        <input type="text" class="col-12 form-control" name="pf_card_phone" maxlength="16" size="16" placeholder="Phone" />
+                    </section>
+                </div>
+                <div id="card-element" class="m-3" />
+                <div id="card-errors" class="m-3 text-danger" />
+            </div>
+            <input type="hidden" name="data_set" value="/payment/paguelofacil/s2s/create_json_3ds" />
+        </template>
+
+        <template id="assets_frontend" inherit_id="web.assets_frontend">
+            <xpath expr="script[last()]" position="after">
+                <script type="text/javascript" src="/payment_paguelofacil/static/src/js/payment_form.js"></script>
+                <script type="text/javascript" src="/payment_paguelofacil/static/src/js/payment_processing.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

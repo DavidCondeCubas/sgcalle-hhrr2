@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="hr_employee_labels_changes">
+        <field name="name">hr_employee_labels_changes</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <!-- Job position -> Desigation -->
+            <field name="job_id" position="before">
+                <label for="job_id" string="Designation"/>
+            </field>
+            <field name="job_id" position="attributes">
+                <attribute name="nolabel">1</attribute>
+            </field>
+            <field name="job_title" position="attributes">
+                <attribute name="placeholder">Designation</attribute>
+            </field>
+
+            <!-- Manager -> Line Manager -->
+            <field name="parent_id" position="before">
+                <label for="parent_id" string="Line Manager"/>
+            </field>
+            <field name="parent_id" position="attributes">
+                <attribute name="nolabel">1</attribute>
+            </field>
+
+            <!-- Identification No to Employee Number -->
+            <field name="identification_id" position="before">
+                <label for="identification_id" string="Employee Number"/>
+            </field>
+            <field name="identification_id" position="attributes">
+                <attribute name="nolabel">1</attribute>
+            </field>
+
+
+            <!-- Adding fields -->
+            <field name="work_location" position="after">
+                <field name="date_of_joining" />
+                <field name="date_of_leaving" />
+
+                <field name="employee_job_status" />
+                <field name="employee_active_status" />
+                <field name="employee_type_ids" widget="many2many_checkboxes" />
+            </field>
+
+            <field name="km_home_work" position="after">
+                <field name="health_card_number"/>
+                <field name="hcr_date_of_issue"/>
+                <field name="hcr_date_of_expiration"/>
+            </field>
+
+            <field name="passport_id" position="after">
+                <field name="hcr_passport_date_of_issue"/>
+                <field name="hcr_passport_date_of_expiration"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Contract view -->
+    <record model="ir.ui.view" id="hr_contract_extended">
+        <field name="name">hr_contract_extended</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <field name="employee_id" position="after">
+                <field name="employee_status" widget="radio"/>
+            </field>
+            <field name="department_id" position="after">
+                <field name="last_review_date"/>
+                <field name="next_review_date"/>
+            </field>
+        </field>
+    </record>
+</odoo>

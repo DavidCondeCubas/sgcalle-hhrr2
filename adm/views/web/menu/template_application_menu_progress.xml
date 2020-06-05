@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm.template_application_menu_progress">
+        <t t-call="website.layout">
+            <t t-set="title">Application Review</t>
+            <link rel="stylesheet" href="/adm/static/css/form_application.css" />
+            <div class="oe_struture" />
+            <div class="oe_struture">
+                <div class="container-fluid d-flex p-4">
+                    <div class="container-fluid d-flex p-4">
+                        <t t-call="adm.template_application_menu" />
+                        <main class="col-10">
+                            <section class="col d-flex">
+                                <b>Current Status:</b>
+                                <ul class="progressbar col">
+                                    <t t-set="current" t-value="False" />
+                                    <t t-foreach="application_status_ids" t-as="application_status_id">
+                                        <t t-if="student_application.status_id.id == application_status_id.id">
+                                            <t t-set="current" t-value="True" />
+                                            <li class="current">
+                                                <t t-esc="application_status_id.name" />
+                                            </li>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-if="current">
+                                                <li>
+                                                    <t t-esc="application_status_id.name" />
+                                                </li>
+                                            </t>
+                                            <t t-else="">
+                                                <li class="active">
+                                                    <t t-esc="application_status_id.name" />
+                                                </li>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </ul>
+                            </section>
+                        </main>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

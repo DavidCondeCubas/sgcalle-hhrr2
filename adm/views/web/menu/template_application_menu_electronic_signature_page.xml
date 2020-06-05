@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm.template_application_menu_electronic_signature_page">
+        <t t-call="website.layout">
+            <t t-set="title">Application</t>
+            <link rel="stylesheet" href="/adm/static/css/form_application.css" />
+            <div class="oe_struture" />
+            <div class="oe_struture">
+                <div class="container-fluid d-flex p-4">
+                    <t t-call="adm.template_application_menu" />
+                    <main class="col">
+                        <form action="app_edit.cfm?memberid=3606&amp;studentid=504&amp;FormSchoolID=258"
+                            method="post" name="frm" class="app_form" enctype="multipart/form-data">
+                            <input type="hidden" name="next_previous" value="next" />
+                            <input type="hidden" name="goto" value="" />
+                            <p>
+                                <strong>Electronic Signature</strong>
+                            </p>
+
+                            <p>The electronic signatures below and their related fields are treated by
+                                International
+                                School of Panama as a physical handwritten signature on a paper
+                                form.
+                            </p>
+
+                            <p>
+                                <strong>Agreements</strong>
+                            </p>
+
+                            <p>I/We
+                                hereby apply for enrolment and certify that the information provided is
+                                accurate, true
+                                and complete. I/We understand that if complete and accurate
+                                information has not been
+                                provided, The International School of Panama (ISP) may
+                                be unable to provide services or
+                                accommodations, and may withdraw an offer of
+                                admission and exclude or dismiss the student
+                                from ISP at any future date.
+                                I/We have read, agreed to and accepted the general terms and
+                                conditions.
+                            </p>
+
+                            <p>
+                                <input type="checkbox" name="signature_first" value="1" />
+                                Check for electronic signature
+                                <br />
+                                <span>Name:</span>
+                                <input type="text" name="elec_sig_first_name" value="" size="20" maxlength="100" />
+                                <br />
+                                Date:
+                                2/11/2020
+                            </p>
+
+
+                            <div class="signature-label">Sign here using your mouse, touchpad, or touchscreen.</div>
+                            <div class="signature-outer">
+
+                                <div class="signature-again">
+                                    <div class="signature-box">
+                                        <div
+                                            style="padding:0 !important; margin:0 !important;width: 100% !important; height: 0 !important; -ms-touch-action: none; touch-action: none;margin-top:-1em !important; margin-bottom:1em !important;"></div>
+                                        <canvas class="jSignature" width="320" height="80"
+                                            style="margin: 0px; padding: 0px; border: none; height: 80px; width: 320px; touch-action: none; background-color: rgb(255, 255, 255);"></canvas>
+                                        <div
+                                            style="padding:0 !important; margin:0 !important;width: 100% !important; height: 0 !important; -ms-touch-action: none; touch-action: none;margin-top:-1.5em !important; margin-bottom:1.5em !important; position: relative;"></div>
+                                    </div>
+                                    <input type="hidden" name="elec_sig_first_name_img" class="signature-hid" />
+                                    <div class="signature-tools">
+                                        <input type="button" value="Clear" class="jsig-startover" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="signature-end"></div>
+                            <p>
+                                <strong>Release of Records</strong>
+                            </p>
+
+                            <p>I waive my right to access confidential information contained in my child's
+                                admission
+                                file.
+                            </p>
+
+                            <p>
+                                <input type="checkbox" name="signature_second" value="1" />
+                                Check for electronic signature
+                                <br />
+                                <span>Name:</span>
+                                <input type="text" name="elec_sig_second_name" value="" size="20" maxlength="100" />
+                                <br />
+                                Date:
+                                2/11/2020
+                            </p>
+
+
+                            <div class="signature-label">Sign here using your mouse, touchpad, or touchscreen.</div>
+                            <div class="signature-outer">
+
+                                <div class="signature-again">
+                                    <div class="signature-box">
+                                        <div
+                                            style="padding:0 !important; margin:0 !important;width: 100% !important; height: 0 !important; -ms-touch-action: none; touch-action: none;margin-top:-1em !important; margin-bottom:1em !important;"></div>
+                                        <canvas class="jSignature" width="320" height="80"
+                                            style="margin: 0px; padding: 0px; border: none; height: 80px; width: 320px; touch-action: none; background-color: rgb(255, 255, 255);"></canvas>
+                                        <div
+                                            style="padding:0 !important; margin:0 !important;width: 100% !important; height: 0 !important; -ms-touch-action: none; touch-action: none;margin-top:-1.5em !important; margin-bottom:1.5em !important; position: relative;"></div>
+                                    </div>
+                                    <input type="hidden" name="elec_sig_second_name_img" class="signature-hid" />
+                                    <div class="signature-tools">
+                                        <input type="button" value="Clear" class="jsig-startover" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="signature-end"></div>
+
+                        </form>
+                    </main>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

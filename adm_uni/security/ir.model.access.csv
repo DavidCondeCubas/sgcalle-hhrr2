@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+adm_uni_inquiry_access,adm_uni.adm_uni_inquiry_access,adm_uni.model_adm_uni_inquiry,,1,1,1,1
+adm_uni_inquiry_status_access,adm_uni.adm_uni_inquiry_status_access,adm_uni.model_adm_uni_inquiry_status,,1,1,1,1
+adm_uni_inquiry_task_access,adm_uni.adm_uni_inquiry_task_access,adm_uni.model_adm_uni_inquiry_task,,1,1,1,1
+adm_uni_inquiry_languages_access,adm_uni.adm_uni_inquiry_languages_access,adm_uni.model_adm_uni_inquiry_languages,,1,1,1,1
+adm_uni_languages_level_access,adm_uni.adm_uni_languages_level_access,adm_uni.model_adm_uni_languages_level,,1,1,1,1
+adm_uni_languages_access,adm_uni.adm_uni_languages_access,adm_uni.model_adm_uni_languages,,1,1,1,1
+adm_uni_degree_program_access,adm_uni.adm_uni_degree_program_access,adm_uni.model_adm_uni_degree_program,,1,1,1,1
+adm_uni_contact_time_access,adm_uni.adm_uni_contact_time_access,adm_uni.model_adm_uni_contact_time,,1,1,1,1
+adm_uni_application_access,adm_uni.adm_application_access,adm_uni.model_adm_uni_application,,1,1,1,1
+adm_uni_application_task_access,adm_uni.adm_application_task_access,adm_uni.model_adm_uni_application_task,,1,1,1,1
+adm_uni_application_status_access,adm_uni.adm_application_status_access,adm_uni.model_adm_uni_application_status,,1,1,1,1
+adm_uni_application_languages_access,adm_uni.adm_application_languages_access,adm_uni.model_adm_uni_application_languages,,1,1,1,1
+adm_uni_application_other_contacts_access,adm_uni.adm_application_other_contacts_access,adm_uni.model_adm_uni_application_other_contacts,,1,1,1,1

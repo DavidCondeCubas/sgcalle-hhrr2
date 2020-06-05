@@ -1,0 +1,49 @@
+<odoo>
+
+    <record model="ir.ui.view" id="view_school_year_tree">
+        <field name="name">School year</field>
+        <field name="model">school_base.school_year</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget='handle'/>
+                <field name="name"/>
+                <field name="school_code_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_school_code_tree">
+        <field name="name">School codes</field>
+        <field name="model">school_base.school_code</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget='handle'/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_grade_level_tree">
+        <field name="name">School level</field>
+        <field name="model">school_base.grade_level</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget='handle'/>
+                <field name="name"/>
+                <field name="school_code_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_grade_level_tree">
+        <field name="name">School level</field>
+        <field name="model">school_base.district_code</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget='handle'/>
+                <field name="name"/>
+                <field name="school_code_ids"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

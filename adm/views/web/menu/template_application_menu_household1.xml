@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm.template_application_menu_household1">
+        <t t-call="website.layout">
+            <t t-set="title">Application</t>
+            <link rel="stylesheet" href="/adm/static/css/form_application.css" />
+            <div class="oe_struture" />
+            <div class="oe_struture">
+                <div class="container-fluid d-flex p-4">
+                    <t t-call="adm.template_application_menu" />
+                    <main class="col">
+                        <form t-att-action="'/admission/applications/{}/write'.format(application_id)"
+                            method="post" enctype="multipart/form-data">
+
+                            <script type="text/javascript">
+                                function do_country_change(country_field,prefix_label){
+                                if(country_field[country_field.selectedIndex].value=='USA'){
+                                document.getElementById(prefix_label+'state_select').style.display='block';
+                                document.getElementById(prefix_label+'state_input').style.display='none';
+                                $('.'+prefix_label+'phone-us').inputmask("999-999-9999");
+                                $('.'+prefix_label+'ssn-us').inputmask("999-99-9999");
+                                }
+                                else {
+                                document.getElementById(prefix_label+'state_select').style.display='none';
+                                document.getElementById(prefix_label+'state_input').style.display='block';
+                                $('.'+prefix_label+'phone-us').inputmask('remove');
+                                $('.'+prefix_label+'ssn-us').inputmask('remove');
+                                }
+                                }
+                            </script>
+
+
+                            <div class="redtext warn" style="padding-bottom:10px;">
+                                There is 1 missing requirement on this form.
+                            </div>
+                            <p>
+                                Please answer the following questions about the applicant's
+                                <em>
+                                    <strong>primary</strong>
+                                </em>
+                                custodial household.
+                            </p>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="spaced-tables">
+                                <tbody>
+                                    <tr class="section-title">
+                                        <td id="household" colspan="2" class="headerbg">Household 1</td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="2">
+
+                                            <main class="formlist">
+
+                                                <section>
+                                                    <div style="padding-top:15px;">
+                                                        <span class="section">Home Address</span>
+                                                        <a href="javascript:copy_address_p1(document.frm);">Copy From Applicant</a>
+                                                    </div>
+                                                </section>
+                                                <section>
+                                                    <div class="desc_sub">
+                                                        Street Address
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" name="household1_street" t-att-value="application.household1_street"
+                                                            class="pascal-case" />
+                                                    </div>
+                                                </section>
+                                                <section>
+                                                    <div class="desc_sub">
+                                                        City
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" name="household1_city" t-att-value="application.household1_city"
+                                                            class="pascal-case" />
+                                                    </div>
+                                                </section>
+                                                <section>
+                                                    <div class="desc_sub">
+                                                        Country
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <select name="household1_country" t-att-value="application.household1_country">
+                                                        </select>
+                                                    </div>
+                                                </section>
+                                                <section>
+                                                    <div class="desc_sub">
+                                                        State
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <select name="household1_state" t-att-value="application.household1_state" style="display:none">
+                                                            <option></option>
+                                                        </select>
+                                                    </div>
+                                                </section>
+                                                <section>
+                                                    <div class="desc_sub">
+                                                        Zip
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <input type="text" name="household1_zip" t-att-value="application.household1_zip" />
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc_sub">
+                                                        Home Phone
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" name="household1_phone" t-att-value="application.household1_phone" class="p1_phone-us"
+                                                            maxlength="25" />
+                                                    </div>
+                                                </section>
+
+                                                <section class="form_divider_bottom" style="margin-bottom:15px;"></section>
+                                            </main>
+
+                                        </td>
+                                    </tr>
+
+
+                                    <tr valign="top">
+                                        <td id="household-1" class="two-col-form pad-right">
+
+                                            <main class="formlist">
+                                                <section class="household-subhead hh-subhead-mob">
+                                                    First Parent / Guardian
+                                                    <br />
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Last Name
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" name="household1_p1_lastname" t-att-value="application.household1_p1_lastname"
+                                                            class="pascal-case-name" maxlength="50" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        First Name
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" name="household1_p1_firstname" t-att-value="application.household1_p1_firstname"
+                                                            class="pascal-case-name" maxlength="50" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Middle Name</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p1_middlename" t-att-value="application.household1_p1_middlename"
+                                                            class="pascal-case-name" maxlength="50" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Suffix</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p1_suffix" t-att-value="application.household1_p1_suffix" maxlength="50" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Salutation
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <select name="household1_p1_salutation" t-att-value="application.household1_p1_salutation">
+                                                            <option></option>
+                                                            <option>Capt.</option>
+                                                            <option>Col.</option>
+                                                            <option>Dr.</option>
+                                                            <option>Fr.</option>
+                                                            <option>Miss</option>
+                                                            <option>Mr.</option>
+                                                            <option>Mrs.</option>
+                                                            <option>Ms.</option>
+                                                            <option>Sr.</option>
+                                                        </select>
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Gender
+                                                        <span class="redtext"> *</span>
+
+                                                    </div>
+                                                    <div>
+                                                        <input type="radio" name="household1_p1_gender" t-att-value="application.household1_p1_gender" />
+                                                        Male
+                                                        <input type="radio" name="household1_p1_gender" t-att-value="application.household1_p1_gender" />
+                                                        Female
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Relationship to Applicant
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <select name="household1_p1_relationship" t-att-value="application.household1_p1_relationship">
+                                                            <option></option>
+                                                            <option>Attorney</option>
+                                                            <option>Aunt</option>
+                                                            <option>Brother</option>
+                                                            <option>Child</option>
+                                                            <option>Cousin</option>
+                                                            <option>Dad's co-worker</option>
+                                                            <option>Doctor</option>
+                                                            <option>Driver</option>
+                                                            <option>Employer HR Contact</option>
+                                                            <option>Family Driver</option>
+                                                            <option>Father</option>
+                                                            <option>Fiance</option>
+                                                            <option>Friend</option>
+                                                            <option>Godfather</option>
+                                                            <option>Godmother</option>
+                                                            <option>Grandparent</option>
+                                                            <option>Guardian</option>
+                                                            <option>Maid</option>
+                                                            <option>Mom's co-worker</option>
+                                                            <option>Mother</option>
+                                                            <option>Nanny</option>
+                                                            <option>Neighbour</option>
+                                                            <option>Nurse</option>
+                                                            <option>Other</option>
+                                                            <option>Relocation Agent</option>
+                                                            <option>Secretary</option>
+                                                            <option>Self</option>
+                                                            <option>Sister</option>
+                                                            <option>Spouse</option>
+                                                            <option>Step Father</option>
+                                                            <option>Step Mother</option>
+                                                            <option>Stepfather</option>
+                                                            <option>Stepmother</option>
+                                                            <option>Uncle</option>
+                                                        </select>
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Custodial Rights?
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="radio" name="household1_p1_custodialrights" t-att-value="application.household1_p1_custodialrights" checked="" />
+                                                        Yes
+                                                        <input type="radio" name="household1_p1_custodialrights" t-att-value="application.household1_p1_custodialrights" />
+                                                        No
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Financial Responsibility?
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="radio" name="household1_p1_financially_resp" t-att-value="application.household1_p1_financially_resp" checked="" />
+                                                        Yes
+                                                        <input type="radio" name="household1_p1_financially_resp" t-att-value="application.household1_p1_financially_resp" />
+                                                        No
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Marital Status
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <select name="household1_p1_maritalstatus" t-att-value="application.household1_p1_maritalstatus">
+                                                            <option></option>
+                                                            <option>Civil Union/Domestic Partners</option>
+                                                            <option>Divorced</option>
+                                                            <option>Married</option>
+                                                            <option>Never Married</option>
+                                                            <option>Remarried</option>
+                                                            <option>Separated</option>
+                                                            <option>Single</option>
+                                                            <option>Widowed</option>
+                                                        </select>
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Email Address 1
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" name="household1_p1_email" t-att-value="application.household1_p1_email" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Email Address 2</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p1_email2" t-att-value="application.household1_p1_email2" maxlength="100" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Work Phone</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p1_phone_work" t-att-value="application.household1_p1_phone_work"
+                                                            class="p1_phone-us" maxlength="25" />
+                                                        <br />
+                                                        Ext.
+                                                        <input type="text" name="household1_p1_phone_work_ext" t-att-value="application.household1_p1_phone_work_ext" maxlength="10" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Cell Phone
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" name="household1_p1_phone_cell" t-att-value="application.household1_p1_phone_cell"
+                                                            class="p1_phone-us" maxlength="25" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Occupation</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p1_occupation" t-att-value="application.household1_p1_occupation" maxlength="125" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Employer</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p1_employer" t-att-value="application.household1_p1_employer" maxlength="125" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Employer Address</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p1_employer_address" t-att-value="application.household1_p1_employer_address"
+                                                            maxlength="50" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Employer City</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p1_employer_city" t-att-value="application.household1_p1_employer_city" maxlength="50" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="section form_divider_bottom">
+                                                    </div>
+                                                </section>
+
+                                                <section class="more_space">
+
+                                                    <div class="desc warn">
+
+                                                        <span class="p_no_margin">
+                                                            <p>Passport #:</p>
+                                                        </span>
+
+                                                    </div>
+
+                                                    <div>
+                                                        <span class="redtext" style="padding-right:10px;">*</span>
+                                                        <input type="text" name="household1_p1_passport" t-att-value="application.household1_p1_passport" />
+
+                                                    </div>
+
+                                                </section>
+
+                                                <section class="more_space">
+
+                                                    <div class="desc">
+
+                                                        <span class="p_no_margin">
+                                                            <p>Nationality:</p>
+                                                        </span>
+
+                                                    </div>
+
+                                                    <div>
+                                                        <span class="redtext" style="padding-right:10px;">*</span>
+                                                        <input type="text" name="household1_p1_nationality" t-att-value="application.household1_p1_nationality" />
+
+                                                    </div>
+
+                                                </section>
+
+                                            </main>
+
+                                        </td>
+                                        <td id="household-2" class="two-col-form pad-left">
+
+                                            <main class="formlist">
+                                                <section class="household-subhead hh-subhead-mob">
+                                                    Second Parent / Guardian
+                                                    <br />
+                                                    <span style="font-weight:normal;">(leave blank if not applicable)</span>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Last Name
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" name="household1_p2_lastname" t-att-value="application.household1_p2_lastname"
+                                                            class="pascal-case-name" maxlength="50" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        First Name
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" name="household1_p2_firstname" t-att-value="application.household1_p2_firstname"
+                                                            class="pascal-case-name" maxlength="50" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Middle Name</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p2_middlename" t-att-value="application.household1_p2_middlename"
+                                                            class="pascal-case-name" maxlength="50" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Suffix</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p2_suffix" t-att-value="application.household1_p2_suffix" maxlength="50" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Salutation
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <select name="household1_p2_salutation" t-att-value="application.household1_p2_salutation">
+                                                            <option></option>
+
+                                                            <option>Capt.</option>
+
+                                                            <option>Col.</option>
+
+                                                            <option>Dr.</option>
+
+                                                            <option>Fr.</option>
+
+                                                            <option>Miss</option>
+
+                                                            <option>Mr.</option>
+
+                                                            <option>Mrs.</option>
+
+                                                            <option>Ms.</option>
+
+                                                            <option>Sr.</option>
+
+                                                        </select>
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Gender
+                                                        <span class="redtext"> *</span>
+
+                                                    </div>
+                                                    <div>
+                                                        <input type="radio" name="household1_p2_gender" t-att-value="application.household1_p2_gender" />
+                                                        Male
+
+                                                        <input type="radio" name="household1_p2_gender" t-att-value="application.household1_p2_gender" />
+                                                        Female
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Relationship to Applicant
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <select name="household1_p2_relationship" t-att-value="application.household1_p2_relationship">
+                                                            <option></option>
+
+                                                            <option>Attorney</option>
+
+                                                            <option>Aunt</option>
+
+                                                            <option>Brother</option>
+
+                                                            <option>Child</option>
+
+                                                            <option>Cousin</option>
+
+                                                            <option>Dad's co-worker</option>
+
+                                                            <option>Doctor</option>
+
+                                                            <option>Driver</option>
+
+                                                            <option>Employer HR Contact</option>
+
+                                                            <option>Family Driver</option>
+
+                                                            <option>Father</option>
+
+                                                            <option>Fiance</option>
+
+                                                            <option>Friend</option>
+
+                                                            <option>Godfather</option>
+
+                                                            <option>Godmother</option>
+
+                                                            <option>Grandparent</option>
+
+                                                            <option>Guardian</option>
+
+                                                            <option>Maid</option>
+
+                                                            <option>Mom's co-worker</option>
+
+                                                            <option>Mother</option>
+
+                                                            <option>Nanny</option>
+
+                                                            <option>Neighbour</option>
+
+                                                            <option>Nurse</option>
+
+                                                            <option>Other</option>
+
+                                                            <option>Relocation Agent</option>
+
+                                                            <option>Secretary</option>
+
+                                                            <option>Self</option>
+
+                                                            <option>Sister</option>
+
+                                                            <option>Spouse</option>
+
+                                                            <option>Step Father</option>
+
+                                                            <option>Step Mother</option>
+
+                                                            <option>Stepfather</option>
+
+                                                            <option>Stepmother</option>
+
+                                                            <option>Uncle</option>
+
+                                                        </select>
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Custodial Rights?
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="radio" name="household1_p2_custodialrights" t-att-value="application.household1_p2_custodialrights" checked="" />
+                                                        Yes
+
+                                                        <input type="radio" name="household1_p2_custodialrights" t-att-value="application.household1_p2_custodialrights" />
+                                                        No
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Financial Responsibility?
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="radio" name="household1_p2_financially_resp" t-att-value="application.household1_p2_financially_resp" checked="" />
+                                                        Yes
+
+                                                        <input type="radio" name="household1_p2_financially_resp" t-att-value="application.household1_p2_financially_resp" />
+                                                        No
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Marital Status
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <select name="household1_p2_maritalstatus" t-att-value="application.household1_p2_maritalstatus">
+                                                            <option></option>
+
+                                                            <option>Civil Union/Domestic Partners</option>
+
+                                                            <option>Divorced</option>
+
+                                                            <option>Married</option>
+
+                                                            <option>Never Married</option>
+
+                                                            <option>Remarried</option>
+
+                                                            <option>Separated</option>
+
+                                                            <option>Single</option>
+
+                                                            <option>Widowed</option>
+
+                                                        </select>
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Email Address 1
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" name="household1_p2_email" t-att-value="application.household1_p2_email" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Email Address 2</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p2_email2" t-att-value="application.household1_p2_email2" maxlength="100" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Work Phone</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p2_phone_work" t-att-value="application.household1_p2_phone_work"
+                                                            class="p1_phone-us" maxlength="25" />
+                                                        <br />
+                                                        Ext.
+                                                        <input type="text" name="household1_p2_phone_work_ext" t-att-value="application.household1_p2_phone_work_ext" maxlength="10" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">
+                                                        Cell Phone
+                                                        <span class="redtext"> *</span>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" name="household1_p2_phone_cell" t-att-value="application.household1_p2_phone_cell"
+                                                            class="p1_phone-us" maxlength="25" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Occupation</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p2_occupation" t-att-value="application.household1_p2_occupation" maxlength="125" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Employer</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p2_employer" t-att-value="application.household1_p2_employer" maxlength="125" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Employer Address</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p2_employer_address" t-att-value="application.household1_p2_employer_address"
+                                                            maxlength="50" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="desc">Employer City</div>
+                                                    <div>
+                                                        <input type="text" name="household1_p2_employer_city" t-att-value="application.household1_p2_employer_city" maxlength="50" />
+                                                    </div>
+                                                </section>
+
+                                                <section>
+                                                    <div class="section form_divider_bottom">
+                                                    </div>
+                                                </section>
+
+                                                <section class="more_space">
+
+                                                    <div class="desc">
+
+                                                        <span class="p_no_margin">
+                                                            <p>Passport #:</p>
+                                                        </span>
+
+                                                    </div>
+
+                                                    <div>
+                                                        <span class="redtext" style="padding-right:10px;">*</span>
+                                                        <input type="text" name="household1_p2_passport" t-att-value="application.household1_p2_passport" />
+
+                                                    </div>
+
+                                                </section>
+
+                                                <section class="more_space">
+
+                                                    <div class="desc">
+
+                                                        <span class="p_no_margin">
+                                                            <p>Nationality:</p>
+                                                        </span>
+
+                                                    </div>
+
+                                                    <div>
+                                                        <span class="redtext" style="padding-right:10px;">*</span>
+                                                        <input type="text" name="household1_p2_nationality" t-att-value="application.household1_p2_nationality" />
+                                                    </div>
+                                                </section>
+                                            </main>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="form_divider_bottom" style="margin:15px 0px;"></div>
+                            <button>Save changes</button>
+                        </form>
+                    </main>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

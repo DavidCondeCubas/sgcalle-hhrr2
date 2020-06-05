@@ -1,0 +1,39 @@
+th {
+    background: lightgray;
+    text-align: center;
+}
+
+table.table-border-2 th,
+table.table-border-2 td {
+    border: 2px solid black;
+}
+
+ol {
+    counter-reset: list;
+}
+
+ol>li {
+    list-style: none;
+}
+
+ol>li:before {
+    content: counter(list) ") ";
+    counter-increment: list;
+}
+
+.firma {
+    padding: 1em;
+    border-top: 2px solid black;
+}
+
+ul.no-decored li {
+    list-style-type: none;
+}
+
+.invoice-table {
+    height: 16cm;
+}
+
+.page-qatar {
+    font-size: 22px;
+}

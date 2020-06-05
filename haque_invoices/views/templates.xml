@@ -1,0 +1,313 @@
+<odoo>
+    <template id="haque_invoices.report_invoice_document">
+        <t t-set="o" t-value="o.with_context(lang=lang)" />
+        <div class="page" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+            <section class="row border border-dark">
+                <table class="w-100">
+                    <tr>
+                        <td>
+                            <b t-field="o.partner_id" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>
+                                F/O
+                                <span t-field="o.student_id" />
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>
+                                (Class
+                                <span t-field="o.student_id.homeroom" />
+                                )
+                            </b>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section class="row border border-dark text-center">
+                <table class="w-100">
+                    <tr>
+                        <td>
+                            <span t-field="o.company_id" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Bank AL Habib Limited - All Branches</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Collection A/C: 0080-900184-01</td>
+                    </tr>
+                </table>
+            </section>
+            <section class="row border border-dark">
+                <table class="w-100 text-center">
+                    <tr>
+                        <td class="pl-1 pr-1">
+                            <img style="z-index: -1;" t-att-src="'/report/barcode/Codabar/%s' % o.name " class="w-100 pt-2 pb-2" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                Voucher No.:
+                                <span t-field="o.name" />
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                ID No.:
+                                <span t-field="o.student_id.facts_id" />
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                <u>LATE FEE EFFECTIVE AFTER</u>
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                <u>Monday, 2 March 2020</u>
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section class="row border border-dark">
+                <div class="col-8">
+                    STUDENT NAME:
+                    <br />
+                    <span t-field="o.student_id" />
+                </div>
+                <div class="col-4">
+                    CLASS:
+                    <span t-field="o.student_id.homeroom" />
+                </div>
+            </section>
+            <section class="row border border-dark">
+                <table class="w-100">
+                    <tr>
+                        <td>LATE FEE EFFECTIVE AFTER:</td>
+                        <td>
+                            <t t-if="o.invoice_date_due">
+                                <t t-esc="'{dt:%a}, {dt.day} {dt:%b} {dt.year}'.format(dt=o.invoice_date_due)" />
+                            </t>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CHALLAN INVALID AFTER:</td>
+                        <td>
+                            <t t-if="o.invoice_date_invalid">
+                                <t t-esc="'{dt:%a}, {dt.day} {dt:%b} {dt.year}'.format(dt=o.invoice_date_invalid)" />
+                            </t>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ISSUE DATE:</td>
+                        <td>
+                            <t t-if="o.invoice_date">
+                                <t t-esc="'{dt:%a}, {dt.day} {dt:%b} {dt.year}'.format(dt=o.invoice_date)" />
+                            </t>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section class="row border border-dark">
+                <table class="w-100">
+                    <tr>
+                        <td colspan="2">Fees of Mar 2020 through Mar 2020:</td>
+                    </tr>
+                    <tr>
+                        <td>TUITION FEE:</td>
+                        <td>
+                            <span t-field="o.amount_untaxed" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL ADVANCE TAX</td>
+                        <td>
+                            <span t-field="o.amount_tax" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>AMOUNT WITHIN DUE DATE:</td>
+                        <td>
+                            <div style="border-top: 3px solid black;">
+                                <span t-field="o.amount_total" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section class="row border border-dark">
+                <table class="w-100">
+                    <tr>
+                        <td colspan="3">5% Advance Tax on CNIC</td>
+                    </tr>
+                    <tr>
+                        <td>
+                                42301-1046663-1
+                            </td>
+                        <td>
+                                Fee
+                            </td>
+                        <td>
+                                Tax
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Current Fee
+                            <t t-esc="'{dt:%b} {dt.year} through {dt:%b} {dt.year}'.format(dt=o.invoice_date_due)" />
+                        </td>
+                        <td>
+                            <span t-field="o.amount_untaxed" />
+                        </td>
+                        <td>
+                            <span t-field="o.amount_tax" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Accrued Fee July 2020</td>
+                    </tr>
+                    <tr>
+                        <td>Accrued Admission Fee</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                <u>TOTAL ADVANCE TAX:</u>
+                            </strong>
+                        </td>
+                        <td colspan="2">
+                            <div class="border border-dark">
+                                <span t-field="o.amount_tax" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section class="row border border-dark">
+                <table class="w-100">
+                    <tr>
+                        <td>LATE FEE WITH TAX:</td>
+                        <td>
+                            <span t-field="o.late_fee_amount" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <u>
+                                <strong>AMOUNT WITH LATE FEE:</strong>
+                            </u>
+                        </td>
+                        <td>
+                            <div class="border border-dark">
+                                <t t-esc="o.amount_total + o.late_fee_amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section class="row border border-dark">
+                <t t-esc="o.company_id.street" />
+            </section>
+            <section class="row border border-dark text-center">
+                <t t-if="modo">
+                    <t t-esc="modo" />
+                </t>
+            </section>
+        </div>
+    </template>
+
+    <template id="haque_invoices.report_invoice_with_copy">
+        <div class="article o_report_layout_standard position-relative" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+            <t t-set="o" t-value="o.with_context(lang=lang)" />
+            <div class="row">
+                <section class="col-3">
+                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="width: 256px;" alt="Logo" />
+                    <p>
+                        <t t-if="o.invoice_date">
+                            <t t-esc="'{dt:%a}, {dt.day} {dt:%b} {dt.year}'.format(dt=o.invoice_date)" />
+                        </t>
+                    </p>
+                    <p>
+                        Dear Parents,
+                        <br />
+                        Please find herewith the fee challan for
+                        <br />
+                        <strong>
+                            <t t-esc="'{dt:%b} {dt.year} through {dt:%b} {dt.year}'.format(dt=o.invoice_date_due)" />
+                        </strong>
+                        <br />
+                        Payment may be made via the following
+                        three modes ONLY:
+                    </p>
+                    <p>
+                        1. Cash - payable to any Bank Al Habib Ltd branch
+                        all over Pakistan.
+                    </p>
+                    <p>
+
+                        2. Cheque in favor of HAQUE ACADEMY -
+                        payable to any branch of Bank Al Habib in
+                        Pakistan.
+                    </p>
+                    <p>
+                        3. Pay order in favor of HAQUE ACADEMY -
+                        payable to any branch of Bank Al Habib in
+                        Pakistan.
+                    </p>
+                    <p>
+                        Please note that no other mode of payment
+                        is acceptable, such as Mobile Banking, Online/ATM
+                        transfer, etc.
+                    </p>
+                    <p>
+                        No payment of fees, cash or cheque, 
+                        will be accepted at Haque Academy.
+                    </p>
+                    <p>
+                        Please contact our Accounts Department at
+                        Haque Academy for any questions or queries.
+                    </p>
+                    <p>
+                        Thank you,
+                        <br />
+                        Haque Academy
+                    </p>
+                </section>
+                <!--                 <div style="flex: 0 0 12.5%; max-width: 12.5%;"/> -->
+                <section class="col-3" style="margin-left: 12.5%">
+                    <t t-call="haque_invoices.report_invoice_document" t-lang="lang">
+                        <t t-set="modo" t-value="'Depositor\'s Copy'" />
+                    </t>
+                </section>
+                <!--                 <div style="flex: 0 0 12.5%; max-width: 12.5%;"/> -->
+                <section class="col-3" style="margin-left: 12.5%">
+                    <t t-call="haque_invoices.report_invoice_document" t-lang="lang">
+                        <t t-set="modo" t-value="'Bank\'s Copy'" />
+                    </t>
+                </section>
+            </div>
+        </div>
+    </template>
+
+    <!--     <template id="haque_invoices.report_common" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link href="/haque_invoices/static/src/css/haque_invoice.css" rel="stylesheet" />
+            <script type="text/javascript" src="/haque_invoices/static/src/js/NumeroALetras.js" />
+        </xpath>
+    </template> -->
+</odoo>

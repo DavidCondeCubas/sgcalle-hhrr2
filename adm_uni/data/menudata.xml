@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Actions -->
+    
+    <record model="ir.actions.act_window" id="action_language">
+        <field name="name">Languages</field>
+        <field name="res_model">adm_uni.languages</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="action_language_level">
+        <field name="name">Language Levels</field>
+        <field name="res_model">adm_uni.languages.level</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="action_degree_program">
+        <field name="name">Degree Program</field>
+        <field name="res_model">adm_uni.degree_program</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="action_contact_time">
+        <field name="name">Contact time</field>
+        <field name="res_model">adm_uni.contact_time</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- Inquiries -->
+	<record model="ir.actions.act_window" id="action_inquiry">
+		<field name="name">Inquiries</field>
+		<field name="res_model">adm_uni.inquiry</field>
+		<field name="view_mode">kanban,tree,form</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_status">
+		<field name="name">Inquiry Status</field>
+		<field name="res_model">adm_uni.inquiry.status</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+    <!-- Applications -->
+    <record model="ir.actions.act_window" id="action_application">
+        <field name="name">Applications</field>
+        <field name="res_model">adm_uni.application</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_application_status">
+        <field name="name">Application Status</field>
+        <field name="res_model">adm_uni.application.status</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Principal -->
+	<menuitem id="adm_uni_menu" name="Admission" />
+    
+    <!-- Inquiry -->
+	<menuitem id="adm_uni_menu_inquiry" action="action_inquiry"
+		name="Inquiry" parent="adm_uni_menu" />
+
+    <!-- Application -->
+	<menuitem id="adm_uni_menu_application" action="action_application"
+		name="Application" parent="adm_uni_menu" />
+        
+    <!--Configuration -->
+    <menuitem id="adm_uni_menu_configurations"
+        parent="adm_uni_menu" name="Configurations" />
+    
+    <!-- Status -->
+    <menuitem id="adm_uni_menu_status"
+        parent="adm_uni_menu_configurations" name="Inquiry Status"
+        action="action_status" />
+        
+    <menuitem id="adm_uni_menu_application_status"
+        parent="adm_uni_menu_configurations" name="Application Status"
+        action="action_application_status" />
+        
+    <menuitem id="adm_uni_menu_language"
+        parent="adm_uni_menu_configurations" name="Languages"
+        action="action_language" />
+        
+    <menuitem id="adm_uni_menu_language_level"
+        parent="adm_uni_menu_configurations" name="Language levels"
+        action="action_language_level" />
+        
+    <menuitem id="adm_uni_menu_contact_time"
+        parent="adm_uni_menu_configurations" name="Contact times"
+        action="action_contact_time" />
+    <menuitem id="adm_uni_menu_degree_program"
+        parent="adm_uni_menu_configurations" name="Degree programs"
+        action="action_degree_program" />
+    
+    <!-- Website Tab -->
+    <record id="website_menu_adm_uni_inquiry" model="website.menu">
+        <field name="name">University Inquiry</field>
+        <field name="url">/admission-university/inquiry</field>
+        <field name="parent_id" ref="website.main_menu" />
+        <field name="sequence" type="int">40</field>
+    </record>
+    
+    <template id="website_menuitem_application" inherit_id="website.layout" name="header application menu">
+           <xpath expr="//a[@id='o_logout']" position="before">
+               <a href="/admission-university/application" role="menuitem" class="dropdown-item">Application</a>
+           </xpath>
+    </template>
+    
+</odoo>

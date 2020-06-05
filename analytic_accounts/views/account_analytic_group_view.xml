@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="account_analytic_group_with_code_form">
+        <field name="name">Analytic Group Form Inherited with code</field>
+        <field name="model">account.analytic.group</field>
+        <field name="inherit_id" ref="analytic.account_analytic_group_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group>
+                    <field name="analytic_code"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

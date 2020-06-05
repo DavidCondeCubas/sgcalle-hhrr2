@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="adm.template_application_menu_alumni_currently_enrolled_students">
+        <t t-call="website.layout">
+            <t t-set="title">Application</t>
+            <link rel="stylesheet" href="/adm/static/css/form_application.css" />
+            <div class="oe_struture" />
+            <div class="oe_struture">
+                <div class="container-fluid d-flex p-4">
+                    <t t-call="adm.template_application_menu" />
+                    <main class="col">
+                        <form action="app_edit.cfm?memberid=3606&amp;studentid=504&amp;FormSchoolID=253"
+                            method="post" name="frm" class="app_form" enctype="multipart/form-data">
+                            <input type="hidden" name="next_previous" value="next" />
+                            <input type="hidden" name="goto" value="" />
+
+
+                            <script type="text/javascript">
+                                function hide_the_form(form,block_none){
+                                document.getElementById('the_form').style.display = block_none;
+                                }
+                            </script>
+
+                            <div style="padding:20px 0px 10px 0px; font-weight:bold;">Does the applicant have any other relatives who currently attend,
+                                have attended or have graduated from our school?
+                            </div>
+                            <div style="padding:0px 0px 20px 20px;">
+                                <input type="radio" name="alumni" value="1" checked=""
+                                    onclick="javascript:hide_the_form(document.frm,'block');" />
+                                Yes
+                                <input type="radio" name="alumni" value="0"
+                                    onclick="javascript:hide_the_form(document.frm,'none');" />
+                                No
+                            </div>
+
+                            <div id="the_form" style="display:block;">
+
+                                <input type="hidden" name="alumnusid_list" value="205,206,207" />
+                                <input type="hidden" name="add" value="0" />
+
+                                <main class="formlist">
+
+                                    <section class="section_header">
+                                        Alumnus / Enrolled 1
+                                        <span style="padding-left:20px;">
+                                            <input type="checkbox" name="alumnus_delete_205" value="1" />
+                                            Delete
+                                        </span>
+                                    </section>
+
+                                    <section>
+                                        <div class="desc">
+                                            Name
+                                            <span class="redtext"> *</span>
+                                        </div>
+                                        <div>
+                                            <input type="text" name="alumniname_205" value="Roberto Ardon"
+                                                size="35" maxlength="50" />
+                                        </div>
+                                    </section>
+
+                                    <section>
+                                        <div class="desc">
+                                            Relationship to Applicant
+                                            <span class="redtext"> *</span>
+                                        </div>
+                                        <div>
+                                            <select name="relationship_205">
+                                                <option value=""></option>
+
+                                                <option value="Attorney">Attorney</option>
+
+                                                <option value="Aunt">Aunt</option>
+
+                                                <option value="Brother">Brother</option>
+
+                                                <option value="Child">Child</option>
+
+                                                <option value="Cousin">Cousin</option>
+
+                                                <option value="Dad's co-worker">Dad's co-worker</option>
+
+                                                <option value="Doctor">Doctor</option>
+
+                                                <option value="Driver">Driver</option>
+
+                                                <option value="Employer HR Contact">Employer HR Contact</option>
+
+                                                <option value="Family Driver">Family Driver</option>
+
+                                                <option value="Father">Father</option>
+
+                                                <option value="Fiance">Fiance</option>
+
+                                                <option value="Friend">Friend</option>
+
+                                                <option value="Godfather">Godfather</option>
+
+                                                <option value="Godmother">Godmother</option>
+
+                                                <option value="Grandparent">Grandparent</option>
+
+                                                <option value="Guardian">Guardian</option>
+
+                                                <option value="Maid">Maid</option>
+
+                                                <option value="Mom's co-worker">Mom's co-worker</option>
+
+                                                <option value="Mother">Mother</option>
+
+                                                <option value="Nanny">Nanny</option>
+
+                                                <option value="Neighbour">Neighbour</option>
+
+                                                <option value="Nurse">Nurse</option>
+
+                                                <option value="Other">Other</option>
+
+                                                <option value="Relocation Agent">Relocation Agent</option>
+
+                                                <option value="Secretary">Secretary</option>
+
+                                                <option value="Self">Self</option>
+
+                                                <option value="Sister">Sister</option>
+
+                                                <option value="Spouse">Spouse</option>
+
+                                                <option value="Step Father">Step Father</option>
+
+                                                <option value="Step Mother">Step Mother</option>
+
+                                                <option value="Stepfather">Stepfather</option>
+
+                                                <option value="Stepmother">Stepmother</option>
+
+                                                <option value="Uncle" selected="">Uncle</option>
+
+                                            </select>
+                                        </div>
+                                    </section>
+
+                                    <section>
+                                        <div class="desc">
+                                            Years Attended
+                                            <span style="font-weight:normal;"> (Ex: 1990 - 1993)</span>
+                                        </div>
+                                        <div>
+                                            <input type="text" name="attended_205" value="1995-2000" size="25"
+                                                maxlength="25" />
+                                        </div>
+                                    </section>
+
+                                    <section class="section_header">
+                                        Alumnus / Enrolled 2
+                                        <span style="padding-left:20px;">
+                                            <input type="checkbox" name="alumnus_delete_206" value="1" />
+                                            Delete
+                                        </span>
+                                    </section>
+
+                                    <section>
+                                        <div class="desc">
+                                            Name
+                                            <span class="redtext"> *</span>
+                                        </div>
+                                        <div>
+                                            <input type="text" name="alumniname_206" value="Maria Camila Ardon"
+                                                size="35" maxlength="50" />
+                                        </div>
+                                    </section>
+
+                                    <section>
+                                        <div class="desc">
+                                            Relationship to Applicant
+                                            <span class="redtext"> *</span>
+                                        </div>
+                                        <div>
+                                            <select name="relationship_206">
+                                                <option value=""></option>
+
+                                                <option value="Attorney">Attorney</option>
+
+                                                <option value="Aunt">Aunt</option>
+
+                                                <option value="Brother">Brother</option>
+
+                                                <option value="Child">Child</option>
+
+                                                <option value="Cousin">Cousin</option>
+
+                                                <option value="Dad's co-worker">Dad's co-worker</option>
+
+                                                <option value="Doctor">Doctor</option>
+
+                                                <option value="Driver">Driver</option>
+
+                                                <option value="Employer HR Contact">Employer HR Contact</option>
+
+                                                <option value="Family Driver">Family Driver</option>
+
+                                                <option value="Father">Father</option>
+
+                                                <option value="Fiance">Fiance</option>
+
+                                                <option value="Friend">Friend</option>
+
+                                                <option value="Godfather">Godfather</option>
+
+                                                <option value="Godmother">Godmother</option>
+
+                                                <option value="Grandparent">Grandparent</option>
+
+                                                <option value="Guardian">Guardian</option>
+
+                                                <option value="Maid">Maid</option>
+
+                                                <option value="Mom's co-worker">Mom's co-worker</option>
+
+                                                <option value="Mother" selected="">Mother</option>
+
+                                                <option value="Nanny">Nanny</option>
+
+                                                <option value="Neighbour">Neighbour</option>
+
+                                                <option value="Nurse">Nurse</option>
+
+                                                <option value="Other">Other</option>
+
+                                                <option value="Relocation Agent">Relocation Agent</option>
+
+                                                <option value="Secretary">Secretary</option>
+
+                                                <option value="Self">Self</option>
+
+                                                <option value="Sister">Sister</option>
+
+                                                <option value="Spouse">Spouse</option>
+
+                                                <option value="Step Father">Step Father</option>
+
+                                                <option value="Step Mother">Step Mother</option>
+
+                                                <option value="Stepfather">Stepfather</option>
+
+                                                <option value="Stepmother">Stepmother</option>
+
+                                                <option value="Uncle">Uncle</option>
+
+                                            </select>
+                                        </div>
+                                    </section>
+
+                                    <section>
+                                        <div class="desc">
+                                            Years Attended
+                                            <span style="font-weight:normal;"> (Ex: 1990 - 1993)</span>
+                                        </div>
+                                        <div>
+                                            <input type="text" name="attended_206" value="1995-2000" size="25"
+                                                maxlength="25" />
+                                        </div>
+                                    </section>
+
+                                    <section class="section_header">
+                                        Alumnus / Enrolled 3
+                                        <span style="padding-left:20px;">
+                                            <input type="checkbox" name="alumnus_delete_207" value="1" />
+                                            Delete
+                                        </span>
+                                    </section>
+
+                                    <section>
+                                        <div class="desc">
+                                            Name
+                                            <span class="redtext"> *</span>
+                                        </div>
+                                        <div>
+                                            <input type="text" name="alumniname_207" value="Rossana Ardon"
+                                                size="35" maxlength="50" />
+                                        </div>
+                                    </section>
+
+                                    <section>
+                                        <div class="desc">
+                                            Relationship to Applicant
+                                            <span class="redtext"> *</span>
+                                        </div>
+                                        <div>
+                                            <select name="relationship_207">
+                                                <option value=""></option>
+
+                                                <option value="Attorney">Attorney</option>
+
+                                                <option value="Aunt" selected="">Aunt</option>
+
+                                                <option value="Brother">Brother</option>
+
+                                                <option value="Child">Child</option>
+
+                                                <option value="Cousin">Cousin</option>
+
+                                                <option value="Dad's co-worker">Dad's co-worker</option>
+
+                                                <option value="Doctor">Doctor</option>
+
+                                                <option value="Driver">Driver</option>
+
+                                                <option value="Employer HR Contact">Employer HR Contact</option>
+
+                                                <option value="Family Driver">Family Driver</option>
+
+                                                <option value="Father">Father</option>
+
+                                                <option value="Fiance">Fiance</option>
+
+                                                <option value="Friend">Friend</option>
+
+                                                <option value="Godfather">Godfather</option>
+
+                                                <option value="Godmother">Godmother</option>
+
+                                                <option value="Grandparent">Grandparent</option>
+
+                                                <option value="Guardian">Guardian</option>
+
+                                                <option value="Maid">Maid</option>
+
+                                                <option value="Mom's co-worker">Mom's co-worker</option>
+
+                                                <option value="Mother">Mother</option>
+
+                                                <option value="Nanny">Nanny</option>
+
+                                                <option value="Neighbour">Neighbour</option>
+
+                                                <option value="Nurse">Nurse</option>
+
+                                                <option value="Other">Other</option>
+
+                                                <option value="Relocation Agent">Relocation Agent</option>
+
+                                                <option value="Secretary">Secretary</option>
+
+                                                <option value="Self">Self</option>
+
+                                                <option value="Sister">Sister</option>
+
+                                                <option value="Spouse">Spouse</option>
+
+                                                <option value="Step Father">Step Father</option>
+
+                                                <option value="Step Mother">Step Mother</option>
+
+                                                <option value="Stepfather">Stepfather</option>
+
+                                                <option value="Stepmother">Stepmother</option>
+
+                                                <option value="Uncle">Uncle</option>
+
+                                            </select>
+                                        </div>
+                                    </section>
+
+                                    <section>
+                                        <div class="desc">
+                                            Years Attended
+                                            <span style="font-weight:normal;"> (Ex: 1990 - 1993)</span>
+                                        </div>
+                                        <div>
+                                            <input type="text" name="attended_207" value="1995-2000" size="25"
+                                                maxlength="25" />
+                                        </div>
+                                    </section>
+
+
+                                </main>
+
+                                <p>
+                                    <input type="submit" name="add_alumnus" value=" Add Another " />
+                                </p>
+
+
+
+                            </div>
+
+
+                        </form>
+                    </main>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
