@@ -600,7 +600,7 @@ class Admission(http.Controller):
             "application": application,
             "countries": countries.ids,
             "student": application.partner_id,
-            "languages": languages,
+            "adm_languages": languages,
             "genders": genders,
         })
     
@@ -623,7 +623,7 @@ class Admission(http.Controller):
             "countries": countries.ids,
             "states": states.ids,
             "student": application.partner_id,
-            "languages": languages,
+            "adm_languages": languages,
         })
     
     @http.route("/admission/applications/<int:application_id>/additional-student-info", auth="public", methods=["GET"], website=True, csrf=False)
@@ -637,7 +637,7 @@ class Admission(http.Controller):
         return http.request.render("adm.template_application_menu_student_info", {
             "application_id": params["application_id"],
             "application": application,
-            "languages": languages,
+            "adm_languages": languages,
         })
     
     @http.route("/admission/applications/<int:application_id>/household-1", auth="public", methods=["GET"], website=True, csrf=False)
