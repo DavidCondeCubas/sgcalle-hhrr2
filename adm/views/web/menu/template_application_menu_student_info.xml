@@ -63,7 +63,7 @@
                                         <select name="first_language" class="form-control">
                                             <option value="-1" t-att-selected="not application.first_language">Select a language
                                             </option>
-                                            <t t-foreach="languages" t-as="language">
+                                            <t t-foreach="adm_languages" t-as="language">
                                                 <option t-att-value="language.id" t-att-selected="application.first_language.id == language.id">
                                                     <t t-esc="language.name" />
                                                 </option>
@@ -108,7 +108,7 @@
                                         <select name="second_language" class="form-control">
                                             <option value="-1" t-att-selected="not application.second_language">Select a language
                                             </option>
-                                            <t t-foreach="languages" t-as="language">
+                                            <t t-foreach="adm_languages" t-as="language">
                                                 <option t-att-value="language.id" t-att-selected="application.second_language == language">
                                                     <t t-esc="language.name" />
                                                 </option>
@@ -152,7 +152,7 @@
                                         <select name="third_language" class="form-control">
                                             <option value="-1" t-att-selected="not application.third_language">Select a language
                                             </option>
-                                            <t t-foreach="languages" t-as="language">
+                                            <t t-foreach="adm_languages" t-as="language">
                                                 <option t-att-value="language.id" t-att-selected="application.third_language == language">
                                                     <t t-esc="language.name" />
                                                 </option>
