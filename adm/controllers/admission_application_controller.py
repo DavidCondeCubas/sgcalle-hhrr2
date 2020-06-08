@@ -419,7 +419,7 @@ class Admission(http.Controller):
             in itertools.zip_longest(previous_school_ids, previous_school_names, previous_school_street,
                                      previous_school_city, previous_school_state, previous_school_country,
                                      previous_school_zip, previous_school_phone, previous_school_fromdate,
-                                     previous_school_todate, previous_school_gradecompleted,previous_school_extracurricular_interests
+                                     previous_school_todate, previous_school_gradecompleted,previous_school_extracurricular_interests,
                                      fillvalue=False):
                 if id != -1:
                     PreviousSchoolDescriptionEnv.browse([id]).write({
