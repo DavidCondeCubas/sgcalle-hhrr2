@@ -490,6 +490,10 @@ class Admission(http.Controller):
             new_partner_office_phone = post_params.getlist("new_partner_office_phone")
             new_partner_title = post_params.getlist("title")
             
+            if new_partner_title is 'other'
+                new_partner_title = post_params.getlist("other_reason")
+            
+            
             PartnerEnv = http.request.env["res.partner"]
             RelationshipEnv = http.request.env["adm.relationship"]
             application = http.request.env["adm.application"].browse([application_id])
