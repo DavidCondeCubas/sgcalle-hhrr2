@@ -472,6 +472,17 @@ class Admission(http.Controller):
             relationship_house = post_params.getlist("relationship_house")
             relationship_is_emergency_contact = post_params.getlist("relationship_is_emergency_contact")
             
+            #customization current howard academy
+            current_partner_citizenship = post_params.getlist("current_partner_nationality")
+            current_partner_identification = post_params.getlist("current_partner_identification")
+            current_partner_marital_status = post_params.getlist("current_partner_marital_status")
+            current_partner_occupation = post_params.getlist("current_partner_occupation")
+            current_partner_office_address = post_params.getlist("current_partner_office_address")
+            current_partner_office_phone = post_params.getlist("current_partner_office_phone")
+            current_partner_title = post_params.getlist("current_title")
+            current_partner_other_reason = post_params.getlist("current_other_reason")
+            
+            
             # From new contacts
             new_partner_name = post_params.getlist("new_partner_name")
             new_partner_mobile = post_params.getlist("new_partner_mobile")
@@ -481,7 +492,7 @@ class Admission(http.Controller):
             new_relationship_house = post_params.getlist("new_relationship_house")
             new_relationship_is_emergency_contact = post_params.getlist("new_relationship_is_emergency_contact")
             
-            #customization howard academy
+            #customization new howard academy
             new_partner_citizenship = post_params.getlist("new_partner_nationality")
             new_partner_identification = post_params.getlist("new_partner_identification")
             new_partner_marital_status = post_params.getlist("new_partner_marital_status")
@@ -510,13 +521,17 @@ class Admission(http.Controller):
                                              "partner_2": id,
                  }) for id in contact_existing_id],
             })
-
-            for id, type, mobile, phone, email, house_address_id, is_emergency_contact \
+            
+            for id, type, mobile, phone, email, house_address_id, is_emergency_contact, citizenship, identification, marital_status, occupation, office_address, office_phone, title, other_reason \
             in  itertools.zip_longest(contact_ids, relationship_type, relation_partner_mobile,
                                       relation_partner_phone, relation_partner_email, relationship_house,
-                                      relationship_is_emergency_contact,
+                                      relationship_is_emergency_contact, new_partner_citizenship, new_partner_identification, new_partner_marital_status, new_partner_occupation, 
+                                      new_partner_office_address, new_partner_office_phone, new_partner_title, new_partner_other_reason,
                                       fillvalue=False):
                 if id != -1:
+                    if title == 'other':
+                    title = other_reason
+                    
                     relationship = application.relationship_ids.filtered(lambda relation : relation.partner_2.id == id)
                     relationship.sudo().write({
                         "relationship_type": type,
@@ -528,13 +543,19 @@ class Admission(http.Controller):
                         "email": email,
                         "email": email,
                         "house_address_id": house_address_id,
+                        "x_citizenship": citizenship,
+                        "x_identification": identification,
+                        "x_marital_status": marital_status,
+                        "x_occupation": occupation,
+                        "x_work_address": office_address,
+                        "x_work_phone": office_phone,
+                        "x_title": title,
                     })
                     
             for name, mobile, phone, email, type, house_address_id, is_emergency_contact, citizenship, identification, marital_status, occupation, office_address, office_phone, title, other_reason \
             in  itertools.zip_longest(new_partner_name, new_partner_mobile, new_partner_phone, 
                                       new_partner_email, new_relationship_type, new_relationship_house,
-                                      new_relationship_is_emergency_contact, new_partner_citizenship, new_partner_identification, new_partner_marital_status, new_partner_occupation, 
-                                      new_partner_office_address, new_partner_office_phone, new_partner_title, new_partner_other_reason,
+                                      new_relationship_is_emergency_contact, current_partner_citizenship, current_partner_identification, current_partner_marital_status, current_partner_occupation, current_partner_office_address, current_partner_office_phone, current_partner_title, current_partner_other_reason,
                                       fillvalue=False):
                 
                 if title == 'other':
