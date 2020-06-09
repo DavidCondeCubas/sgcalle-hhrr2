@@ -493,9 +493,7 @@ class Admission(http.Controller):
             
             if new_partner_title == 'other':
                 new_partner_title = post_params.getlist("other_reason")
-                
-                
-            print(str(new_partner_title) + " !==" + str(other_reason))
+                 
             
             PartnerEnv = http.request.env["res.partner"]
             RelationshipEnv = http.request.env["adm.relationship"]
@@ -554,7 +552,7 @@ class Admission(http.Controller):
                     "x_occupation": occupation,
                     "x_work_address": office_address,
                     "x_work_phone": office_phone,
-                    "x_title": title+" "+other_reason,
+                    "x_title": str(title)+" "+str(other_reason),
                 })
                 
                 application.sudo().write({
