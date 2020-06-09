@@ -488,7 +488,7 @@ class Admission(http.Controller):
             new_partner_occupation = post_params.getlist("new_partner_occupation")
             new_partner_office_address = post_params.getlist("new_partner_office_address")
             new_partner_office_phone = post_params.getlist("new_partner_office_phone")
-            #new_partner_office_phone = post_params.getlist("new_partner_office_phone")
+            new_partner_title = post_params.getlist("title")
             
             PartnerEnv = http.request.env["res.partner"]
             RelationshipEnv = http.request.env["adm.relationship"]
@@ -528,11 +528,11 @@ class Admission(http.Controller):
                         "house_address_id": house_address_id,
                     })
                     
-            for name, mobile, phone, email, type, house_address_id, is_emergency_contact, citizenship, identification, marital_status, occupation, office_address, office_phone \
+            for name, mobile, phone, email, type, house_address_id, is_emergency_contact, citizenship, identification, marital_status, occupation, office_address, office_phone, title \
             in  itertools.zip_longest(new_partner_name, new_partner_mobile, new_partner_phone, 
                                       new_partner_email, new_relationship_type, new_relationship_house,
                                       new_relationship_is_emergency_contact, new_partner_citizenship, new_partner_identification, new_partner_marital_status, new_partner_occupation, 
-                                      new_partner_office_address, new_partner_office_phone,
+                                      new_partner_office_address, new_partner_office_phone, new_partner_title,
                                       fillvalue=False):
                 new_partner = PartnerEnv.sudo().create({
                     "name": name,
@@ -547,6 +547,7 @@ class Admission(http.Controller):
                     "x_occupation": occupation,
                     "x_work_address": office_address,
                     "x_work_phone": office_phone,
+                    "x_title": title,
                 })
                 
                 application.sudo().write({
