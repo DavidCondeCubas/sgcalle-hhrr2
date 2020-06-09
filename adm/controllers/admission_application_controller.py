@@ -529,7 +529,7 @@ class Admission(http.Controller):
                                       fillvalue=False):
                 if id != -1:
                     if title == 'other':
-                    title = other_reason
+                        title = other_reason
                     
                     relationship = application.relationship_ids.filtered(lambda relation : relation.partner_2.id == id)
                     relationship.sudo().write({
