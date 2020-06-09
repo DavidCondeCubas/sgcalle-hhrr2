@@ -481,7 +481,9 @@ class Admission(http.Controller):
             current_partner_office_phone = post_params.getlist("current_partner_office_phone")
             current_partner_title = post_params.getlist("current_title")
             current_partner_other_reason = post_params.getlist("current_other_reason")
-            
+            current_partner_parental_responsability = post_params.getlist("current_relationship_is_parental_responsability")
+            current_partner_fees_payable = post_params.getlist("current_partner_fees_payable")
+            current_partner_extra_payable = post_params.getlist("current_partner_extra_payable")
             
             # From new contacts
             new_partner_name = post_params.getlist("new_partner_name")
@@ -501,7 +503,9 @@ class Admission(http.Controller):
             new_partner_office_phone = post_params.getlist("new_partner_office_phone")
             new_partner_title = post_params.getlist("title")
             new_partner_other_reason = post_params.getlist("other_reason")
-            
+            new_partner_parental_responsability = post_params.getlist("new_relationship_is_parental_responsability")
+            new_partner_fees_payable = post_params.getlist("new_partner_fees_payable")
+            new_partner_extra_payable = post_params.getlist("new_partner_extra_payable")
             
             PartnerEnv = http.request.env["res.partner"]
             RelationshipEnv = http.request.env["adm.relationship"]
@@ -520,12 +524,12 @@ class Admission(http.Controller):
                 "relationship_ids": [(0, 0, {"partner_1": application.partner_id.id,
                                              "partner_2": id,
                  }) for id in contact_existing_id],
-            })
+            }) 
             
-            for id, type, mobile, phone, email, house_address_id, is_emergency_contact, citizenship, identification, marital_status, occupation, office_address, office_phone, title, other_reason \
+            for id, type, mobile, phone, email, house_address_id, is_emergency_contact, citizenship, identification, marital_status, occupation, office_address, office_phone, title, other_reason,parental_responsability,fees_payable,extra_payable \
             in  itertools.zip_longest(contact_ids, relationship_type, relation_partner_mobile,
                                       relation_partner_phone, relation_partner_email, relationship_house,
-                                      relationship_is_emergency_contact,current_partner_citizenship, current_partner_identification, current_partner_marital_status, current_partner_occupation, current_partner_office_address, current_partner_office_phone, current_partner_title, current_partner_other_reason,
+                                      relationship_is_emergency_contact,current_partner_citizenship, current_partner_identification, current_partner_marital_status, current_partner_occupation, current_partner_office_address, current_partner_office_phone, current_partner_title, current_partner_other_reason,current_partner_parental_responsability,current_partner_fees_payable,current_partner_extra_payable,
                                       fillvalue=False):
                 if id != -1:
                     if title == 'other':
@@ -549,13 +553,17 @@ class Admission(http.Controller):
                         "x_work_address": office_address,
                         "x_work_phone": office_phone,
                         "x_title": title,
+                        "x_parental_responsability":parental_responsability,
+                        "x_percent_extras_payable":fees_payable,
+                        "x_percent_fees_payable":extra_payable,
                     })
                     
-            for name, mobile, phone, email, type, house_address_id, is_emergency_contact, citizenship, identification, marital_status, occupation, office_address, office_phone, title, other_reason \
+            
+            for name, mobile, phone, email, type, house_address_id, is_emergency_contact, citizenship, identification, marital_status, occupation, office_address, office_phone, title, other_reason,parental_responsability,fees_payable,extra_payable  \
             in  itertools.zip_longest(new_partner_name, new_partner_mobile, new_partner_phone, 
                                       new_partner_email, new_relationship_type, new_relationship_house,
                                       new_relationship_is_emergency_contact, new_partner_citizenship, new_partner_identification, new_partner_marital_status, new_partner_occupation, 
-                                      new_partner_office_address, new_partner_office_phone, new_partner_title, new_partner_other_reason,
+                                      new_partner_office_address, new_partner_office_phone, new_partner_title, new_partner_other_reason, new_partner_parental_responsability, new_partner_fees_payable,new_partner_extra_payable, 
                                       fillvalue=False):
                 
                 if title == 'other':
@@ -575,6 +583,9 @@ class Admission(http.Controller):
                     "x_work_address": office_address,
                     "x_work_phone": office_phone,
                     "x_title": title,
+                    "x_parental_responsability":parental_responsability,
+                    "x_percent_extras_payable":fees_payable,
+                    "x_percent_fees_payable":extra_payable,
                 })
                 
                 application.sudo().write({
