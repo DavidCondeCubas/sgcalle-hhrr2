@@ -481,6 +481,15 @@ class Admission(http.Controller):
             new_relationship_house = post_params.getlist("new_relationship_house")
             new_relationship_is_emergency_contact = post_params.getlist("new_relationship_is_emergency_contact")
             
+            #customization howard academy
+            new_partner_citizenship = post_params.getlist("new_partner_nationality")
+            new_partner_identification = post_params.getlist("new_partner_identification")
+            new_partner_marital_status = post_params.getlist("new_partner_marital_status")
+            new_partner_occupation = post_params.getlist("new_partner_occupation")
+            new_partner_office_address = post_params.getlist("new_partner_office_address")
+            new_partner_office_phone = post_params.getlist("new_partner_office_phone")
+            #new_partner_office_phone = post_params.getlist("new_partner_office_phone")
+            
             PartnerEnv = http.request.env["res.partner"]
             RelationshipEnv = http.request.env["adm.relationship"]
             application = http.request.env["adm.application"].browse([application_id])
@@ -519,10 +528,11 @@ class Admission(http.Controller):
                         "house_address_id": house_address_id,
                     })
                     
-            for name, mobile, phone, email, type, house_address_id, is_emergency_contact \
+            for name, mobile, phone, email, type, house_address_id, is_emergency_contact, citizenship, identification, marital_status, occupation, office_address, office_phone \
             in  itertools.zip_longest(new_partner_name, new_partner_mobile, new_partner_phone, 
                                       new_partner_email, new_relationship_type, new_relationship_house,
-                                      new_relationship_is_emergency_contact,
+                                      new_relationship_is_emergency_contact, new_partner_citizenship, new_partner_identification, new_partner_marital_status, new_partner_occupation, 
+                                      new_partner_office_address, new_partner_office_phone,
                                       fillvalue=False):
                 new_partner = PartnerEnv.sudo().create({
                     "name": name,
@@ -531,6 +541,12 @@ class Admission(http.Controller):
                     "mobile": mobile,
                     "email": email,
                     "house_address_id": house_address_id,
+                    "x_citizenship": citizenship,
+                    "x_identification": identification,
+                    "x_marital_status": marital_status,
+                    "x_occupation": occupation,
+                    "x_work_address": office_address,
+                    "x_work_phone": office_phone,
                 })
                 
                 application.sudo().write({
