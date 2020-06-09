@@ -491,7 +491,7 @@ class Admission(http.Controller):
             new_partner_title = post_params.getlist("title")
             other_reason = post_params.getlist("other_reason")
             
-            if new_partner_title == 'other':
+            if other_reason != none and other_reason !=[]:
                 new_partner_title = post_params.getlist("other_reason")
                  
             
@@ -552,7 +552,7 @@ class Admission(http.Controller):
                     "x_occupation": occupation,
                     "x_work_address": office_address,
                     "x_work_phone": office_phone,
-                    "x_title": str(title)+" "+str(other_reason),
+                    "x_title": title,
                 })
                 
                 application.sudo().write({
