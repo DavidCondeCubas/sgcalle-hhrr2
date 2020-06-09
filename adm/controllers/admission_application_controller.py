@@ -495,7 +495,7 @@ class Admission(http.Controller):
                 new_partner_title = post_params.getlist("other_reason")
                 
                 
-            print(new_partner_title + " !==" + other_reason)
+            print(str(new_partner_title) + " !==" + str(other_reason))
             
             PartnerEnv = http.request.env["res.partner"]
             RelationshipEnv = http.request.env["adm.relationship"]
