@@ -690,7 +690,8 @@ class Admission(http.Controller):
         partners = PartnerEnv.browse(pertner_search_ids)
         
         CountryEnv = http.request.env['res.country']
-        countries = ContryEnv.browse(CountryEnv.search([]))
+        countries = CountryEnv.browse(CountryEnv.search([]))
+        
         return http.request.render("adm.template_application_menu_family_info", {
             "application_id": params["application_id"],
             "application": application,
