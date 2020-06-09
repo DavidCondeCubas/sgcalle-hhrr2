@@ -490,7 +490,7 @@ class Admission(http.Controller):
             new_partner_office_phone = post_params.getlist("new_partner_office_phone")
             new_partner_title = post_params.getlist("title")
             
-            if new_partner_title is 'other':
+            if new_partner_title == 'other':
                 new_partner_title = post_params.getlist("other_reason")
             
             
