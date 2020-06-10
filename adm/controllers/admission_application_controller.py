@@ -69,9 +69,9 @@ class Admission(http.Controller):
         
         if upload_file:
             file_id = AttachmentEnv.sudo().create({
-                'name': 'signature',
+                'name': 'signature.png',
                 #'datas_fname': upload_file.filename,
-                'res_name': 'signature',
+                'res_name': 'signature.png',
                 'type': 'binary',
                 'res_model': 'adm.application',
                 'res_id': application_id,
