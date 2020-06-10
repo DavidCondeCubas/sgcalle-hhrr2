@@ -79,7 +79,7 @@ class Admission(http.Controller):
                 'datas': upload_file,
             })
         
-        url_redirect = '/admission/applications/{}/document-upload'.format(application_id)
+        url_redirect = '/admission/applications/{}/electronic-signature'.format(application_id)
         return http.request.redirect(url_redirect)
     
     @http.route("/admission/applications/message/<int:application_id>", auth="public", methods=["POST"], website=True, csrf=False)
