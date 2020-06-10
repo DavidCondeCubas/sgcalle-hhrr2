@@ -63,7 +63,7 @@ class Admission(http.Controller):
         print("Params: {}".format(params))
         contact_id = self.get_partner()
         application_id = params["application_id"]
-        upload_file = params["siganture-pad"]
+        upload_file = params["signature-pad"]
         
         AttachmentEnv = http.request.env["ir.attachment"]
         
