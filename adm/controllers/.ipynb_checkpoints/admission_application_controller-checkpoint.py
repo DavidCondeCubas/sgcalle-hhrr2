@@ -839,11 +839,15 @@ class Admission(http.Controller):
     @http.route("/admission/applications/<int:application_id>/electronic-signature", auth="public", methods=["GET"], website=True, csrf=False)
     def electronic_signature(self, **params):
         ApplicationEnv = http.request.env["adm.application"]
+        AttachEnv = http.request.env["ir.attachment"]
+        
         application = ApplicationEnv.browse([params["application_id"]])
+        attachFile = AttachEnv.browse(AttachEnv.search([('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])]))
         
         return http.request.render("adm.template_application_menu_electronic_signature_page", {
             "application_id": params["application_id"],
             "application": application,
+            "attachFile": attachFile.datas,
         })
     
     @http.route("/admission/applications/<int:application_id>/review", auth="public", methods=["GET"], website=True, csrf=False)
