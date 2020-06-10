@@ -58,7 +58,7 @@ class Admission(http.Controller):
         return response
 
     @http.route("/admission/applications/signature/<int:application_id>", auth="public", methods=["POST"], website=True, csrf=False)
-    def send_message(self, **params):
+    def send_signature(self, **params):
         
         print("Params: {}".format(params))
         contact_id = self.get_partner()
