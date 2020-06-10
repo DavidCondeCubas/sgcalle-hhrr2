@@ -111,9 +111,9 @@ class Admission(http.Controller):
         
         if upload_file:
             file_id = AttachmentEnv.sudo().create({
-                'name': upload_file.filename,
+                'name': 'cvitae',
                 #'datas_fname': upload_file.filename,
-                'res_name': upload_file.filename,
+                'res_name': str(upload_file),
                 'type': 'binary',
                 'res_model': 'adm.application',
                 'res_id': application_id,
