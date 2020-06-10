@@ -90,6 +90,7 @@ class Admission(http.Controller):
         application_id = params["application_id"]
         upload_file = params["file_upload"]
         message_body = params["message_body"]
+        origin = params["origin"]
         
         message_body = message_body.replace("\n", "<br />\n")
         
@@ -118,8 +119,8 @@ class Admission(http.Controller):
                 'res_id': application_id,
                 'datas': base64.b64encode(upload_file.read()),
             })
-        
-        url_redirect = '/admission/applications/{}/document-upload'.format(application_id)
+        #url_redirect = '/admission/applications/{}/document-upload'.format(application_id)
+        url_redirect = ('/admission/applications/{}/document-'+str(origin)).format(application_id)
         return http.request.redirect(url_redirect)
     
         # return http.request.redirect('/admission/applications')
