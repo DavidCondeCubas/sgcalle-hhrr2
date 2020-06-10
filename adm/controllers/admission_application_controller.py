@@ -836,6 +836,36 @@ class Admission(http.Controller):
             "application_id": params["application_id"],
         }) 
     
+     @http.route("/admission/applications/<int:application_id>/document-toddlesrs", auth="public", methods=["GET"], website=True, csrf=False)
+    def document_upload(self, **params):
+        ApplicationEnv = http.request.env["adm.application"]
+        student_application = ApplicationEnv.browse([params["application_id"]])
+        
+        return http.request.render("adm.template_application_menu_upload_file_toddlesrs", {
+            "student_application": student_application,
+            "application_id": params["application_id"],
+        }) 
+    
+     @http.route("/admission/applications/<int:application_id>/document-1_9", auth="public", methods=["GET"], website=True, csrf=False)
+    def document_upload(self, **params):
+        ApplicationEnv = http.request.env["adm.application"]
+        student_application = ApplicationEnv.browse([params["application_id"]])
+        
+        return http.request.render("adm.template_application_menu_upload_file_1_9", {
+            "student_application": student_application,
+            "application_id": params["application_id"],
+        }) 
+    
+     @http.route("/admission/applications/<int:application_id>/document-foreign", auth="public", methods=["GET"], website=True, csrf=False)
+    def document_upload(self, **params):
+        ApplicationEnv = http.request.env["adm.application"]
+        student_application = ApplicationEnv.browse([params["application_id"]])
+        
+        return http.request.render("adm.template_application_menu_upload_file_foreign", {
+            "student_application": student_application,
+            "application_id": params["application_id"],
+        }) 
+    
     @http.route("/admission/applications/<int:application_id>/electronic-signature", auth="public", methods=["GET"], website=True, csrf=False)
     def electronic_signature(self, **params):
         ApplicationEnv = http.request.env["adm.application"]
