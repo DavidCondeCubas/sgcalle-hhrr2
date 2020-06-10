@@ -75,7 +75,7 @@ class Admission(http.Controller):
                 'type': 'binary',
                 'res_model': 'adm.application',
                 'res_id': application_id,
-                'datas': base64.b64encode(upload_file.read()),
+                'datas': upload_file,#base64.b64encode(upload_file.read()),
             })
         
         url_redirect = '/admission/applications/{}/document-upload'.format(application_id)
