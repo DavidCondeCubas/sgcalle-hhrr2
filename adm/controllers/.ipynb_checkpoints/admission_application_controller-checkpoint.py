@@ -91,7 +91,8 @@ class Admission(http.Controller):
         upload_file = params["file_upload"]
         message_body = params["message_body"]
         origin = params["origin"]
-        
+        origin_nameFile = params["origin_filename"]
+            
         message_body = message_body.replace("\n", "<br />\n")
         
         MessageEnv = http.request.env["mail.message"]
@@ -111,9 +112,9 @@ class Admission(http.Controller):
         
         if upload_file:
             file_id = AttachmentEnv.sudo().create({
-                'name': 'cvitae',
+                'name': str(origin_nameFile),
                 #'datas_fname': upload_file.filename,
-                'res_name': str(upload_file),
+                'res_name': upload_file.filename,
                 'type': 'binary',
                 'res_model': 'adm.application',
                 'res_id': application_id,
