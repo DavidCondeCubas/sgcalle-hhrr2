@@ -847,7 +847,7 @@ class Admission(http.Controller):
         return http.request.render("adm.template_application_menu_electronic_signature_page", {
             "application_id": params["application_id"],
             "application": application,
-            "attachFile": attachFile.urls,
+            "attachFile": attachFile.url,
         })
     
     @http.route("/admission/applications/<int:application_id>/review", auth="public", methods=["GET"], website=True, csrf=False)
