@@ -19,7 +19,7 @@
 		$(this).remove();
 
 
-		$("#school_forms").append("<button type='button' class='add-school btn btn-secondary d-block ml-auto mt-2'>&#10010; School</button>");
+		$("#school_forms").append("<button type='button' class='add-school btn btn-secondary d-block ml-auto mt-2'>&#10010;Add School</button>");
 		$(".add-school").on("click", addSchool);
 		var countryElement = document.querySelectorAll("select.country");
 		addEvent(countryElement, "change", changeState);
