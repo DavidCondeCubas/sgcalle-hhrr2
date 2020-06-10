@@ -56,6 +56,30 @@ class Admission(http.Controller):
             'current_url': http.request.httprequest.full_path,
         })
         return response
+
+    @http.route("/admission/applications/signature/<int:application_id>", auth="public", methods=["POST"], website=True, csrf=False)
+    def send_message(self, **params):
+        
+        print("Params: {}".format(params))
+        contact_id = self.get_partner()
+        application_id = params["application_id"]
+        upload_file = params["siganture-pad"]
+        
+        AttachmentEnv = http.request.env["ir.attachment"]
+        
+        if upload_file:
+            file_id = AttachmentEnv.sudo().create({
+                'name': upload_file.filename,
+                #'datas_fname': upload_file.filename,
+                'res_name': upload_file.filename,
+                'type': 'binary',
+                'res_model': 'adm.application',
+                'res_id': application_id,
+                'datas': base64.b64encode(upload_file.read()),
+            })
+        
+        url_redirect = '/admission/applications/{}/document-upload'.format(application_id)
+        return http.request.redirect(url_redirect)
     
     @http.route("/admission/applications/message/<int:application_id>", auth="public", methods=["POST"], website=True, csrf=False)
     def send_message(self, **params):
