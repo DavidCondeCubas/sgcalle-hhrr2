@@ -4,7 +4,6 @@ from datetime import datetime
 import base64
 import itertools
 
-_logger = logging.getLogger(__name__)
 
 def get_parameters():
     return http.request.httprequest.args
