@@ -875,8 +875,10 @@ class Admission(http.Controller):
         
         application = ApplicationEnv.browse([params["application_id"]])
         attachFile = AttachEnv.browse(AttachEnv.sudo().search([('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])]))
+        print('================================================================');
         print(str(attachFile));
-        ##
+        print('================================================================');
+        #
         return http.request.render("adm.template_application_menu_electronic_signature_page", {
             "application_id": params["application_id"],
             "application": application,
