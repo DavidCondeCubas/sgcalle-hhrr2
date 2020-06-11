@@ -1,15 +1,8 @@
 # -*- coding: utf-8 -*-
-#from odoo import http
-#from datetime import datetime
-#import base64
-#import itertools
-
-import base64
-import itertools
-import logging
-from openerp.osv import orm
 from odoo import http
 from datetime import datetime
+import base64
+import itertools
 
 _logger = logging.getLogger(__name__)
 
@@ -883,11 +876,8 @@ class Admission(http.Controller):
         
         application = ApplicationEnv.browse([params["application_id"]])
         attachFile = AttachEnv.browse(AttachEnv.sudo().search([('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])]))
-        print('================================================================');
-        print(str(attachFile));
-        _logger.debug('Create a  with vals ')
-        print('================================================================');
         #
+        
         return http.request.render("adm.template_application_menu_electronic_signature_page", {
             "application_id": params["application_id"],
             "application": application,
