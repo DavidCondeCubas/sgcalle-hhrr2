@@ -878,7 +878,7 @@ class Admission(http.Controller):
         AttachEnv = http.request.env["ir.attachment"]
         
         application = ApplicationEnv.browse([params["application_id"]])
-        last_attach_id = AttachEnv.sudo().search([('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
+        last_attach_id = AttachEnv.sudo().search([('name', '=', 'signature.png'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         #attach_file = AttachEnv.browse(AttachEnv.sudo().search([('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])).ids
         #attach_file = AttachEnv.browse([1027])
         
