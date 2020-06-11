@@ -878,13 +878,14 @@ class Admission(http.Controller):
         AttachEnv = http.request.env["ir.attachment"]
         
         application = ApplicationEnv.browse([params["application_id"]])
-        attachFile = AttachEnv.browse(AttachEnv.sudo().search([('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])]))
+        attach_file = AttachEnv.browse(AttachEnv.sudo().search([('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])).ids
+        
         #
         
         return http.request.render("adm.template_application_menu_electronic_signature_page", {
             "application_id": params["application_id"],
             "application": application,
-            #"attach_file": attachFile.local_url,
+            "attach_file_id": attach_file,
         })
     
     @http.route("/admission/applications/<int:application_id>/review", auth="public", methods=["GET"], website=True, csrf=False)
