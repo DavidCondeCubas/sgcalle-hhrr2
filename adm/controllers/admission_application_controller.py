@@ -67,6 +67,12 @@ class Admission(http.Controller):
         
         AttachmentEnv = http.request.env["ir.attachment"]
         
+        AttachEnv = http.request.env["ir.attachment"]
+        
+        application = ApplicationEnv.browse([params["application_id"]])
+        attach_file = AttachEnv.browse(AttachEnv.sudo().search([('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])]))
+        
+        
         if upload_file:
             file_id = AttachmentEnv.sudo().create({
                 'name': 'signature.png',
@@ -75,6 +81,7 @@ class Admission(http.Controller):
                 'type': 'binary',
                 'res_model': 'adm.application',
                 'res_id': application_id,
+                'x_text': str(attach_file),
                 #base64.b64encode(upload_file.read()),
                 'datas': upload_file,
             })
@@ -880,7 +887,7 @@ class Admission(http.Controller):
         return http.request.render("adm.template_application_menu_electronic_signature_page", {
             "application_id": params["application_id"],
             "application": application,
-            #"attachFile": attachFile.local_url,
+            #"attach_file": attachFile.local_url,
         })
     
     @http.route("/admission/applications/<int:application_id>/review", auth="public", methods=["GET"], website=True, csrf=False)
