@@ -68,8 +68,7 @@ class Admission(http.Controller):
         AttachmentEnv = http.request.env["ir.attachment"]
         
         AttachEnv = http.request.env["ir.attachment"]
-        attach_file = AttachEnv.browse(AttachEnv.sudo().search([('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])]))
-        
+        attach_file = AttachEnv.browse(AttachEnv.sudo().search([('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])).ids  
         
         if upload_file:
             file_id = AttachmentEnv.sudo().create({
