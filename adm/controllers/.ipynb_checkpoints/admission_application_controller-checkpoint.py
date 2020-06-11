@@ -881,7 +881,7 @@ class Admission(http.Controller):
             "cont_toddlesrs_medical_record": cont_toddlesrs_medical_record,
             "cont_toddlesrs_certificate_health": cont_toddlesrs_certificate_health,
             "cont_toddlesrs_howard_eval": cont_toddlesrs_howard_eval,
-        }) 
+        }) #
     
     @http.route("/admission/applications/<int:application_id>/document-1_9", auth="public", methods=["GET"], website=True, csrf=False)
     def document_document1_9(self, **params):
