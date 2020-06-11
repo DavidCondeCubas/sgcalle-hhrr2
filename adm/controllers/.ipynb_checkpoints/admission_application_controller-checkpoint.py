@@ -887,10 +887,54 @@ class Admission(http.Controller):
     def document_document1_9(self, **params):
         ApplicationEnv = http.request.env["adm.application"]
         student_application = ApplicationEnv.browse([params["application_id"]])
+        AttachEnv = http.request.env["ir.attachment"]
         
+        cont_1_9_certificate_previous_school = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_certificate_previous_school'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_1_9_certificate_previous_school = len(last_attach_id)
+        
+        cont_1_9_report_card = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_report_card'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_1_9_report_card = len(last_attach_id)
+        
+        cont_1_9_cumulative_credits = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_cumulative_credits'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_1_9_cumulative_credits = len(last_attach_id)
+        
+        cont_1_9_passport_photo = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_passport_photo'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_1_9_passport_photo = len(last_attach_id)
+        
+        cont_1_9_medical_record = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_medical_record'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_1_9_medical_record = len(last_attach_id)
+        
+        cont_1_9_recomendation_letter = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_recomendation_letter'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_1_9_recomendation_letter = len(last_attach_id)
+         
+        cont_1_9_howard_eval = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_howard_eval'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_1_9_howard_eval = len(last_attach_id)
+            
+            
         return http.request.render("adm.template_application_menu_upload_file_1_9", {
             "student_application": student_application,
             "application_id": params["application_id"],
+            "cont_1_9_certificate_previous_school": cont_1_9_certificate_previous_school,
+            "cont_1_9_report_card": cont_1_9_report_card,
+            "cont_1_9_cumulative_credits": cont_1_9_cumulative_credits,
+            "cont_1_9_passport_photo": cont_1_9_passport_photo,
+            "cont_1_9_medical_record": cont_1_9_medical_record,
+            "cont_1_9_recomendation_letter": cont_1_9_recomendation_letter,
+            "cont_1_9_howard_eval": cont_1_9_howard_eval,
         }) 
     
     @http.route("/admission/applications/<int:application_id>/document-foreign", auth="public", methods=["GET"], website=True, csrf=False)
