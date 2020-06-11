@@ -847,9 +847,15 @@ class Admission(http.Controller):
         ApplicationEnv = http.request.env["adm.application"]
         student_application = ApplicationEnv.browse([params["application_id"]])
         
+        cont_toddlesrs_birth_cert = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', 'toddlesrs_birth_certificate'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_toddlesrs_birth_cert = len(last_attach_id)
+        
         return http.request.render("adm.template_application_menu_upload_file_toddlesrs", {
             "student_application": student_application,
             "application_id": params["application_id"],
+            "cont_toddlesrs_birth_cert": cont_toddlesrs_birth_cert,
         }) 
     
     @http.route("/admission/applications/<int:application_id>/document-1_9", auth="public", methods=["GET"], website=True, csrf=False)
