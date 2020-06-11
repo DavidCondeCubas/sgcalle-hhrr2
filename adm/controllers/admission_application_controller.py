@@ -853,10 +853,34 @@ class Admission(http.Controller):
         if last_attach_id: 
             cont_toddlesrs_birth_cert = len(last_attach_id)
         
+        cont_toddlesrs_passport_photo = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', 'toddlesrs_passport_photo'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_toddlesrs_passport_photo = len(last_attach_id)
+            
+        cont_toddlesrs_medical_record = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', 'toddlesrs_medical_record'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_toddlesrs_medical_record = len(last_attach_id)
+            
+        cont_toddlesrs_certificate_health = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', 'toddlesrs_certificate_health'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_toddlesrs_certificate_health = len(last_attach_id)
+            
+        cont_toddlesrs_howard_eval = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', 'toddlesrs_howard_eval'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_toddlesrs_howard_eval = len(last_attach_id)
+            
         return http.request.render("adm.template_application_menu_upload_file_toddlesrs", {
             "student_application": student_application,
             "application_id": params["application_id"],
             "cont_toddlesrs_birth_cert": cont_toddlesrs_birth_cert,
+            "cont_toddlesrs_passport_photo": cont_toddlesrs_passport_photo,
+            "cont_toddlesrs_medical_record": cont_toddlesrs_medical_record,
+            "cont_toddlesrs_certificate_health": cont_toddlesrs_certificate_health,
+            "cont_toddlesrs_howard_eval": cont_toddlesrs_howard_eval,
         }) 
     
     @http.route("/admission/applications/<int:application_id>/document-1_9", auth="public", methods=["GET"], website=True, csrf=False)
