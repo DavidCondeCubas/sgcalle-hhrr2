@@ -941,10 +941,30 @@ class Admission(http.Controller):
     def document_foreign(self, **params):
         ApplicationEnv = http.request.env["adm.application"]
         student_application = ApplicationEnv.browse([params["application_id"]])
+        AttachEnv = http.request.env["ir.attachment"]
         
+        cont_foreign_academic_credits = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', 'foreign_academic_credits'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_foreign_academic_credits = len(last_attach_id)
+        
+        cont_foreign_copy_passport = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', 'foreign_copy_passport'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_foreign_copy_passport = len(last_attach_id)
+        
+        cont_foreign_birth_certificate = 0
+        last_attach_id = AttachEnv.sudo().search([('name', '=', 'foreign_birth_certificate'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_foreign_birth_certificate = len(last_attach_id)
+            
+            
         return http.request.render("adm.template_application_menu_upload_file_foreign", {
             "student_application": student_application,
             "application_id": params["application_id"],
+            "cont_foreign_academic_credits": cont_foreign_academic_credits,
+            "cont_foreign_copy_passport": cont_foreign_copy_passport,
+            "cont_foreign_birth_certificate": cont_foreign_birth_certificate,
         }) 
     
     @http.route("/admission/applications/<int:application_id>/electronic-signature", auth="public", methods=["GET"], website=True, csrf=False)
