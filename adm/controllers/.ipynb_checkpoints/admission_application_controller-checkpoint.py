@@ -136,6 +136,11 @@ class Admission(http.Controller):
             if last_attach_id: 
                 attach_file = AttachmentEnv.browse(last_attach_id[0].id)
                 attach_file.sudo().write({
+                            'name': str(origin_nameFile),
+                            #'datas_fname': upload_file.filename,
+                            'res_name': upload_file.filename,
+                            'type': 'binary',
+                            'res_model': 'adm.application',
                             'res_name': upload_file.filename,
                             'res_id': application_id,
                             'datas': base64.b64encode(upload_file.read()),
