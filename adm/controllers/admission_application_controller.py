@@ -980,20 +980,20 @@ class Admission(http.Controller):
         AttachEnv = http.request.env["ir.attachment"]
         
         cont_foreign_academic_credits = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', 'foreign_academic_credits'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', 'foreign_academic_credits'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
         if last_attach_id: 
-            cont_foreign_academic_credits = len(last_attach_id)
+            cont_foreign_academic_credits = AttachEnv.browse(last_attach_id[0].id)
         
         cont_foreign_copy_passport = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', 'foreign_copy_passport'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', 'foreign_copy_passport'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
         if last_attach_id: 
-            cont_foreign_copy_passport = len(last_attach_id)
-        
-        cont_foreign_birth_certificate = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', 'foreign_birth_certificate'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
-        if last_attach_id: 
-            cont_foreign_birth_certificate = len(last_attach_id)
+            cont_foreign_copy_passport = AttachEnv.browse(last_attach_id[0].id)
             
+        cont_foreign_birth_certificate = 0
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', 'foreign_birth_certificate'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        if last_attach_id: 
+            cont_foreign_birth_certificate = AttachEnv.browse(last_attach_id[0].id)
+
             
         return http.request.render("adm.template_application_menu_upload_file_foreign", {
             "student_application": student_application,
