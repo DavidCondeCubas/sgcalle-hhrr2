@@ -891,6 +891,7 @@ class Admission(http.Controller):
         last_attach_id = AttachEnv.sudo().search([('name', 'like', 'toddlesrs_passport_photo'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
             cont_toddlesrs_passport_photo =  AttachEnv.browse(last_attach_id[0].id)
+            #
             
         cont_toddlesrs_medical_record = 0
         last_attach_id = AttachEnv.sudo().search([('name', 'like', 'toddlesrs_medical_record'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
