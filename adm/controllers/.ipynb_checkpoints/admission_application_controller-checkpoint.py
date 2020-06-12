@@ -879,6 +879,7 @@ class Admission(http.Controller):
         student_application = ApplicationEnv.browse([params["application_id"]])
         AttachEnv = http.request.env["ir.attachment"]
         
+        
         cont_toddlesrs_birth_cert = 0
         last_attach_id = AttachEnv.sudo().search([('name', 'like', 'toddlesrs_birth_certificate'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         
