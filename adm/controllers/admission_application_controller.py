@@ -974,23 +974,23 @@ class Admission(http.Controller):
         }) 
     
     @http.route("/admission/applications/<int:application_id>/document-foreign", auth="public", methods=["GET"], website=True, csrf=False)
-    def document_foreign(self, **params):
+    def document_foreign(self, **params):##
         ApplicationEnv = http.request.env["adm.application"]
         student_application = ApplicationEnv.browse([params["application_id"]])
         AttachEnv = http.request.env["ir.attachment"]
         
         cont_foreign_academic_credits = 0
-        last_attach_id = AttachEnv.sudo().search([('name', 'like', 'foreign_academic_credits'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', 'foreign_academic_credits'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
             cont_foreign_academic_credits = AttachEnv.browse(last_attach_id[0].id)
         
         cont_foreign_copy_passport = 0
-        last_attach_id = AttachEnv.sudo().search([('name', 'like', 'foreign_copy_passport'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', 'foreign_copy_passport'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
             cont_foreign_copy_passport = AttachEnv.browse(last_attach_id[0].id)
             
         cont_foreign_birth_certificate = 0
-        last_attach_id = AttachEnv.sudo().search([('name', 'like', 'foreign_birth_certificate'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', 'foreign_birth_certificate'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
             cont_foreign_birth_certificate = AttachEnv.browse(last_attach_id[0].id)
 
