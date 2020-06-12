@@ -134,7 +134,7 @@ class Admission(http.Controller):
         #attach_file = AttachEnv.browse([1027])
         if upload_file:
             if last_attach_id: 
-                attach_file = AttachEnv.browse(last_attach_id[0].id)
+                attach_file = AttachmentEnv.browse(last_attach_id[0].id)
                 attach_file.sudo().write({
                             'res_id': application_id,
                             'x_text': str(attach_file),
