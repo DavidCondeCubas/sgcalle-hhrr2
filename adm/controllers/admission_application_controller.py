@@ -925,38 +925,38 @@ class Admission(http.Controller):
         AttachEnv = http.request.env["ir.attachment"]
         
         cont_1_9_certificate_previous_school = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_certificate_previous_school'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', '1_9_certificate_previous_school'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
             cont_1_9_certificate_previous_school = AttachEnv.browse(last_attach_id[0].id)
             
         
         cont_1_9_report_card = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_report_card'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', '1_9_report_card'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
             cont_1_9_report_card = AttachEnv.browse(last_attach_id[0].id)
         
         cont_1_9_cumulative_credits = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_cumulative_credits'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', '1_9_cumulative_credits'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
             cont_1_9_cumulative_credits = AttachEnv.browse(last_attach_id[0].id)
         
         cont_1_9_passport_photo = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_passport_photo'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', '1_9_passport_photo'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
             cont_1_9_passport_photo = AttachEnv.browse(last_attach_id[0].id)
         
         cont_1_9_medical_record = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_medical_record'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', '1_9_medical_record'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
             cont_1_9_medical_record = AttachEnv.browse(last_attach_id[0].id)
         
         cont_1_9_recomendation_letter = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_recomendation_letter'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', '1_9_recomendation_letter'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
             cont_1_9_recomendation_letter = AttachEnv.browse(last_attach_id[0].id)
          
         cont_1_9_howard_eval = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', '1_9_howard_eval'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', '1_9_howard_eval'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
             cont_1_9_howard_eval = AttachEnv.browse(last_attach_id[0].id)
             
