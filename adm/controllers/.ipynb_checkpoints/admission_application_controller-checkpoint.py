@@ -882,7 +882,8 @@ class Admission(http.Controller):
         cont_toddlesrs_birth_cert = 0
         last_attach_id = AttachEnv.sudo().search([('name', 'like', 'toddlesrs_birth_certificate'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
         if last_attach_id: 
-            cont_toddlesrs_birth_cert = len(last_attach_id)
+            cont_toddlesrs_birth_cert = AttachEnv.browse(last_attach_id[0].id)
+            #cont_toddlesrs_birth_cert = len(last_attach_id)
         
         cont_toddlesrs_passport_photo = 0
         last_attach_id = AttachEnv.sudo().search([('name', '=', 'toddlesrs_passport_photo'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
