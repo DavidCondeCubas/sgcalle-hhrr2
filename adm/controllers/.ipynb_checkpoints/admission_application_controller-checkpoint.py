@@ -142,15 +142,15 @@ class Admission(http.Controller):
                             'datas': upload_file,
                         })
             else:
-            file_id = AttachmentEnv.sudo().create({
-                'name': str(origin_nameFile),
-                #'datas_fname': upload_file.filename,
-                'res_name': upload_file.filename,
-                'type': 'binary',
-                'res_model': 'adm.application',
-                'res_id': application_id,
-                'datas': base64.b64encode(upload_file.read()),
-            })
+                file_id = AttachmentEnv.sudo().create({
+                    'name': str(origin_nameFile),
+                    #'datas_fname': upload_file.filename,
+                    'res_name': upload_file.filename,
+                    'type': 'binary',
+                    'res_model': 'adm.application',
+                    'res_id': application_id,
+                    'datas': base64.b64encode(upload_file.read()),
+                })
         #url_redirect = '/admission/applications/{}/document-upload'.format(application_id)
         url_redirect = ('/admission/applications/{}/document-'+str(origin)).format(application_id)
         return http.request.redirect(url_redirect)
