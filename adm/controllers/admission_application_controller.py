@@ -879,7 +879,7 @@ class Admission(http.Controller):
         student_application = ApplicationEnv.browse([params["application_id"]])
         AttachEnv = http.request.env["ir.attachment"]
         
-        
+        #cont_XX indica el ID de el archivo a descargar en vista
         cont_toddlesrs_birth_cert = 0
         last_attach_id = AttachEnv.sudo().search([('name', 'like', 'toddlesrs_birth_certificate'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         
@@ -888,24 +888,24 @@ class Admission(http.Controller):
             #cont_toddlesrs_birth_cert = len(last_attach_id)
         
         cont_toddlesrs_passport_photo = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', 'toddlesrs_passport_photo'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', 'toddlesrs_passport_photo'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
-            cont_toddlesrs_passport_photo = len(last_attach_id)
+            cont_toddlesrs_passport_photo =  AttachEnv.browse(last_attach_id[0].id)
             
         cont_toddlesrs_medical_record = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', 'toddlesrs_medical_record'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', 'toddlesrs_medical_record'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
-            cont_toddlesrs_medical_record = len(last_attach_id)
+            cont_toddlesrs_medical_record =  AttachEnv.browse(last_attach_id[0].id)
             
         cont_toddlesrs_certificate_health = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', 'toddlesrs_certificate_health'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', 'toddlesrs_certificate_health'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
-            cont_toddlesrs_certificate_health = len(last_attach_id)
+            cont_toddlesrs_certificate_health =  AttachEnv.browse(last_attach_id[0].id)
             
         cont_toddlesrs_howard_eval = 0
-        last_attach_id = AttachEnv.sudo().search([('name', '=', 'toddlesrs_howard_eval'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])
+        last_attach_id = AttachEnv.sudo().search([('name', 'like', 'toddlesrs_howard_eval'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
         if last_attach_id: 
-            cont_toddlesrs_howard_eval = len(last_attach_id)
+            cont_toddlesrs_howard_eval =  AttachEnv.browse(last_attach_id[0].id)
             
         return http.request.render("adm.template_application_menu_upload_file_toddlesrs", {
             "student_application": student_application,
