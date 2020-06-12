@@ -70,19 +70,33 @@ class Admission(http.Controller):
         AttachEnv = http.request.env["ir.attachment"]
         attach_file = AttachEnv.browse(AttachEnv.sudo().search([('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])).ids  
         
-        if upload_file:
-            file_id = AttachmentEnv.sudo().create({
-                'name': 'signature.png',
-                #'datas_fname': upload_file.filename,
-                'res_name': 'signature.png',
-                'type': 'binary',
-                'res_model': 'adm.application',
-                'res_id': application_id,
-                'x_text': str(attach_file),
-                #base64.b64encode(upload_file.read()),
-                'datas': upload_file,
-            })
-        
+        attach_file  = -1
+        last_attach_id = AttachEnv.sudo().search([('name', '=', 'signature.png'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
+        #attach_file = AttachEnv.browse(AttachEnv.sudo().search([('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])).ids
+        #attach_file = AttachEnv.browse([1027])
+        if last_attach_id: 
+            attach_file = AttachEnv.browse(last_attach_id[0].id)
+             partner.sudo().write({
+                        'res_id': application_id,
+                        'x_text': str(attach_file),
+                        #base64.b64encode(upload_file.read()),
+                        'datas': upload_file,
+                    })
+        else:    
+            if upload_file:
+                file_id = AttachmentEnv.sudo().create({
+                    'name': 'signature.png',
+                    #'datas_fname': upload_file.filename,
+                    'res_name': 'signature.png',
+                    'type': 'binary',
+                    'res_model': 'adm.application',
+                    'res_id': application_id,
+                    'x_text': str(attach_file),
+                    #base64.b64encode(upload_file.read()),
+                    'datas': upload_file,
+                }) 
+                    
+            
         url_redirect = '/admission/applications/{}/electronic-signature'.format(application_id)
         return http.request.redirect(url_redirect)
     
