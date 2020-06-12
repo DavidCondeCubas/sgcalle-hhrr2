@@ -142,7 +142,7 @@ class Admission(http.Controller):
                         })
             else:
                 file_id = AttachmentEnv.sudo().create({
-                    'name': str(origin_nameFile)+'.xls',
+                    'name': str(origin_nameFile),
                     #'datas_fname': upload_file.filename,
                     'res_name': upload_file.filename,
                     'type': 'binary',
