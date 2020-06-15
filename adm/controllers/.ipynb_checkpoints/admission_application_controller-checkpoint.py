@@ -702,6 +702,15 @@ class Admission(http.Controller):
             "application_id": params["application_id"]
         })
     
+    
+    @http.route("/admission/applications/<int:application_id>/invoice-applicant", auth="public", methods=["GET"], website=True, csrf=False)
+    def instructions_resources(self, **params):
+        return http.request.render("adm.template_application_menu_invoice", {
+            "application_id": params["application_id"]
+        })
+    
+    
+    
     @http.route("/admission/applications/<int:application_id>/info", auth="public", methods=["GET"], website=True, csrf=False)
     def info(self, **params):
         
