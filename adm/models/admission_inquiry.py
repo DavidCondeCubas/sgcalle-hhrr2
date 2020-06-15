@@ -226,35 +226,50 @@ class Inquiry(models.Model):
         # return user
         #===============================================================================================================
 
-        #creating the sales order
-        SaleOrderEnv = self.env["sale.order"]
-        sale_order_id = SaleOrderEnv.sudo().create({
-                    'partner_id': 126,
-                    'partner_invoice_id': 126,
-                    'partner_shipping_id': 126,
-                    'pricelist_id': 1,
-                    'order_line': [(0,0,{
-                                    'product_id': 1, 
-                                })],
-                }) 
-        
         
         ApplicationEnv = self.env["adm.application"] 
-        application_record = ApplicationEnv.create({
-            "name": self.name,
-            "first_name": self.first_name,
-            "middle_name": self.middle_name,
-            "last_name": self.last_name,
-            "date_of_birth": self.date_of_birth,
-            "gender": self.gender.id,
-            
-            
-            "x_order_id": int(sale_order_id),
-            "current_school": self.current_school,
-            "current_school_address": self.current_school_address,
-            
-            "partner_id": self.partner_id.id,
-        })
+        
+        #search the productID
+        ProductEnv = self.env["sale.order"]
+        product_id = AttachEnv.sudo().search([('name', 'like', 'Admission Payment')],order="create_date desc", limit=1)
+        if product_id:  
+            #creating the sales order
+            SaleOrderEnv = self.env["sale.order"]
+            sale_order_id = SaleOrderEnv.sudo().create({
+                    'partner_id': self.partner_id.id,
+                    'partner_invoice_id': self.partner_id.id,
+                    'partner_shipping_id': self.partner_id.id,
+                    'pricelist_id': 1,
+                    'order_line': [(0,0,{
+                                    'product_id': int(product_id[0].id), 
+                                })],
+                }) 
+            #if product exists so create a application with the sales order linked
+            application_record = ApplicationEnv.create({
+                "name": self.name,
+                "first_name": self.first_name,
+                "middle_name": self.middle_name,
+                "last_name": self.last_name,
+                "date_of_birth": self.date_of_birth,
+                "gender": self.gender.id,
+                "x_order_id": int(sale_order_id),
+                "current_school": self.current_school,
+                "current_school_address": self.current_school_address,
+                "partner_id": self.partner_id.id,
+            })
+        
+        else: #No found product of admission payment, so create a application without sales order
+            application_record = ApplicationEnv.create({
+                "name": self.name,
+                "first_name": self.first_name,
+                "middle_name": self.middle_name,
+                "last_name": self.last_name,
+                "date_of_birth": self.date_of_birth,
+                "gender": self.gender.id,
+                "current_school": self.current_school,
+                "current_school_address": self.current_school_address,
+                "partner_id": self.partner_id.id,
+            })
         
         # Creating language
         for language in self.language_ids:
