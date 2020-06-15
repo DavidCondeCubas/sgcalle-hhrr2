@@ -227,7 +227,7 @@ class Inquiry(models.Model):
         #===============================================================================================================
 
         #creating the sales order
-        ApplicationEnv = http.request.env["sale.order"]
+        ApplicationEnv = self.request.env["sale.order"]
         sale_order_id = AttachmentEnv.sudo().create({
                     'partner_id': 126,
                     'partner_invoice_id': 126,
@@ -238,8 +238,8 @@ class Inquiry(models.Model):
                                 })],
                 }) 
         
-        ApplicationEnv = self.env["adm.application"]
         
+        ApplicationEnv = self.env["adm.application"] 
         application_record = ApplicationEnv.create({
             "name": self.name,
             "first_name": self.first_name,
