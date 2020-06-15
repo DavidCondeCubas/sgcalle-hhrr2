@@ -233,9 +233,6 @@ class Inquiry(models.Model):
                     'partner_invoice_id': 126,
                     'partner_shipping_id': 126,
                     'pricelist_id': 1,
-                    'order_line': [(0,0,{
-                                    'product_id': 1, 
-                                })],
                 }) 
         
         
