@@ -227,7 +227,7 @@ class Inquiry(models.Model):
         #===============================================================================================================
 
         #creating the sales order
-        SaleOrderEnv = self.request.env["sale.order"]
+        SaleOrderEnv = self.env["sale.order"]
         sale_order_id = SaleOrderEnv.sudo().create({
                     'partner_id': 126,
                     'partner_invoice_id': 126,
