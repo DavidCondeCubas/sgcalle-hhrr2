@@ -285,16 +285,19 @@ class Application(models.Model):
         values['status_id'] = first_status.id
         values['name'] = formatting.format_name(values['first_name'], values['middle_name'], values['last_name']) 
         
-        values['x_order_id'] = 1
-        #ApplicationEnv = http.request.env["adm.application"]
         
-        #file_id = AttachmentEnv.sudo().create({
-        #            'name': 'signature.png',
-         #           'res_name': 'signature.png',
-          #      }) 
+        ApplicationEnv = http.request.env["sale.order"]
+        sale_order_id = AttachmentEnv.sudo().create({
+                    'partner_id': 126,
+                    'partner_invoice_id': 126,
+                    'partner_shipping_id': 126,
+                    'pricelist_id': 1,
+                    'order_line': [(0,0,{
+                                    'product_id': 1, 
+                                })],
+                }) 
         
-        
-        
+         values['x_order_id'] = sale_order_id
         
         return super(Application, self).create(values)
 
