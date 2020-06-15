@@ -231,7 +231,7 @@ class Inquiry(models.Model):
         
         #search the productID
         ProductEnv = self.env["sale.order"]
-        product_id = AttachEnv.sudo().search([('name', 'like', 'Admission Payment')],order="create_date desc", limit=1)
+        product_id = ProductEnv.sudo().search([('name', 'like', 'Admission Payment')],order="create_date desc", limit=1)
         if product_id:  
             #creating the sales order
             SaleOrderEnv = self.env["sale.order"]
