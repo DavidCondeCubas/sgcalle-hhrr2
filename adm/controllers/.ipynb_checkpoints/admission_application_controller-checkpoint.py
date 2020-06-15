@@ -703,14 +703,6 @@ class Admission(http.Controller):
         })
     
     
-    @http.route("/admission/applications/<int:application_id>/invoice-applicant", auth="public", methods=["GET"], website=True, csrf=False)
-    def instructions_resources(self, **params):
-        return http.request.render("adm.template_application_menu_invoice", {
-            "application_id": params["application_id"]
-        })
-    
-    
- 
     
     @http.route("/admission/applications/<int:application_id>/info", auth="public", methods=["GET"], website=True, csrf=False)
     def info(self, **params):
@@ -1035,14 +1027,8 @@ class Admission(http.Controller):
     
     @http.route("/admission/applications/<int:application_id>/review", auth="public", methods=["GET"], website=True, csrf=False)
     def review(self, **params):
-        ApplicationEnv = http.request.env["adm.application"]
-         
-        student_application = ApplicationEnv.browse([params["application_id"]])
-        application_status_ids = http.request.env["adm.application.status"].browse(http.request.env["adm.application.status"].search([]))
-         
-        return http.request.render("adm.template_application_menu_progress", {
-            "student_application": student_application,
-            "application_status_ids": application_status_ids.ids,
-            "application_id": params["application_id"],
-        }) 
+        return http.request.render("adm.template_application_menu_invoice", {
+            "application_id": params["application_id"]
+        })
+    
     
