@@ -246,7 +246,7 @@ class Inquiry(models.Model):
             "gender": self.gender.id,
             
             
-            "x_order_id": sale_order_id,
+            "x_order_id": 1,
             "current_school": self.current_school,
             "current_school_address": self.current_school_address,
             
