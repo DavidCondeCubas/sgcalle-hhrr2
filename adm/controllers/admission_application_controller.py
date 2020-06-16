@@ -1052,7 +1052,7 @@ class Admission(http.Controller):
                 
         return http.request.render("adm.template_application_menu_invoice", {
             "application_id": params["application_id"],
-            "sales_order_info": application[0],
+            "sales_order_info": str(application[0].x_order_id.id),
             #"sales_order_info": str(wizard_data[0].link),
         })
     
