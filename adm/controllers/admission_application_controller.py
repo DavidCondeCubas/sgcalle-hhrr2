@@ -1037,9 +1037,12 @@ class Admission(http.Controller):
             wizardIDs = WizardEnv.search([('res_model', '=', 'sale.order'),('res_id', '=', application[0].x_order_id.id)])
 
             if wizardIDs: 
+                
                 wizard_data = WizardEnv.browse(wizardIDs[0].id)
+                _logger.info("existe wizardIDS")
                  #
             else:
+                _logger.info("NO existe wizardIDS")
                 #de lo contrario creo el link
                 created_wizard_id = WizardEnv.create({
                         'res_model': 'sale.order',
