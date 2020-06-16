@@ -1028,7 +1028,7 @@ class Admission(http.Controller):
     @http.route("/admission/applications/<int:application_id>/review", auth="public", methods=["GET"], website=True, csrf=False)
     def review(self, **params):
         
-        ApplicationEnv = http.request.env["adm.application"]
+        ApplicationEnv = http.request.env["adm.application"].sudo()
         application = ApplicationEnv.browse([params["application_id"]])
         # busco si existe el link de pago generado
         WizardEnv = http.request.env["payment.link.wizard"].sudo()
