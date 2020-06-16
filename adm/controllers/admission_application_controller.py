@@ -1046,6 +1046,9 @@ class Admission(http.Controller):
             else:
                 _logger.info("NO existe wizardIDS")
                 #de lo contrario creo el link
+                _logger.info(application)
+                _logger.info("==========================")
+                    
                 created_wizard_id = WizardEnv.create({
                         'res_model': 'sale.order',
                         'res_id':application[0].x_order_id.id,
