@@ -1044,9 +1044,13 @@ class Admission(http.Controller):
                 _logger.info("existe wizardIDS")
                  #
             else:
-                _logger.info("NO existe wizardIDS")
+                _logger.info("===========================")
                 #de lo contrario creo el link
-                _logger.info(application)
+                _logger.info(application[0].x_order_id.id)
+                _logger.info(application[0].x_order_id.name)
+                _logger.info(application[0].x_order_id.amount_total)
+                _logger.info(application[0].x_order_id.currency_id.id)
+                _logger.info(application[0].partner_id.id)
                 _logger.info("==========================")
                     
                 created_wizard_id = WizardEnv.create({
