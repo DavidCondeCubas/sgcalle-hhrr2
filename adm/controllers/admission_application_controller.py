@@ -1032,32 +1032,35 @@ class Admission(http.Controller):
         
         ApplicationEnv = http.request.env["adm.application"].sudo()
         application = ApplicationEnv.browse([params["application_id"]])
-        # busco si existe el link de pago generado
+        
+        # busco si existe el link de pago generado si se mantiene en -1 indica que existe un pago realizado 
         linkPayment = -1
-        if application:
-            WizardEnv = http.request.env["payment.link.wizard"].sudo()
-            wizardIDs = WizardEnv.search([('res_model', '=', 'sale.order'),('res_id', '=', application[0].x_order_id.id)])
+        
+        #comprobamos que no tenga alguna transaction creada, de lo contrario estaria pagada
+        if not application[0].x_order_id.transaction_ids:
+            if application:
+                WizardEnv = http.request.env["payment.link.wizard"].sudo()
+                wizardIDs = WizardEnv.search([('res_model', '=', 'sale.order'),('res_id', '=', application[0].x_order_id.id)])
 
-            if wizardIDs: 
-                
-                wizard_data = WizardEnv.browse(wizardIDs[0].id)
-                _logger.info("existe wizardIDS")
-                 #
-            else:
-  
-                created_wizard_id = WizardEnv.create({
-                        'res_model': 'sale.order',
-                        'res_id': int(application[0].x_order_id.id),
-                        'description': str(application[0].x_order_id.name),
-                        'amount': float(application[0].x_order_id.amount_total),
-                        'currency_id': int(application[0].x_order_id.currency_id.id),
-                        'partner_id': int(application[0].partner_id.id),
-                    })  
-                #_logger.info(created_wizard_id.id)
+                if wizardIDs: 
 
-                wizard_data = WizardEnv.browse(created_wizard_id.id)
-                
-            linkPayment = wizard_data[0].link
+                    wizard_data = WizardEnv.browse(wizardIDs[0].id)
+                    _logger.info("existe wizardIDS")
+                     #
+                else:
+                    created_wizard_id = WizardEnv.create({
+                            'res_model': 'sale.order',
+                            'res_id': int(application[0].x_order_id.id),
+                            'description': str(application[0].x_order_id.name),
+                            'amount': float(application[0].x_order_id.amount_total),
+                            'currency_id': int(application[0].x_order_id.currency_id.id),
+                            'partner_id': int(application[0].partner_id.id),
+                        })  
+                    #_logger.info(created_wizard_id.id)
+
+                    wizard_data = WizardEnv.browse(created_wizard_id.id)
+
+                linkPayment = wizard_data[0].link
                 
         return http.request.render("adm.template_application_menu_invoice", {
             "application_id": params["application_id"],
