@@ -1044,8 +1044,8 @@ class Admission(http.Controller):
                     'res_id':application.x_order_id.id,
                     'description': application.x_order_id.name,
                     'amount': application.x_order_id.amount_total,
-                    'currency_id': application.x_order_id.currency_id,
-                    'partner_id': application.partner_id,
+                    'currency_id': 2,
+                    'partner_id': 138,
                 })  
             wizard_data = WizardEnv.browse(created_wizard_id)
                 
