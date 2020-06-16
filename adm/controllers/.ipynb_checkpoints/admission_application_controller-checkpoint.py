@@ -1044,15 +1044,7 @@ class Admission(http.Controller):
                 _logger.info("existe wizardIDS")
                  #
             else:
-                _logger.info("===========================")
-                #de lo contrario creo el link
-                _logger.info(application[0].x_order_id.id)
-                _logger.info(application[0].x_order_id.name)
-                _logger.info(application[0].x_order_id.amount_total)
-                _logger.info(application[0].x_order_id.currency_id.id)
-                _logger.info(application[0].partner_id.id)
-                _logger.info("==========================")
-                    
+  
                 created_wizard_id = WizardEnv.create({
                         'res_model': 'sale.order',
                         'res_id': int(application[0].x_order_id.id),
@@ -1061,8 +1053,8 @@ class Admission(http.Controller):
                         'currency_id': int(application[0].x_order_id.currency_id.id),
                         'partner_id': int(application[0].partner_id.id),
                     })  
-                _logger.info(created_wizard_id.id)
-                _logger.info("==========================")
+                #_logger.info(created_wizard_id.id)
+
                 wizard_data = WizardEnv.browse(created_wizard_id.id)
                 
             linkPayment = wizard_data[0].link
