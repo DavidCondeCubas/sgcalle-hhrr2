@@ -1050,7 +1050,8 @@ class Admission(http.Controller):
                         'partner_id': application[0].partner_id.id,
                     })  
                 wizard_data = WizardEnv.browse(created_wizard_id)
-                linkPayment = wizard_data[0].link
+            
+            linkPayment = wizard_data[0].link
                 
         return http.request.render("adm.template_application_menu_invoice", {
             "application_id": params["application_id"],
