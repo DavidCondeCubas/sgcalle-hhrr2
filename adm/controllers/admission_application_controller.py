@@ -1030,15 +1030,16 @@ class Admission(http.Controller):
         
         ApplicationEnv = http.request.env["adm.application"]
         application = ApplicationEnv.browse([params["application_id"]])
-        
+        # busco si existe el link de pago generado
         WizardEnv = http.request.env["payment.link.wizard"]
         wizardIDs = WizardEnv.sudo().search([('res_model', '=', 'sale.order'),
                                                                 ('res_id', '=', application.x_order_id.id)])
         
         if wizardIDs: 
             wizard_data = WizardEnv.browse(wizardIDs[0].id)
-             
+             #
         else:
+            #de lo contrario creo el link
             created_wizard_id = WizardEnv.sudo().create({
                     'res_model': 'sale.order',
                     'res_id':application.x_order_id.id,
@@ -1052,8 +1053,6 @@ class Admission(http.Controller):
                 
         return http.request.render("adm.template_application_menu_invoice", {
             "application_id": params["application_id"],
-            "sales_order_info": wizard_data,
+            "sales_order_info": str(wizard_data.link),
         })
-    
-    
     
