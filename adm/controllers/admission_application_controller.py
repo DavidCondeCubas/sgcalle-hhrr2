@@ -1055,14 +1055,16 @@ class Admission(http.Controller):
                     
                 created_wizard_id = WizardEnv.create({
                         'res_model': 'sale.order',
-                        'res_id':application[0].x_order_id.id,
-                        'description': application[0].x_order_id.name,
-                        'amount': application[0].x_order_id.amount_total,
-                        'currency_id': application[0].x_order_id.currency_id.id,
-                        'partner_id': application[0].partner_id.id,
+                        'res_id': int(application[0].x_order_id.id),
+                        'description': str(application[0].x_order_id.name),
+                        'amount': float(application[0].x_order_id.amount_total),
+                        'currency_id': int(application[0].x_order_id.currency_id.id),
+                        'partner_id': int(application[0].partner_id.id),
                     })  
                 wizard_data = WizardEnv.browse(created_wizard_id)
-            
+                _logger.info(wizard_data[0].link)
+                _logger.info("==========================")
+                
             linkPayment = wizard_data[0].link
                 
         return http.request.render("adm.template_application_menu_invoice", {
