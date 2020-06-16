@@ -1031,28 +1031,30 @@ class Admission(http.Controller):
         ApplicationEnv = http.request.env["adm.application"].sudo()
         application = ApplicationEnv.browse([params["application_id"]])
         # busco si existe el link de pago generado
-        WizardEnv = http.request.env["payment.link.wizard"].sudo()
-        wizardIDs = WizardEnv.search([('res_model', '=', 'sale.order'),('res_id', '=', application.x_order_id.id)])
-        
-        if wizardIDs: 
-            wizard_data = WizardEnv.browse(wizardIDs[0].id)
-             #
-        else:
-            #de lo contrario creo el link
-            created_wizard_id = WizardEnv.create({
-                    'res_model': 'sale.order',
-                    'res_id':application.x_order_id.id,
-                    'description': application.x_order_id.name,
-                    'amount': application.x_order_id.amount_total,
-                    'currency_id': 2,
-                    'partner_id': 138,
-                })  
-            wizard_data = WizardEnv.browse(created_wizard_id)
-                
+        linkPayment = -1
+        if application:
+            WizardEnv = http.request.env["payment.link.wizard"].sudo()
+            wizardIDs = WizardEnv.search([('res_model', '=', 'sale.order'),('res_id', '=', application[0].x_order_id.id)])
+
+            if wizardIDs: 
+                wizard_data = WizardEnv.browse(wizardIDs[0].id)
+                 #
+            else:
+                #de lo contrario creo el link
+                created_wizard_id = WizardEnv.create({
+                        'res_model': 'sale.order',
+                        'res_id':application[0].x_order_id.id,
+                        'description': application[0].x_order_id.name,
+                        'amount': application[0].x_order_id.amount_total,
+                        'currency_id': application[0].x_order_id.currency_id.id,
+                        'partner_id': application[0].partner_id.id,
+                    })  
+                wizard_data = WizardEnv.browse(created_wizard_id)
+                linkPayment = wizard_data[0].link
                 
         return http.request.render("adm.template_application_menu_invoice", {
             "application_id": params["application_id"],
-            "sales_order_info": str(application[0].x_order_id.id),
+            "sales_order_info": str(linkPayment),
             #"sales_order_info": str(wizard_data[0].link),
         })
     
