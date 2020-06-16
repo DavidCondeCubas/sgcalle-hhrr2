@@ -1031,8 +1031,8 @@ class Admission(http.Controller):
         ApplicationEnv = http.request.env["adm.application"]
         application = ApplicationEnv.browse([params["application_id"]])
         # busco si existe el link de pago generado
-        WizardEnv = http.request.env["payment.link.wizard"]
-        wizardIDs = WizardEnv.sudo().search([('res_model', '=', 'sale.order'),
+        WizardEnv = http.request.env["payment.link.wizard"].sudo()
+        wizardIDs = WizardEnv.search([('res_model', '=', 'sale.order'),
                                                                 ('res_id', '=', application.x_order_id.id)])
         
         if wizardIDs: 
@@ -1040,7 +1040,7 @@ class Admission(http.Controller):
              #
         else:
             #de lo contrario creo el link
-            created_wizard_id = WizardEnv.sudo().create({
+            created_wizard_id = WizardEnv.create({
                     'res_model': 'sale.order',
                     'res_id':application.x_order_id.id,
                     'description': application.x_order_id.name,
