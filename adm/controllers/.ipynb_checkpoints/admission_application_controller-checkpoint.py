@@ -1061,9 +1061,9 @@ class Admission(http.Controller):
                         'currency_id': int(application[0].x_order_id.currency_id.id),
                         'partner_id': int(application[0].partner_id.id),
                     })  
-                _logger.info(created_wizard_id)
+                _logger.info(created_wizard_id.id)
                 _logger.info("==========================")
-                wizard_data = WizardEnv.browse(created_wizard_id)
+                wizard_data = WizardEnv.browse(created_wizard_id.id)
                 
             linkPayment = wizard_data[0].link
                 
