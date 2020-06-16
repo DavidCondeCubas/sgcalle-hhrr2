@@ -1033,7 +1033,7 @@ class Admission(http.Controller):
         # busco si existe el link de pago generado
         WizardEnv = http.request.env["payment.link.wizard"].sudo()
         wizardIDs = WizardEnv.search([('res_model', '=', 'sale.order'),
-                                                                ('res_id', '=', application.x_order_id.id)])
+                                                                ('res_id', '=', application.x_order_id)])
         
         if wizardIDs: 
             wizard_data = WizardEnv.browse(wizardIDs[0].id)
