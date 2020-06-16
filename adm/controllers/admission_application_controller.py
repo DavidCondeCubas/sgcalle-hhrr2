@@ -1031,19 +1031,15 @@ class Admission(http.Controller):
         ApplicationEnv = http.request.env["adm.application"]
         application = ApplicationEnv.browse([params["application_id"]])
         
-     
-        wizardIDs = AttachEnv.browse(AttachEnv.sudo().search([('res_model', '=', 'sale.order'),
-                                                                ('res_id', '=', application.x_order_id.id)])).ids  
-        
-        wizardIDs = AttachEnv.sudo().search([('name', '=', 'signature.png'),('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])],order="create_date desc", limit=1)
-        #attach_file = AttachEnv.browse(AttachEnv.sudo().search([('res_model', '=', 'adm.application'),('res_id', '=', params["application_id"])])).ids
-        #attach_file = AttachEnv.browse([1027])
+        WizardEnv = http.request.env["payment.link.wizard"]
+        wizardIDs = WizardEnv.sudo().search([('res_model', '=', 'sale.order'),
+                                                                ('res_id', '=', application.x_order_id.id)])
         
         if wizardIDs: 
-            wizard_data = AttachEnv.browse(wizardIDs[0].id)
+            wizard_data = WizardEnv.browse(wizardIDs[0].id)
              
         else:
-            created_wizard_id = AttachmentEnv.sudo().create({
+            created_wizard_id = WizardEnv.sudo().create({
                     'res_model': 'sale.order',
                     'res_id':application.x_order_id.id,
                     'description': application.x_order_id.name,
@@ -1051,12 +1047,13 @@ class Admission(http.Controller):
                     'currency_id': application.x_order_id.currency_id,
                     'partner_id': application.partner_id,
                 })  
-            wizard_data = AttachEnv.browse(created_wizard_id)
+            wizard_data = WizardEnv.browse(created_wizard_id)
                 
                 
         return http.request.render("adm.template_application_menu_invoice", {
             "application_id": params["application_id"],
             "sales_order_info": wizard_data,
         })
+    
     
     
